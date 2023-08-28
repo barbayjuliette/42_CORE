@@ -2,7 +2,7 @@
 #include <string.h>
 #include "libft.h"
 
-int main(void)
+int	main(void)
 {
 	// ft_strlen
 	printf("%s", "Test string length: ");
@@ -60,6 +60,35 @@ int main(void)
 	// ft_putendl
 	char *string2 = "Putstr with new line is: OK";
 	ft_putendl_fd(string2, 1);
+
+	// ft_atoi
+	printf("%s", "Test atoi: ");
+	ft_atoi("-423") == atoi("-423") && ft_atoi("123456") == atoi("123456") ? printf("%s", "OK\n") : printf("%s", "NOK\n");
+
+	// ft_strnstr
+	char needle[] = "jul";
+	char haystack[] = "juliette";
+	printf("%s", "Test stnstr 1: ");
+	strnstr(haystack, needle, 5) == ft_strnstr(haystack, needle, 5) ? printf("%s", "OK\n") : printf("%s", "NOK\n");
+
+	char substring[] = "jul";
+	char search_string[] = "juliette";
+	printf("%s", "Test stnstr 2: ");
+	strnstr(search_string, substring, 5) == ft_strnstr(search_string, substring, 5) ? printf("%s", "OK\n") : printf("%s", "NOK\n");
+
+
+	// ft_strstr
+	char strstr[] = "abbc";
+	printf("%s", "Test strstr 1: ");
+	strchr(strstr, '\0') == ft_strchr(strstr, '\0') ? printf("%s", "OK\n") : printf("%s", "NOK\n");
+	printf("%s", "Test strstr 2: ");
+	strchr(strstr, 'c') == ft_strchr(strstr, 'c') ? printf("%s", "OK\n") : printf("%s", "NOK\n");
+
+	// ft_strrstr
+	printf("%s", "Test strrstr 1: ");
+	strrchr(strstr, '\0') == ft_strrchr(strstr, '\0') ? printf("%s", "OK\n") : printf("%s", "NOK\n");
+	printf("%s", "Test strrstr 2: ");
+	strrchr(strstr, 'x') == ft_strrchr(strstr, 'x') ? printf("%s", "OK\n") : printf("%s", "NOK\n");
 
 	return (0);
 }
