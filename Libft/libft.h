@@ -21,5 +21,7 @@ int	ft_strlcpy(char * restrict dst, const char * restrict src, int dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, int len);
+int	ft_strlcat(char *dest, const char *src, int destsize);
+void *ft_memset(void *b, int c, int len);
 
 #endif
