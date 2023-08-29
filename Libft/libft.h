@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int main(void);
 int	ft_strlen(const char *string);
 int	ft_isalpha(int c);
 int	ft_isdigit(int c);
@@ -18,9 +17,9 @@ void ft_putchar_fd(char c, int fd);
 void ft_putstr_fd(char *s, int fd);
 void ft_putendl_fd(char *s, int fd);
 int	ft_atoi(const char *str);
-int	ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize);
+int	ft_strlcpy(char * restrict dst, const char * restrict src, int dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strnstr(const char *haystack, const char *needle, int len);
 
 #endif
