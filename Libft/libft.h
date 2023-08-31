@@ -29,5 +29,6 @@ void	*ft_memccpy(void *restrict dest, const void *restrict src, int c, int n);
 void	*ft_memchr(const void *s, int c, int n);
 int		ft_memcmp(const void *s1, const void *s2, int n);
 void	*ft_memmove(void *dest, const void *src, int len);
+char	*ft_strdup(const char *s1);
 
 #endif
