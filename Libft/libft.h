@@ -30,5 +30,7 @@ void	*ft_memchr(const void *s, int c, int n);
 int		ft_memcmp(const void *s1, const void *s2, int n);
 void	*ft_memmove(void *dest, const void *src, int len);
 char	*ft_strdup(const char *s1);
+void	*ft_calloc(int count, int size);
+char	*ft_itoa(int num);
 
 #endif
