@@ -32,5 +32,7 @@ void	*ft_memmove(void *dest, const void *src, int len);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(int count, int size);
 char	*ft_itoa(int num);
+char *ft_substr(char const *s, int start, int len);
+
 
 #endif

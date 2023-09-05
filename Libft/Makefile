@@ -26,7 +26,8 @@ SRCS = ft_atoi.c \
 					ft_memmove.c \
 					ft_strdup.c \
 					ft_calloc.c \
-					ft_itoa.c
+					ft_itoa.c \
+					ft_substr.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
