@@ -1,49 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 12:12:54 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/09/06 12:12:57 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_substr(char const *s, int start, int len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *substring;
-	int	i;
+	char		*substring;
+	size_t		i;
+	size_t		j;
 
 	substring = (char *)malloc(sizeof(char) * (len + 1));
 	if (!substring)
 		return (NULL);
-
 	i = 0;
-	while (i < len && s[start + i])
+	j = 0;
+	while (s[i])
 	{
-		substring[i] = s[start + i];
+		if (i >= start && j < len)
+		{
+			substring[j] = s[i];
+			j++;
+		}
 		i++;
 	}
-	substring[i] = '\0';
+	substring[j] = '\0';
 	return (substring);
 }
 
-
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
+// int main(void)
 // {
-// 	size_t	i;
-// 	size_t	j;
-// 	char	*str;
-
-// 	str = (char *)malloc(sizeof(*s) * (len + 1));
-// 	if (str == 0)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while (s[i])
-// 	{
-// 		if (i >= start && j < len)
-// 		{
-// 			str[j] = s[i];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	str[j] = 0;
-// 	return (str);
+// 	char string[] = "abcdefghijklmnopqrstuvwxyz";
+// 	char *substring;
+// 	substring = ft_substr(string, 4, 8);
+// 	ft_putstr_fd(ft_substr(string, 4, 8), 1);
+// 	return 0;
 // }
-
-
-//	if (start + len > ft_strlen(s))
-// 		len = ft_strlen(s) - start;>

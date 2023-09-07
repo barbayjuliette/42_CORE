@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 12:10:39 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/09/06 12:10:42 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, int n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
-	char *string;
+	size_t	i;
+	char	*string;
 
 	i = 0;
 	string = (char *)s;

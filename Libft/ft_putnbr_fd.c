@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 12:11:48 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/06 12:11:57 by jbarbay          ###   ########.fr       */
+/*   Created: 2023/09/06 12:39:02 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/09/06 12:39:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	*string;
 
-	string = malloc(count * size);
-	ft_bzero(string, count);
-	return (string);
+	string = ft_itoa(n);
+	ft_putstr_fd(string, fd);
 }

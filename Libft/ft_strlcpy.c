@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 12:08:39 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/09/06 12:08:42 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_strlcpy(char * restrict dest, const char * restrict src, int destsize)
+size_t	ft_strlcpy(char *dest, const char *src, size_t destsize)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (destsize == 0)

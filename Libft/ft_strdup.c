@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/06 12:12:32 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/09/06 12:12:35 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strdup(const char *s1)
 {
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 	char	*copy;
 
 	len = ft_strlen(s1);
@@ -17,6 +29,5 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	copy[i] = '\0';
-
 	return (copy);
 }
