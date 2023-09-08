@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay<marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 18:14:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/07 18:14:12 by jbarbay          ###   ########.fr       */
+/*   Created: 2023/09/08 20:39:23 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/09/08 20:39:31 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstadd_front(t_list **lst, t_list *new)
+t_list *ft_lstlast(t_list *lst)
 {
-	new->next = *lst;
-	*lst = new;
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
 // int main(void)
 // {
-// 	char *content = "I am an old node";
+// 	char *content = "I am the first node";
 // 	t_list *list = ft_lstnew(content);
 
-// 	t_list new;
-// 	new.content = "new first node";
-// 	new.next = NULL;
+// 	t_list node;
+// 	node.next = NULL;
+// 	node.content = "second node";
+// 	list->next = &node;
 
-// 	ft_lstadd_front(&list, &new);
-
-// 	while (list)
-// 	{
-// 		printf("Content: %s\n", (char *)list->content);
-// 		list = list->next;
-// 	}
-
+// 	printf("Content: %s\n", (char *)ft_lstlast(list)->content);
 // 	return 0;
 // }
