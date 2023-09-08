@@ -26,43 +26,44 @@ static int	to_trim(char c, char const *set)
 	return (0);
 }
 
-static int	count_char_start(char const *s1, char const *set)
+static	int	find_pos_start(char const *s1, char const *set)
 {
 	int	i;
 
 	i = 0;
-	while (to_trim(s1[i], set))
+	while (s1[i] && to_trim(s1[i], set))
 		i++;
 	return (i);
 }
 
-static int	count_char_end(char const *s1, char const *set)
+static int	find_pos_end(char const *s1, char const *set, int start)
 {
 	int	i;
-	int	count;
 
 	i = ft_strlen(s1) - 1;
-	count = 0;
-	while (to_trim(s1[i], set))
-	{
+	while (s1[i] && to_trim(s1[i], set) && i > start)
 		i--;
-		count++;
-	}
-	return (count);
+	return (i);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		len;
 	char	*string;
+	int		pos_end;
+	int		pos_start;
 
-	len = ft_strlen(s1) - count_char_end(s1, set) - count_char_start(s1, set);
-	string = ft_substr(s1, count_char_start(s1, set), len);
+	if (!s1 || !set)
+		return (NULL);
+	pos_start = find_pos_start(s1, set);
+	pos_end = find_pos_end(s1, set, pos_start);
+	len = pos_end - pos_start + 1;
+	string = ft_substr(s1, pos_start, len);
 	return (string);
 }
 
 // int main(void)
 // {
-// 	printf("%s\n", ft_strtrim("hhsblahs", "hs"));
+// 	printf("String: %s\n", ft_strtrim("aaaaaa", "a"));
 // 	return(0);
 // }

@@ -26,7 +26,7 @@ static	int	count_words(char const *s, char c)
 		else
 		{
 			count++;
-			while (s[i] != c)
+			while (s[i] != c && s[i])
 				i++;
 		}
 	}
@@ -38,7 +38,7 @@ static int	get_length_word(char const *str, char c)
 	int	length;
 
 	length = 0;
-	while (str[length] != c)
+	while (str[length] != c && str[length])
 		length++;
 	return (length);
 }
@@ -90,17 +90,19 @@ char	**ft_split(char const *s, char c)
 }
 
 // int main(void)
-// {	
+// {
 // 	int	i;
 // 	char **strings;
 
 // 	i = 0;
-// 	strings = ft_split("xxhhxjulxikoxxokokxxpl", 'x');
-// 	while (strings[i])
+// strings = ft_split("hello how are you", ' ');
+	// while (strings[i])
 // 	{
 // 		ft_putstr_fd(strings[i], 1);
+// 		free(strings[i]);
 // 		write(1, "\n", 1);
 // 		i++;
 // 	}
+// 	free(strings);
 // 	return (0);
 // }
