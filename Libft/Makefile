@@ -32,7 +32,16 @@ SRCS = ft_atoi.c \
 		ft_strtrim.c \
 		ft_split.c \
 		ft_strmapi.c \
-		ft_striteri.c
+		ft_striteri.c \
+		ft_lstmap.c \
+		ft_lstadd_back.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -43,14 +52,14 @@ OBJS = ${SRCS:.c=.o}
 all: ${NAME}
 
 $(NAME): $(OBJS)
-				$(CC) $(CFLAGS) -c $(SRCS)
-				ar rc $(NAME) $(OBJS)
-				ranlib $(NAME)
+			$(CC) $(CFLAGS) -c $(SRCS)
+			ar rc $(NAME) $(OBJS)
+			ranlib $(NAME)
 
 clean:
-			${RM} ${OBJS}
+		${RM} ${OBJS}
 
 fclean: clean
-			${RM} ${NAME}
+		${RM} ${NAME}
 
 re: fclean all
