@@ -32,34 +32,44 @@ SRCS = ft_atoi.c \
 		ft_strtrim.c \
 		ft_split.c \
 		ft_strmapi.c \
-		ft_striteri.c \
-		ft_lstmap.c \
-		ft_lstadd_back.c \
-		ft_lstnew.c \
-		ft_lstadd_front.c \
-		ft_lstsize.c \
-		ft_lstlast.c \
-		ft_lstdelone.c \
-		ft_lstclear.c \
-		ft_lstiter.c
+		ft_striteri.c
 
+BONUS_SRCS = 	ft_lstadd_back_bonus.c \
+					ft_lstnew_bonus.c \
+					ft_lstadd_front_bonus.c \
+					ft_lstsize_bonus.c \
+					ft_lstlast_bonus.c \
+					ft_lstdelone_bonus.c \
+					ft_lstclear_bonus.c \
+					ft_lstiter_bonus.c \
+					ft_lstmap_bonus.c \
+
+INCLUDES = ./libft.h
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 NAME = libft.a
 OBJS = ${SRCS:.c=.o}
+BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 all: ${NAME}
 
 $(NAME): $(OBJS)
-			$(CC) $(CFLAGS) -c $(SRCS)
+			$(CC) $(CFLAGS) -c $(SRCS) -I ${INCLUDES}
 			ar rc $(NAME) $(OBJS)
 			ranlib $(NAME)
 
 clean:
-		${RM} ${OBJS}
+		${RM} ${OBJS} {BONUS_OBJS}
 
 fclean: clean
 		${RM} ${NAME}
 
 re: fclean all
+
+bonus: ${BONUS_OBJS}
+			$(CC) $(CFLAGS) -c $(BONUS_SRCS) -I ${INCLUDES}
+			ar rc $(NAME) $(BONUS_OBJS)
+			ranlib $(NAME)
+
+.PHONY: all clean fclean re
