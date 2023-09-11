@@ -16,7 +16,6 @@ SRCS = ft_atoi.c \
 		ft_strrchr.c \
 		ft_tolower.c \
 		ft_toupper.c \
-		ft_strlcat.c \
 		ft_memset.c \
 		ft_bzero.c \
 		ft_memcpy.c \
@@ -35,14 +34,14 @@ SRCS = ft_atoi.c \
 		ft_striteri.c
 
 BONUS_SRCS = 	ft_lstadd_back_bonus.c \
-					ft_lstnew_bonus.c \
-					ft_lstadd_front_bonus.c \
-					ft_lstsize_bonus.c \
-					ft_lstlast_bonus.c \
-					ft_lstdelone_bonus.c \
-					ft_lstclear_bonus.c \
-					ft_lstiter_bonus.c \
-					ft_lstmap_bonus.c \
+			ft_lstnew_bonus.c \
+			ft_lstadd_front_bonus.c \
+			ft_lstsize_bonus.c \
+			ft_lstlast_bonus.c \
+			ft_lstdelone_bonus.c \
+			ft_lstclear_bonus.c \
+			ft_lstiter_bonus.c \
+			ft_lstmap_bonus.c \
 
 INCLUDES = ./libft.h
 CC = cc
@@ -60,16 +59,16 @@ $(NAME): $(OBJS)
 			ranlib $(NAME)
 
 clean:
-		${RM} ${OBJS} {BONUS_OBJS}
+		${RM} ${OBJS} ${BONUS_OBJS}
 
 fclean: clean
-		${RM} ${NAME}
+		${RM} ${NAME} $(BONUS_OBJS)
 
 re: fclean all
 
 bonus: ${BONUS_OBJS}
-			$(CC) $(CFLAGS) -c $(BONUS_SRCS) -I ${INCLUDES}
-			ar rc $(NAME) $(BONUS_OBJS)
-			ranlib $(NAME)
+		$(CC) $(CFLAGS) -c $(BONUS_SRCS) -I ${INCLUDES}
+		ar rc $(NAME) $(BONUS_OBJS)
+		ranlib $(NAME)
 
 .PHONY: all clean fclean re

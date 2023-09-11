@@ -15,7 +15,29 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	*string;
+	long	num;
+	char	c;
 
-	string = ft_itoa(n);
-	ft_putstr_fd(string, fd);
+	num = n;
+	if (num < 0)
+	{
+		num = -num;
+		ft_putchar_fd('-', fd);
+	}
+	if (num > 9)
+	{	
+		ft_putnbr_fd(num / 10, fd);
+		ft_putnbr_fd(num % 10, fd);
+	}
+	else
+	{	
+		c = '0' + num;
+		ft_putchar_fd(c, fd);
+	}
+}
+
+int main(void)
+{
+	ft_putnbr_fd(-125487, 1);
+	return 0;
 }
