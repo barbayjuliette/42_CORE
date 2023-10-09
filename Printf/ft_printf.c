@@ -43,6 +43,22 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
+void	ft_put_unsigned_fd(unsigned int n, int fd)
+{
+	char	c;
+
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+	{
+		c = '0' + n;
+		ft_putchar_fd(c, fd);
+	}
+}
+
 static int	count_args(const char *format)
 {
 	int	i;
@@ -103,6 +119,10 @@ int ft_printf(const char *format, ...)
 			{
 				ft_putnbr_fd(va_arg(ptr, int), 1);
 			}
+			else if (type == 5)
+			{
+				ft_put_unsigned_fd(va_arg(ptr, unsigned int), 1);
+			}
 			else
 				return (0);
 			i += 2;
@@ -115,7 +135,7 @@ int ft_printf(const char *format, ...)
 		else
 		{
 			write(1, &format[i], 1);
-			i++;			
+			i++;
 		}
 	}
 	va_end(ptr);
@@ -123,7 +143,8 @@ int ft_printf(const char *format, ...)
 }
 
 int main(void)
-{	
-	ft_printf("This is %d test %d %% tt %d", 1, 2, 3 );
+{
+	ft_printf("Got: unsigned int %u \n", -5);
+	printf("Expected: unsigned int %u", -5);
 	return 0;
 }
