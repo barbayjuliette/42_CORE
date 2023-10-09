@@ -142,11 +142,15 @@ int ft_printf(const char *format, ...)
 			// STRING
 			else if (format[i + 1] == 's')
 				ft_putstr_fd(va_arg(ptr, char*), 1);
-			// HEXADECIMAL
+			// HEXADECIMAL LOWERCASE
 			else if (format[i + 1] == 'x')
 				ft_puthexa(va_arg(ptr, unsigned int));
+			// HEXADECIMAL UPPERCASE
 			else if (format[i + 1] == 'X')
 				ft_puthexa_upcase(va_arg(ptr, unsigned int));
+			// POINTER
+			else if (format[i + 1] == 'p')
+				ft_puthexa(va_arg(ptr, int));
 			else
 				return (0);
 			i += 2;
@@ -156,6 +160,8 @@ int ft_printf(const char *format, ...)
 			write(1, "%", 1);
 			i += 2;
 		}
+		// If % as last character
+			// ADD CODE
 		else
 		{
 			write(1, &format[i], 1);
@@ -168,6 +174,9 @@ int ft_printf(const char *format, ...)
 
 int main(void)
 {
+	char *ptr;
+	char c = 'x';
+	ptr = &c;
 	// ft_printf("Character: %c\n", 'x');
 	// ft_printf("Integer: %i\n", 167);
 	// ft_printf("Integer: %d\n", 167);
@@ -175,7 +184,9 @@ int main(void)
 	// ft_printf("String: %s\n", "hello");
 	// ft_printf("Hexadecimal: %x\n", -6);
 	// printf("Expected Hexadecimal: %x\n", -6);
-	ft_printf("HEXADECIMAL: %X\n", -6876);
-	printf("Expected HEXADECIMAL: %X\n", -6876);
+	// ft_printf("HEXADECIMAL: %X\n", -6876);
+	// printf("Expected HEXADECIMAL: %X\n", -6876);
+	ft_printf("Pointer: %p\n", ptr);
+	printf("Expected Pointer: %p\n", ptr);
 	return 0;
 }
