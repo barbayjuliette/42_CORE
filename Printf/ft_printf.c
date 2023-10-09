@@ -59,6 +59,18 @@ void	ft_put_unsigned_fd(unsigned int n, int fd)
 	}
 }
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
+
 static int	count_args(const char *format)
 {
 	int	i;
@@ -82,22 +94,6 @@ static int	count_args(const char *format)
 	return (count);
 }
 
-static int	put_arg(char c)
-{
-	if (c == 'd' || c == 'i' || c == 'x' || c == 'X')
-		return (1);
-	else if (c == 'c')
-		return (2);
-	else if (c == 's')
-		return (3);
-	else if (c == 'p')
-		return (4);
-	else if (c == 'u')
-		return (5);
-	else
-		return (0);
-}
-
 int ft_printf(const char *format, ...)
 {
 	int		count;
@@ -112,17 +108,18 @@ int ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] != '%')
 		{
-			type = put_arg(format[i + 1]);
-			if (type == 0)
-				return (1); // Error finish program
-			else if (type == 1) // This is an int
-			{
+			// INTEGER
+			if (format[i + 1] == 'i' || format[i + 1] == 'd')
 				ft_putnbr_fd(va_arg(ptr, int), 1);
-			}
-			else if (type == 5)
-			{
+			// UNSIGNED INT
+			else if (format[i + 1] == 'u')
 				ft_put_unsigned_fd(va_arg(ptr, unsigned int), 1);
-			}
+			// CHARACTER
+			else if (format[i + 1] == 'c')
+				ft_putchar_fd(va_arg(ptr, int), 1);
+			// STRING
+			else if (format[i + 1] == 's')
+				ft_putstr_fd(va_arg(ptr, char*), 1);
 			else
 				return (0);
 			i += 2;
@@ -144,7 +141,10 @@ int ft_printf(const char *format, ...)
 
 int main(void)
 {
-	ft_printf("Got: unsigned int %u \n", -5);
-	printf("Expected: unsigned int %u", -5);
+	ft_printf("Character: %c\n", 'x');
+	ft_printf("Integer: %i\n", 167);
+	ft_printf("Integer: %d\n", 167);
+	ft_printf("Unsigned int: %u\n", -345);
+	ft_printf("String: %s", "hello");
 	return 0;
 }
