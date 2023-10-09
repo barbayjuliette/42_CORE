@@ -94,6 +94,28 @@ static int	count_args(const char *format)
 	return (count);
 }
 
+void	ft_puthexa(unsigned int n)
+{
+	if (n < 16)
+		ft_putchar_fd("0123456789abcdef"[n], 1);
+	else
+	{
+		ft_puthexa(n / 16);
+		ft_putchar_fd("0123456789abcdef"[n % 16], 1);
+	}
+}
+
+void	ft_puthexa_upcase(unsigned int n)
+{
+	if (n < 16)
+		ft_putchar_fd("0123456789ABCDEF"[n], 1);
+	else
+	{
+		ft_puthexa_upcase(n / 16);
+		ft_putchar_fd("0123456789ABCDEF"[n % 16], 1);
+	}
+}
+
 int ft_printf(const char *format, ...)
 {
 	int		count;
@@ -120,6 +142,11 @@ int ft_printf(const char *format, ...)
 			// STRING
 			else if (format[i + 1] == 's')
 				ft_putstr_fd(va_arg(ptr, char*), 1);
+			// HEXADECIMAL
+			else if (format[i + 1] == 'x')
+				ft_puthexa(va_arg(ptr, unsigned int));
+			else if (format[i + 1] == 'X')
+				ft_puthexa_upcase(va_arg(ptr, unsigned int));
 			else
 				return (0);
 			i += 2;
@@ -141,10 +168,14 @@ int ft_printf(const char *format, ...)
 
 int main(void)
 {
-	ft_printf("Character: %c\n", 'x');
-	ft_printf("Integer: %i\n", 167);
-	ft_printf("Integer: %d\n", 167);
-	ft_printf("Unsigned int: %u\n", -345);
-	ft_printf("String: %s", "hello");
+	// ft_printf("Character: %c\n", 'x');
+	// ft_printf("Integer: %i\n", 167);
+	// ft_printf("Integer: %d\n", 167);
+	// ft_printf("Unsigned int: %u\n", -345);
+	// ft_printf("String: %s\n", "hello");
+	// ft_printf("Hexadecimal: %x\n", -6);
+	// printf("Expected Hexadecimal: %x\n", -6);
+	ft_printf("HEXADECIMAL: %X\n", -6876);
+	printf("Expected HEXADECIMAL: %X\n", -6876);
 	return 0;
 }
