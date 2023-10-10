@@ -10,66 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
-
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	long	num;
-	char	c;
-
-	num = n;
-	if (num < 0)
-	{
-		num = -num;
-		ft_putchar_fd('-', fd);
-	}
-	if (num > 9)
-	{
-		ft_putnbr_fd(num / 10, fd);
-		ft_putnbr_fd(num % 10, fd);
-	}
-	else
-	{
-		c = '0' + num;
-		ft_putchar_fd(c, fd);
-	}
-}
-
-void	ft_put_unsigned_fd(unsigned int n, int fd)
-{
-	char	c;
-
-	if (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
-	}
-	else
-	{
-		c = '0' + n;
-		ft_putchar_fd(c, fd);
-	}
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
-}
+#include "printf.h"
 
 static int	count_args(const char *format)
 {
@@ -94,29 +35,7 @@ static int	count_args(const char *format)
 	return (count);
 }
 
-void	ft_puthexa(unsigned int n)
-{
-	if (n < 16)
-		ft_putchar_fd("0123456789abcdef"[n], 1);
-	else
-	{
-		ft_puthexa(n / 16);
-		ft_putchar_fd("0123456789abcdef"[n % 16], 1);
-	}
-}
-
-void	ft_puthexa_upcase(unsigned int n)
-{
-	if (n < 16)
-		ft_putchar_fd("0123456789ABCDEF"[n], 1);
-	else
-	{
-		ft_puthexa_upcase(n / 16);
-		ft_putchar_fd("0123456789ABCDEF"[n % 16], 1);
-	}
-}
-
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	int		count;
 	int		i;
@@ -172,7 +91,7 @@ int ft_printf(const char *format, ...)
 	return (0);
 }
 
-int main(void)
+int	main(void)
 {
 	char *ptr;
 	char c = 'x';
