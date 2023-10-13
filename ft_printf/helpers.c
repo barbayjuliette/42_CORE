@@ -28,7 +28,7 @@ void	ft_put_unsigned_fd(unsigned int n, int fd)
 	}
 }
 
-int ft_count_n_hexa(unsigned int n)
+int ft_count_n_hexa(unsigned long int n)
 {
     int length;
 

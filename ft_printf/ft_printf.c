@@ -35,7 +35,7 @@ static int	count_args(const char *format)
 	return (count);
 }
 
-int	ft_putptr(long num)
+int	ft_putptr(unsigned long int num)
 {
 	if (num == 0)
 	{
@@ -51,8 +51,9 @@ int	ft_printf(const char *format, ...)
 {
 	int		count;
 	int		i;
-	int		type;
 	int		num;
+	char 	*str;
+	unsigned long	n;
 	va_list	ptr;
 
 	// count = count_args(format);
@@ -84,13 +85,14 @@ int	ft_printf(const char *format, ...)
 			// STRING
 			else if (format[i + 1] == 's')
 			{
-				// if (va_arg(ptr, char*) == NULL)
-				// {
-				// 	ft_putstr_fd("NULL", 1);
-				// 	count += 4;				
-				// }
-				// else
-				count += ft_putstr_fd(va_arg(ptr, char*), 1);
+				str = va_arg(ptr, char*);
+				if (str == NULL)
+				{
+					ft_putstr_fd("(null)", 1);
+					count += 6;				
+				}
+				else
+					count += ft_putstr_fd(str, 1);
 			}
 			// HEXADECIMAL LOWERCASE
 			else if (format[i + 1] == 'x')
@@ -102,7 +104,16 @@ int	ft_printf(const char *format, ...)
 
 			// POINTER
 			else if (format[i + 1] == 'p')
-				count += ft_putptr(va_arg(ptr, long));
+			{
+				n = va_arg(ptr, unsigned long int);
+				if (n == 0)
+				{
+					ft_putstr_fd("(nil)", 1);
+					count += 5;	
+				}
+				else
+					count += ft_putptr(n);
+			}
 			else
 				return (0);
 			i += 2;
@@ -124,33 +135,36 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
- int	main(void)
- {
- 	char *ptr;
- 	char c = 'x';
- 	ptr = &c;
- 	int count;
+// int	main(void)
+//  {
+//  	char *ptr;
+//  	char c = 'x';
+//  	ptr = &c;
+//  	int count;
 
-	// count = ft_printf("Character: %c\n", 'x');
-	// count = ft_printf("%i", 123456);
-	// ft_printf("Integer: %d\n", 167);
- // 	ft_printf("Unsigned int: %u\n", -345);
- // 	ft_printf("String: %s\n", "hello");
- // 	ft_printf("Hexadecimal: %x\n", -6);
- // 	printf("Expected Hexadecimal: %x\n", -6);
- // 	ft_printf("HEXADECIMAL: %X\n", -6876);
- // 	printf("Expected HEXADECIMAL: %X\n", -6876);
- // 	ft_printf("Pointer: %p\n", ptr);
- // 	printf("Expected Pointer: %p\n", ptr);
- // 	ft_printf("Test: %w hello\n", 5 );
- // 	ft_printf("Test number of args; %d, %d\n", 1, 2, 3);
- // 	ft_printf("Test %% at the end: %");
- // 	ft_printf(" %c ", 'x');
+// // 	// count = ft_printf("Character: %c\n", 'x');
+// // 	// count = ft_printf("%i", 123456);
+// // 	// ft_printf("Integer: %d\n", 167);
+// //  // 	ft_printf("Unsigned int: %u\n", -345);
+// //  // 	ft_printf("String: %s\n", "hello");
+// //  // 	ft_printf("Hexadecimal: %x\n", -6);
+// //  // 	printf("Expected Hexadecimal: %x\n", -6);
+// //  // 	ft_printf("HEXADECIMAL: %X\n", -6876);
+// //  // 	printf("Expected HEXADECIMAL: %X\n", -6876);
+// //  // 	ft_printf("Pointer: %p\n", ptr);
+// //  // 	printf("Expected Pointer: %p\n", ptr);
+// //  // 	ft_printf("Test: %w hello\n", 5 );
+// //  // 	ft_printf("Test number of args; %d, %d\n", 1, 2, 3);
+// //  // 	ft_printf("Test %% at the end: %");
+// //  // 	ft_printf(" %c ", 'x');
 
- 	// count = ft_printf("This is a %s, num %d, %c hello %p f %x %u gg %d", "test", 145, 'x', ptr, 2578956, -125468, -125);
-	// printf("\nNum:%d\n", ft_printf("%u", -1525));
-	// printf("\nExpected num: %d\n", printf("%u", -1525));
-	// ft_printf(" %s %s %s %s %s ", " - ", "", "4", "", "2 ");
-	// ft_printf(" NULL %s NULL ", NULL);
- 	return 0;
-}
+// //  	// count = ft_printf("This is a %s, num %d, %c hello %p f %x %u gg %d", "test", 145, 'x', ptr, 2578956, -125468, -125);
+// // 	// printf("\nNum:%d\n", ft_printf("%u", -1525));
+// // 	// printf("\nExpected num: %d\n", printf("%u", -1525));
+// // 	// ft_printf(" %s %s %s %s %s ", " - ", "", "4", "", "2 ");
+// // 	// ft_printf(" NULL %s NULL ", NULL);
+// // 	ft_printf("%s %s %s %s", "s1", "s2", "s3", "s4");
+// printf(" %p %p \n", ptr, ptr);
+// ft_printf(" %p %p \n", ptr, ptr);
+// //  	return 0;
+// }

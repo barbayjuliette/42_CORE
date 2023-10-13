@@ -36,7 +36,7 @@ int	get_length_num(long num)
 	return (length);
 }
 
-int	get_length_unsigned(unsigned num)
+int	get_length_unsigned(unsigned int num)
 {
 	int	length;
 
