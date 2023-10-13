@@ -17,14 +17,18 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 static int	count_args(const char *format);
 int		ft_printf(const char *format, ...);
 void	ft_put_unsigned_fd(unsigned int n, int fd);
-void	ft_puthexa(unsigned long int n);
-void	ft_puthexa_upcase(unsigned int n);
-void	ft_putchar_fd(char c, int fd);
+int		ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
+int		get_length_num(long num);
+int		ft_puthexa(unsigned long int n);
+int		ft_puthexa_upcase(unsigned long int n);
+int		ft_putptr(long num);
+int		get_length_unsigned(unsigned num);
 
 #endif

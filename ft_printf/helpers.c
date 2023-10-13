@@ -28,24 +28,58 @@ void	ft_put_unsigned_fd(unsigned int n, int fd)
 	}
 }
 
-void	ft_puthexa(unsigned long int n)
+int ft_count_n_hexa(unsigned int n)
 {
-	if (n < 16)
-		ft_putchar_fd("0123456789abcdef"[n], 1);
-	else
-	{
-		ft_puthexa(n / 16);
-		ft_putchar_fd("0123456789abcdef"[n % 16], 1);
-	}
+    int length;
+
+    length = 0;
+    while (n >= 16)
+    {
+        n = n / 16;
+        length += 1;
+    }
+    length += 1;
+    return (length);
 }
 
-void	ft_puthexa_upcase(unsigned int n)
+int	ft_puthexa(unsigned long int n)
 {
-	if (n < 16)
-		ft_putchar_fd("0123456789ABCDEF"[n], 1);
-	else
+	int	count;
+	char *hexa;
+	int i;
+
+	count = ft_count_n_hexa(n);
+	i = count - 1;
+	hexa = malloc(sizeof(char) * (count + 1));
+	hexa[count] = '\0';
+	while (i >= 0)
 	{
-		ft_puthexa_upcase(n / 16);
-		ft_putchar_fd("0123456789ABCDEF"[n % 16], 1);
+		hexa[i] = "0123456789abcdef"[n % 16];
+		n = n / 16;
+		i--;
 	}
+	ft_putstr_fd(hexa, 1);
+	free(hexa);
+	return (count);
+}
+
+int	ft_puthexa_upcase(unsigned long int n)
+{
+	int	count;
+	char *hexa;
+	int i;
+
+	count = ft_count_n_hexa(n);
+	i = count - 1;
+	hexa = malloc(sizeof(char) * (count + 1));
+	hexa[count] = '\0';
+	while (i >= 0)
+	{
+		hexa[i] = "0123456789ABCDEF"[n % 16];
+		n = n / 16;
+		i--;
+	}
+	ft_putstr_fd(hexa, 1);
+	free(hexa);
+	return (count);
 }

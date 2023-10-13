@@ -12,9 +12,46 @@
 
 #include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
+	return (1);
+}
+
+int	get_length_num(long num)
+{
+	int	length;
+
+	length = 1;
+	if (num < 0)
+	{
+		length++;
+		num = -num;
+	}
+	while (num > 9)
+	{
+		num = num / 10;
+		length++;
+	}
+	return (length);
+}
+
+int	get_length_unsigned(unsigned num)
+{
+	int	length;
+
+	length = 1;
+	if (num < 0)
+	{
+		length++;
+		num = -num;
+	}
+	while (num > 9)
+	{
+		num = num / 10;
+		length++;
+	}
+	return (length);
 }
 
 void	ft_putnbr_fd(int n, int fd)
@@ -40,7 +77,7 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
 
@@ -50,5 +87,6 @@ void	ft_putstr_fd(char *s, int fd)
 		ft_putchar_fd(s[i], fd);
 		i++;
 	}
+	return (i);
 }
 
