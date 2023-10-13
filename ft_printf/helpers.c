@@ -28,25 +28,25 @@ void	ft_put_unsigned_fd(unsigned int n, int fd)
 	}
 }
 
-int ft_count_n_hexa(unsigned long int n)
+int	ft_count_n_hexa(unsigned long int n)
 {
-    int length;
+	int	length;
 
-    length = 0;
-    while (n >= 16)
-    {
-        n = n / 16;
-        length += 1;
-    }
-    length += 1;
-    return (length);
+	length = 0;
+	while (n >= 16)
+	{
+		n = n / 16;
+		length += 1;
+	}
+	length += 1;
+	return (length);
 }
 
 int	ft_puthexa(unsigned long int n)
 {
-	int	count;
-	char *hexa;
-	int i;
+	int		count;
+	char	*hexa;
+	int		i;
 
 	count = ft_count_n_hexa(n);
 	i = count - 1;
@@ -65,9 +65,9 @@ int	ft_puthexa(unsigned long int n)
 
 int	ft_puthexa_upcase(unsigned long int n)
 {
-	int	count;
-	char *hexa;
-	int i;
+	int		count;
+	char	*hexa;
+	int		i;
 
 	count = ft_count_n_hexa(n);
 	i = count - 1;

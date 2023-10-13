@@ -13,7 +13,8 @@
 
 SRCS = ft_printf.c \
 		helpers.c \
-		library.c
+		library.c \
+		conversions.c
 
 CC = cc
 # CFLAGS = -Wall -Wextra -Werror

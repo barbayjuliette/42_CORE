@@ -19,7 +19,6 @@ static int	count_args(const char *format)
 
 	i = 0;
 	count = 0;
-
 	while (format[i + 1])
 	{
 		if (format[i] == '%' && format[i + 1] != '%')
@@ -52,11 +51,10 @@ int	ft_printf(const char *format, ...)
 	int		count;
 	int		i;
 	int		num;
-	char 	*str;
+	char	*str;
 	unsigned long	n;
 	va_list	ptr;
 
-	// count = count_args(format);
 	i = 0;
 	count = 0;
 	va_start(ptr, format);
@@ -64,28 +62,21 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] != '%')
 		{
-			// INTEGER
 			if (format[i + 1] == 'i' || format[i + 1] == 'd')
 			{
-				num = va_arg(ptr, int);
-				count += get_length_num(num);
-				ft_putnbr_fd(num, 1);
+				count += ft_process_int(va_arg(ptr, int));
 			}
-
-			// UNSIGNED INT
 			else if (format[i + 1] == 'u')
 			{
 				num = va_arg(ptr, unsigned);
 				ft_put_unsigned_fd(num, 1);
 				count += get_length_unsigned(num);
 			}
-			// CHARACTER
 			else if (format[i + 1] == 'c')
 				count += ft_putchar_fd(va_arg(ptr, int), 1);
-			// STRING
 			else if (format[i + 1] == 's')
 			{
-				str = va_arg(ptr, char*);
+				str = va_arg(ptr, char *);
 				if (str == NULL)
 				{
 					ft_putstr_fd("(null)", 1);
@@ -94,22 +85,19 @@ int	ft_printf(const char *format, ...)
 				else
 					count += ft_putstr_fd(str, 1);
 			}
-			// HEXADECIMAL LOWERCASE
 			else if (format[i + 1] == 'x')
 				count += ft_puthexa(va_arg(ptr, unsigned int));
 
-			// HEXADECIMAL UPPERCASE
 			else if (format[i + 1] == 'X')
 				count += ft_puthexa_upcase(va_arg(ptr, unsigned int));
 
-			// POINTER
 			else if (format[i + 1] == 'p')
 			{
 				n = va_arg(ptr, unsigned long int);
 				if (n == 0)
 				{
 					ft_putstr_fd("(nil)", 1);
-					count += 5;	
+					count += 5;
 				}
 				else
 					count += ft_putptr(n);
@@ -143,8 +131,8 @@ int	ft_printf(const char *format, ...)
 //  	int count;
 
 // // 	// count = ft_printf("Character: %c\n", 'x');
-// // 	// count = ft_printf("%i", 123456);
-// // 	// ft_printf("Integer: %d\n", 167);
+// 	// count = ft_printf("%i", 123456);
+// 	ft_printf("%d", ft_printf("Integer: %d\n", 167));
 // //  // 	ft_printf("Unsigned int: %u\n", -345);
 // //  // 	ft_printf("String: %s\n", "hello");
 // //  // 	ft_printf("Hexadecimal: %x\n", -6);
@@ -164,7 +152,7 @@ int	ft_printf(const char *format, ...)
 // // 	// ft_printf(" %s %s %s %s %s ", " - ", "", "4", "", "2 ");
 // // 	// ft_printf(" NULL %s NULL ", NULL);
 // // 	ft_printf("%s %s %s %s", "s1", "s2", "s3", "s4");
-// printf(" %p %p \n", ptr, ptr);
-// ft_printf(" %p %p \n", ptr, ptr);
+// // printf(" %p %p \n", ptr, ptr);
+// // ft_printf(" %p %p \n", ptr, ptr);
 // //  	return 0;
 // }
