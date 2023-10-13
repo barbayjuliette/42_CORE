@@ -69,22 +69,11 @@ int	ft_printf(const char *format, ...)
 			else if (format[i + 1] == 'c')
 				count += ft_putchar_fd(va_arg(ptr, int), 1);
 			else if (format[i + 1] == 's')
-			{
-				str = va_arg(ptr, char *);
-				if (str == NULL)
-				{
-					ft_putstr_fd("(null)", 1);
-					count += 6;				
-				}
-				else
-					count += ft_putstr_fd(str, 1);
-			}
+				count += ft_process_str(va_arg(ptr, char *));
 			else if (format[i + 1] == 'x')
 				count += ft_puthexa(va_arg(ptr, unsigned int));
-
 			else if (format[i + 1] == 'X')
 				count += ft_puthexa_upcase(va_arg(ptr, unsigned int));
-
 			else if (format[i + 1] == 'p')
 			{
 				n = va_arg(ptr, unsigned long int);

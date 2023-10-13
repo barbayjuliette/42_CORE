@@ -23,3 +23,16 @@ int	ft_process_unsigned_int(int num)
 	ft_put_unsigned_fd(num, 1);
 	return (get_length_unsigned(num));
 }
+
+int	ft_process_str(char *str)
+{
+	if (str == NULL)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);				
+	}
+	else
+	{
+		return (ft_putstr_fd(str, 1));
+	}
+}
