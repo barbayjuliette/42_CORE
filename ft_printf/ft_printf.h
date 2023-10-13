@@ -31,5 +31,6 @@ int			ft_puthexa_upcase(unsigned long int n);
 int			ft_putptr(unsigned long int num);
 int			get_length_unsigned(unsigned int num);
 int			ft_count_n_hexa(unsigned long int n);
+int			ft_process_unsigned_int(int num);
 
 #endif

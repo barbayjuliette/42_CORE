@@ -17,3 +17,9 @@ int	ft_process_int(int num)
 	ft_putnbr_fd(num, 1);
 	return (get_length_num(num));
 }
+
+int	ft_process_unsigned_int(int num)
+{
+	ft_put_unsigned_fd(num, 1);
+	return (get_length_unsigned(num));
+}

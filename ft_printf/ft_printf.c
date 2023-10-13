@@ -63,15 +63,9 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] != '%')
 		{
 			if (format[i + 1] == 'i' || format[i + 1] == 'd')
-			{
 				count += ft_process_int(va_arg(ptr, int));
-			}
 			else if (format[i + 1] == 'u')
-			{
-				num = va_arg(ptr, unsigned);
-				ft_put_unsigned_fd(num, 1);
-				count += get_length_unsigned(num);
-			}
+				count += ft_process_unsigned_int(va_arg(ptr, unsigned));
 			else if (format[i + 1] == 'c')
 				count += ft_putchar_fd(va_arg(ptr, int), 1);
 			else if (format[i + 1] == 's')
