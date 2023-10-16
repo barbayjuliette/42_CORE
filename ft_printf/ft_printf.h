@@ -28,10 +28,11 @@ int			ft_putstr_fd(char *s, int fd);
 int			get_length_num(long num);
 int			ft_puthexa(unsigned long int n);
 int			ft_puthexa_upcase(unsigned long int n);
-int			ft_putptr(unsigned long int num);
+int			ft_putptr(unsigned long num);
 int			get_length_unsigned(unsigned int num);
 int			ft_count_n_hexa(unsigned long int n);
 int			ft_process_unsigned_int(int num);
 int			ft_process_str(char *str);
+int			check_letter_conversion(char format, va_list ptr);
 
 #endif
