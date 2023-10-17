@@ -41,11 +41,6 @@ int	get_length_unsigned(unsigned int num)
 	int	length;
 
 	length = 1;
-	if (num < 0)
-	{
-		length++;
-		num = -num;
-	}
 	while (num > 9)
 	{
 		num = num / 10;

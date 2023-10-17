@@ -13,13 +13,11 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
 
 int			ft_process_int(int num);
-static int	count_args(const char *format);
 int			ft_printf(const char *format, ...);
 void		ft_put_unsigned_fd(unsigned int n, int fd);
 int			ft_putchar_fd(char c, int fd);

@@ -17,7 +17,7 @@ SRCS = ft_printf.c \
 		conversions.c
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 NAME = libftprintf.a
 OBJS = ${SRCS:.c=.o}
@@ -25,12 +25,11 @@ OBJS = ${SRCS:.c=.o}
 all: ${NAME}
 
 $(NAME): $(OBJS)
-			$(CC) -c $(SRCS)
-			ar rc $(NAME) $(OBJS)
-			ranlib $(NAME)
+			$(CC) $(CFLAGS) -c $(SRCS)
+			ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	${CC} -c $< 
+	${CC} $(CFLAGS) -c $< 
 
 clean:
 		${RM} ${OBJS}

@@ -12,28 +12,6 @@
 
 #include "ft_printf.h"
 
-static int	count_args(const char *format)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (format[i + 1])
-	{
-		if (format[i] == '%' && format[i + 1] != '%')
-		{
-			count++;
-			i += 2;
-		}
-		else if (format[i] == '%' && format[i + 1] == '%')
-			i += 2;
-		else
-			i++;
-	}
-	return (count);
-}
-
 int	check_letter_conversion(char format, va_list ptr)
 {
 	if (format == 'i' || format == 'd')
@@ -53,7 +31,7 @@ int	check_letter_conversion(char format, va_list ptr)
 	else if (format == 'p')
 		return (ft_putptr(va_arg(ptr, unsigned long)));
 	else
-		return (0);
+		return (ft_putchar_fd(format, 1));
 }
 
 int	ft_printf(const char *format, ...)
@@ -81,3 +59,27 @@ int	ft_printf(const char *format, ...)
 	va_end(ptr);
 	return (count);
 }
+
+// int main(void)
+// {
+// 	char *ptr;
+// 	char c;
+// 	int count;
+
+// 	c = 'x';
+// 	ptr = &c;
+
+// 	count = ft_printf("Character: %c\n", 'x');
+// 	ft_printf("Integer: %i\n", 123456);
+// 	ft_printf("Decimal: %d\n", 167);
+// 	ft_printf("Unsigned int: %u\n", -345);
+// 	ft_printf("String: %s\n", "hello");
+// 	ft_printf("Hexadecimal: %x\n", 5986);
+// 	ft_printf("HEXADECIMAL: %X\n", -6876);
+// 	ft_printf("Pointer: %p\n", ptr);
+// 	printf("Expected Pointer: %p\n", ptr);
+// 	ft_printf("Return value: %d\n", count);
+// 	ft_printf("Expected return value: %d\n", printf("Character: %c\n", 'x'));
+// 	ft_printf("Return value: %d\n", ft_printf("hello %w world\n", 5));
+// 	return (0);
+// }
