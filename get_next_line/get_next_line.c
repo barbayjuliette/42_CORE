@@ -86,7 +86,7 @@ int	has_new_line(char *buffer)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 char	*get_line(char *rem, int size)
@@ -113,7 +113,7 @@ char *get_next_line(int fd)
 	int			bytes_read;
 	char 		*line;
 	static char	*rem;
-	int	index_line;
+	int			index_line;
 
 	buffer = (char *)malloc(sizeof(char) *(BUFFER_SIZE + 1));
 	if (!rem)
@@ -121,21 +121,30 @@ char *get_next_line(int fd)
 
 	if (!buffer || fd < 0 || BUFFER_SIZE < 1 || !rem)
 		return (NULL);
-
-	while (bytes_read > 0 && !has_new_line(rem))
+	bytes_read = 1;
+	while (bytes_read > 0 && has_new_line(rem) == -1)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[bytes_read] = '\0';
 		rem = ft_strjoin(rem, buffer);
 	}
-	// If we are here, it means either there is a new line in rem or we reached the end of the file
+	if (bytes_read == 0 && rem[0] == '\0')
+		return (NULL);
 	index_line = has_new_line(rem);
-	// printf("Index of new line: %d\n", index_line);
-	if (index_line)
+	if (index_line != -1)
 	{
-		// Get the new line
 		line = get_line(rem, index_line + 1);
-		// Update rem, remove the new line
 		rem = ft_substr(rem, index_line + 1, ft_strlen(rem) - index_line);
+	}
+	else
+	{
+		line = rem;
+		rem = ft_substr(rem, 0, 0);
 	}
 	return (line);
 }
@@ -145,10 +154,16 @@ int main(void)
 	int	fd;
 
 	fd = open("test.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	printf("First call: %s\n", get_next_line(fd));
+	printf("Second call: %s\n", get_next_line(fd));
+	printf("Third call: %s\n", get_next_line(fd));
+	printf("Forth call: %s\n", get_next_line(fd));
+	printf("Fifth call: %s\n", get_next_line(fd));
+	printf("Sixth call: %s\n", get_next_line(fd));
+	printf("Seventh call: %s\n", get_next_line(fd));
+	printf("Eigth call: %s\n", get_next_line(fd));
+	// printf("%s", get_next_line(fd));
+
 	close(fd);
 	return (0);
 }
