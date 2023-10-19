@@ -83,41 +83,40 @@ char	*get_next_line(int fd)
 			return (ft_free(buffer));
 	}
 	free(buffer);
-	if (bytes_read == 0 && rem[0] == '\0')
-		return (ft_free(rem));
 	index_line = has_new_line(rem);
 	line = get_line(rem, index_line + 1);
 	rem = ft_substr(rem, index_line + 1, ft_strlen(rem) - index_line);
+	if (rem == NULL && ft_strlen(line) == 0)
+		return (ft_free(rem));
 	return (line);
 }
 
-int	main(void)
-{
-	int	fd;
-	char *line;
-	fd = open("test.txt", O_RDONLY);
+// int	main(void)
+// {
+// 	int	fd;
+// 	fd = open("test.txt", O_RDONLY);
 
-	// while (line = get_next_line(fd))
-	// {
-	// 	printf("%s", line);
-	// 	free(line);
-	// }
-	// free(line);
+// 	// while (line = get_next_line(fd))
+// 	// {
+// 	// 	printf("%s", line);
+// 	// 	free(line);
+// 	// }
+// 	// free(line);
 
-	printf("First call: %s", get_next_line(fd));
-	printf("Second call: %s", get_next_line(fd));
-	printf("Third call: %s", get_next_line(fd));
-	printf("Forth call: %s", get_next_line(fd));
-	printf("Fifth call: %s", get_next_line(fd));
-	printf("Sixth call: %s", get_next_line(fd));
-	printf("Seventh call: %s", get_next_line(fd));
-	printf("Eigth call: %s", get_next_line(fd));
-	printf("Nineth call: %s", get_next_line(fd));
-	printf("xth call: %s", get_next_line(fd));
-	printf("xth call: %s", get_next_line(fd));
-	printf("xth call: %s", get_next_line(fd));
-	printf("xth call: %s", get_next_line(fd));
-	close(fd);
+// 	printf("First call: %s", get_next_line(fd));
+// 	printf("Second call: %s", get_next_line(fd));
+// 	printf("Third call: %s", get_next_line(fd));
+// 	printf("Forth call: %s", get_next_line(fd));
+// 	printf("Fifth call: %s", get_next_line(fd));
+// 	printf("Sixth call: %s", get_next_line(fd));
+// 	printf("Seventh call: %s", get_next_line(fd));
+// 	printf("Eigth call: %s", get_next_line(fd));
+// 	printf("Nineth call: %s", get_next_line(fd));
+// 	// printf("xth call: %s", get_next_line(fd));
+// 	// printf("xth call: %s", get_next_line(fd));
+// 	// printf("xth call: %s", get_next_line(fd));
+// 	// printf("xth call: %s", get_next_line(fd));
+// 	close(fd);
 
-	return (0);
-}
+// 	return (0);
+// }

@@ -57,7 +57,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	size_t		j;
 
 	if (has_new_line(s) == -1)
-		len = 0;
+		return (NULL);
 	substring = (char *)malloc(sizeof(char) * (len + 1));
 	if (!substring)
 		return (NULL);
