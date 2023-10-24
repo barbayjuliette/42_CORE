@@ -26,13 +26,16 @@ int	has_new_line(char *buffer)
 	return (-1);
 }
 
-char	*get_line(char *rem, int size)
+char	*get_one_line(char *rem, int size)
 {
 	char	*line;
 	int		i;
 
 	if (size == 0)
-		return (rem);
+	{
+		line = ft_strdup(rem);
+		return (line);
+	}
 	line = (char *)malloc(sizeof(char) * (size + 1));
 	if (!line)
 		return (NULL);
@@ -49,6 +52,7 @@ char	*get_line(char *rem, int size)
 char	*ft_free(char *buffer)
 {
 	free(buffer);
+	buffer = NULL;
 	return (NULL);
 }
 
@@ -57,8 +61,10 @@ int	read_file(char **rem, char **buffer, int fd)
 	int	bytes_read;
 
 	bytes_read = read(fd, *buffer, BUFFER_SIZE);
+	if (bytes_read < 1)
+		return (bytes_read);
 	(*buffer)[bytes_read] = '\0';
-	*rem = ft_strjoin(*rem, *buffer);
+	ft_strjoin(rem, *buffer);
 	return (bytes_read);
 }
 
@@ -69,54 +75,56 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*rem;
 	int			index_line;
+	
 
-	buffer = (char *)malloc(sizeof(char) *(BUFFER_SIZE + 1));
-	if (!rem)
-		rem = (char *)malloc(sizeof(char) *(BUFFER_SIZE + 1));
-	if (!buffer || fd < 0 || BUFFER_SIZE < 1 || !rem)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	if (!rem)
+		rem = ft_calloc(1);
+	if (!rem)
+		return (ft_free(buffer));
 	bytes_read = 1;
 	while (bytes_read > 0 && has_new_line(rem) == -1)
 	{
 		bytes_read = read_file(&rem, &buffer, fd);
 		if (bytes_read < 0)
-			return (ft_free(buffer));
+		{
+			// free(rem);
+			free(buffer);
+			buffer = NULL;
+			return (buffer);
+		}
 	}
 	free(buffer);
 	index_line = has_new_line(rem);
-	line = get_line(rem, index_line + 1);
-	rem = ft_substr(rem, index_line + 1, ft_strlen(rem) - index_line);
-	if (rem == NULL && ft_strlen(line) == 0)
-		return (ft_free(rem));
+	line = get_one_line(rem, index_line + 1);
+	ft_substr(&rem, index_line + 1, ft_slen(rem) - index_line, 0);
+	if (ft_slen(rem) == 0 && ft_slen(line) == 0)
+	{
+		// free(rem);
+		return (ft_free(line));
+	}
 	return (line);
 }
 
 // int	main(void)
 // {
-// 	int	fd;
-// 	fd = open("test.txt", O_RDONLY);
+// 	// int	fd;
+// 	// fd = open("test.txt", O_RDONLY);
+// 	char *line;
 
-// 	// while (line = get_next_line(fd))
-// 	// {
-// 	// 	printf("%s", line);
-// 	// 	free(line);
-// 	// }
-// 	// free(line);
-
-// 	printf("First call: %s", get_next_line(fd));
-// 	printf("Second call: %s", get_next_line(fd));
-// 	printf("Third call: %s", get_next_line(fd));
-// 	printf("Forth call: %s", get_next_line(fd));
-// 	printf("Fifth call: %s", get_next_line(fd));
-// 	printf("Sixth call: %s", get_next_line(fd));
-// 	printf("Seventh call: %s", get_next_line(fd));
-// 	printf("Eigth call: %s", get_next_line(fd));
-// 	printf("Nineth call: %s", get_next_line(fd));
-// 	// printf("xth call: %s", get_next_line(fd));
-// 	// printf("xth call: %s", get_next_line(fd));
-// 	// printf("xth call: %s", get_next_line(fd));
-// 	// printf("xth call: %s", get_next_line(fd));
-// 	close(fd);
+// 	line = get_next_line(9);
+// 	while (line)
+// 	{
+// 		printf("Line: %s", line);
+// 		free(line);
+// 		line = get_next_line(9);
+// 	}
+// 	free(line);
+// 	close(9);
 
 // 	return (0);
 // }
