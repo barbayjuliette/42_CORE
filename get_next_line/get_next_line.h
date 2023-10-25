@@ -31,7 +31,8 @@ char	*get_one_line(char *rem, int size);
 char	*get_next_line(int fd);
 char	*ft_strdup(char *s1);
 void	*ft_calloc(size_t size);
-char	*ft_free(char *buffer);
+char	*ft_free(char **buffer);
 int		read_file(char **rem, char **buffer, int fd);
+char	*free_static(char **rem, char **buff);
 
 #endif

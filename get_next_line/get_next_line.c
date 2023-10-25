@@ -49,13 +49,6 @@ char	*get_one_line(char *rem, int size)
 	return (line);
 }
 
-char	*ft_free(char *buffer)
-{
-	free(buffer);
-	buffer = NULL;
-	return (NULL);
-}
-
 int	read_file(char **rem, char **buffer, int fd)
 {
 	int	bytes_read;
@@ -68,6 +61,19 @@ int	read_file(char **rem, char **buffer, int fd)
 	return (bytes_read);
 }
 
+char	*free_static(char **rem, char **buff)
+{
+	char	*temp;
+
+	temp = *rem;
+	*rem = NULL;
+	free(temp);
+	temp = NULL;
+	free(*buff);
+	*buff = NULL;
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*buffer;
@@ -75,38 +81,25 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*rem;
 	int			index_line;
-	
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
 	if (!rem)
 		rem = ft_calloc(1);
-	if (!rem)
-		return (ft_free(buffer));
 	bytes_read = 1;
 	while (bytes_read > 0 && has_new_line(rem) == -1)
 	{
 		bytes_read = read_file(&rem, &buffer, fd);
 		if (bytes_read < 0)
-		{
-			// free(rem);
-			free(buffer);
-			buffer = NULL;
-			return (buffer);
-		}
+			return (free_static(&rem, &buffer));
 	}
 	free(buffer);
 	index_line = has_new_line(rem);
 	line = get_one_line(rem, index_line + 1);
 	ft_substr(&rem, index_line + 1, ft_slen(rem) - index_line, 0);
 	if (ft_slen(rem) == 0 && ft_slen(line) == 0)
-	{
-		// free(rem);
-		return (ft_free(line));
-	}
+		return (free_static(&rem, &line));
 	return (line);
 }
 
