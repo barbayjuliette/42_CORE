@@ -20,7 +20,7 @@ clean:
 		@make fclean -C libft
 
 fclean: clean
-		${RM} ${NAME}
+		${RM} ${NAME} ${OBJS}
 
 re: fclean all
 

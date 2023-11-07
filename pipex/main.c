@@ -14,32 +14,69 @@
 
 int main(int argc, char *argv[], char *envp[])
 {
+	char	*infile;
+	char	*outfile;
+	char	**command1;
+	char	**command2;
+	int		pid1;
+	int		pid2;
+	char	*path;
+
 	if (argc != 5)
 	{
 		ft_printf("Wrong number of arguments. Please try again.\n");
 		return (1);
 	}
 
-	char	*infile;
-	char	*outfile;
-	char	**command1;
-	char	*command2;
-
 	infile = argv[1];
 	command1 = ft_split(argv[2], ' ');
-	command2 = argv[3];
+	command2 = ft_split(argv[3], ' ');
 	outfile = argv[4];
 
-	int i = 0;
+	int fd[2];
+	if (pipe(fd) == -1)
+	{
+		perror("Error in main");
+		return (1);
+	}
 
-	// while (command1[i])
-	// {
-	// 	ft_putstr_fd(command1[i], 1);
-	// 	free(command1[i]);
-	// 	write(1, "\n", 1);
-	// 	i++;
-	// }
-	// write(1, "Hello\n", 6);
+	pid1 = fork();
+	if (pid1 == -1)
+	{
+		perror("Error in main");
+		return (1);
+	}
+	char	*ls[] = {"-l", NULL};
+	if (pid1 == 0)
+	{
+		// Child 1: cmd1
+		ft_printf("Child process 1\n");
+		path = ft_strjoin("/bin/", command1[0]);
+		// ft_putendl_fd(path, 1);
+		if (execve(path, command1, envp) == -1)
+			perror("Child 1");
+		// bin or sbin ?
+	}
 
-	return 0;
+	// Main process here
+	waitpid(pid1, NULL, 0);
+	pid2 = fork();
+
+	if (pid2 == -1)
+	{
+		perror("Error in main");
+		return (1);
+	}
+
+	if (pid2 == 0)
+	{
+		// Child 2: cmd2
+		ft_printf("Child process 2\n");
+		return (0);
+	}
+
+	// Main process
+	waitpid(pid2, NULL, 0);
+	ft_printf("Main process waited for children\n");
+	return (0);
 }

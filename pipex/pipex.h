@@ -13,11 +13,12 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include "libft/libft.h"
+# include "libft/ft_printf/ft_printf.h"
 # include <unistd.h>
 # include <stdlib.h>
 #	include <stdio.h>
-# include "libft/libft.h"
-# include "libft/ft_printf/ft_printf.h"
+# include "errno.h"
 
 int main(int argc, char *argv[], char *envp[]);
 
