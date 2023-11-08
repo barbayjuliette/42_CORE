@@ -23,7 +23,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-
-int main(int argc, char *argv[], char *envp[]);
+int		main(int argc, char *argv[], char *envp[]);
+void	child_process_1(char *file, int fd[2], char *cmd, char *envp[]);
+void	child_process_2(char *file, int fd[2], char *cmd, char *envp[]);
 
 #endif

@@ -1,4 +1,6 @@
 SRCS = main.c \
+		child_process_1.c \
+		child_process_2.c
 
 CC = cc
 # CFLAGS = -Wall -Wextra -Werror
