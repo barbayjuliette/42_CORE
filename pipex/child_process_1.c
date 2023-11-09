@@ -20,7 +20,7 @@ void	child_process_1(char *file, int fd[2], char *cmd, char **envp)
 
 	infile = open(file, O_RDONLY);
 	if (infile == -1)
-		handle_errors(errno, "pipex");
+		handle_file_errors(errno, file);
 	if (dup2(infile, 0) == -1)
 		handle_errors(errno, "pipex");
 	if (dup2(fd[1], 1) == -1)

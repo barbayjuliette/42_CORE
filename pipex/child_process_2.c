@@ -20,7 +20,7 @@ void	child_process_2(char *file, int fd[2], char *cmd, char **envp)
 
 	outfile = open(file, O_WRONLY | O_CREAT | O_TRUNC, 00777);
 	if (outfile == -1)
-		handle_errors(errno, "pipex");
+		handle_file_errors(errno, file);
 	if (dup2(outfile, 1) == -1)
 		handle_errors(errno, "pipex");
 	if (dup2(fd[0], 0) == -1)
@@ -41,7 +41,7 @@ void	child_process_2(char *file, int fd[2], char *cmd, char **envp)
 
 void	no_path(char *path, char *cmd)
 {
-	ft_putstr_fd("pipex: command not found\n", 2);
+	ft_putstr_fd("pipex: command not found: ", 2);
 	ft_putendl_fd(cmd, 2);
 	free(path);
 	exit(127);
@@ -50,6 +50,15 @@ void	no_path(char *path, char *cmd)
 void	handle_errors(int err, char *str)
 {
 	perror(str);
+	exit(err);
+}
+
+void	handle_file_errors(int err, char *file)
+{
+	ft_putstr_fd("pipex: ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(file, 2);
 	exit(err);
 }
 
