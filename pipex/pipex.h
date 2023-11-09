@@ -23,8 +23,12 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-int		main(int argc, char *argv[], char *envp[]);
-void	child_process_1(char *file, int fd[2], char *cmd, char *envp[]);
-void	child_process_2(char *file, int fd[2], char *cmd, char *envp[]);
+void	child_process_1(char *file, int fd[2], char *cmd, char **envp);
+void	child_process_2(char *file, int fd[2], char *cmd, char **envp);
+char	*get_path(char **envp, char *cmd);
+char	*get_all_paths(char **envp);
+void	handle_errors(int err, char *str);
+void	no_path(char *path);
+void	nb_args(int argc);
 
 #endif

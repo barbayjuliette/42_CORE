@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	child_process_1(char *file, int fd[2], char *cmd, char *envp[])
+void	child_process_1(char *file, int fd[2], char *cmd, char **envp)
 {
 	int		infile;
 	char	**command1;
@@ -20,17 +20,21 @@ void	child_process_1(char *file, int fd[2], char *cmd, char *envp[])
 
 	infile = open(file, O_RDONLY);
 	if (infile == -1)
-	{
-		perror("Child 1, trying to open file1");
-		exit(1);
-	}
-	dup2(infile, 0);
-	dup2(fd[1], 1);
+		handle_errors(errno, "pipex");
+	if (dup2(infile, 0) == -1)
+		handle_errors(errno, "pipex");
+	if (dup2(fd[1], 1) == -1)
+		handle_errors(errno, "pipex");
 	close(fd[0]);
 	close(fd[1]);
 	command1 = ft_split(cmd, ' ');
-	path = ft_strjoin("/usr/bin/", command1[0]);
-	if (execve(path, command1, envp) == -1)
-		perror("Child 1");
+	path = get_path(envp, command1[0]);
+	if (path)
+		execve(path, command1, envp);
+	free(command1);
+	if (!path)
+		no_path(path);
+	free(path);
+	handle_errors(errno, "pipex");
 	return ;
 }
