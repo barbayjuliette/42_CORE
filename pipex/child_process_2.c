@@ -33,15 +33,16 @@ void	child_process_2(char *file, int fd[2], char *cmd, char **envp)
 		execve(path, command2, envp);
 	free(command2);
 	if (!path)
-		no_path(path);
+		no_path(path, command2[0]);
 	free(path);
 	handle_errors(errno, "pipex");
 	return ;
 }
 
-void	no_path(char *path)
+void	no_path(char *path, char *cmd)
 {
 	ft_putstr_fd("pipex: command not found\n", 2);
+	ft_putendl_fd(cmd, 2);
 	free(path);
 	exit(127);
 }

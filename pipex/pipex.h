@@ -28,7 +28,7 @@ void	child_process_2(char *file, int fd[2], char *cmd, char **envp);
 char	*get_path(char **envp, char *cmd);
 char	*get_all_paths(char **envp);
 void	handle_errors(int err, char *str);
-void	no_path(char *path);
+void	no_path(char *path, char *cmd);
 void	nb_args(int argc);
 
 #endif

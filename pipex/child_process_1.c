@@ -33,7 +33,7 @@ void	child_process_1(char *file, int fd[2], char *cmd, char **envp)
 		execve(path, command1, envp);
 	free(command1);
 	if (!path)
-		no_path(path);
+		no_path(path, command1[0]);
 	free(path);
 	handle_errors(errno, "pipex");
 	return ;
