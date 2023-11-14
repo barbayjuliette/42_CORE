@@ -32,5 +32,6 @@ void	handle_errors(int err, char *str);
 void	no_path(char *path, char *cmd);
 void	nb_args(int argc);
 void	handle_file_errors(int err, char *file);
+void	wait_child(int pid);
 
 #endif

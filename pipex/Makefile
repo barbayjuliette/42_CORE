@@ -1,6 +1,6 @@
 SRCS = main.c \
-		child_process_1.c \
-		child_process_2.c
+		child_processes.c \
+		helpers.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -11,8 +11,8 @@ OBJS = ${SRCS:.c=.o}
 all: ${NAME}
 
 $(NAME):
-			@make all -C libft
-			$(CC) $(CFLAGS) $(SRCS) -L./libft -lft -o ${NAME}
+		@make all -C libft
+		$(CC) $(CFLAGS) $(SRCS) -L./libft -lft -o ${NAME}
 
 %.o: %.c
 	${CC} $(CFLAGS) -c $<

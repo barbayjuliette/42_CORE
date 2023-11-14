@@ -1,43 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_process_2.c                                  :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 12:38:29 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/08 12:38:32 by jbarbay          ###   ########.fr       */
+/*   Created: 2023/11/14 11:46:53 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/11/14 11:47:00 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	child_process_2(char *file, int fd[2], char *cmd, char **envp)
-{
-	int		outfile;
-	char	**command2;
-	char	*path;
-
-	outfile = open(file, O_WRONLY | O_CREAT | O_TRUNC, 00777);
-	if (outfile == -1)
-		handle_file_errors(errno, file);
-	if (dup2(outfile, 1) == -1)
-		handle_errors(errno, "pipex");
-	if (dup2(fd[0], 0) == -1)
-		handle_errors(errno, "pipex");
-	close(fd[0]);
-	close(fd[1]);
-	command2 = ft_split(cmd, ' ');
-	path = get_path(envp, command2[0]);
-	if (path)
-		execve(path, command2, envp);
-	free(command2);
-	if (!path)
-		no_path(path, command2[0]);
-	free(path);
-	handle_errors(errno, "pipex");
-	return ;
-}
 
 void	no_path(char *path, char *cmd)
 {
@@ -55,8 +28,13 @@ void	handle_errors(int err, char *str)
 
 void	handle_file_errors(int err, char *file)
 {
+	char	*error_msg;
+
+	error_msg = ft_strdup(strerror(errno));
+	if (*error_msg)
+		*error_msg = ft_tolower(*error_msg);
 	ft_putstr_fd("pipex: ", 2);
-	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd(error_msg, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(file, 2);
 	exit(err);

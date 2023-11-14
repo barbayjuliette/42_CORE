@@ -22,12 +22,23 @@ void	nb_args(int argc)
 	return ;
 }
 
+void	wait_child(int pid)
+{
+	int		status;
+
+	waitpid(pid, &status, 0);
+	if ((WIFEXITED(status)))
+	{
+		if (WEXITSTATUS(status) != 0)
+			exit(WEXITSTATUS(status));
+	}
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	int		pid1;
 	int		pid2;
 	int		fd[2];
-	int		status;
 
 	nb_args(argc);
 	if (pipe(fd) == -1)
@@ -44,17 +55,7 @@ int	main(int argc, char *argv[], char **envp)
 		child_process_2(argv[4], fd, argv[3], envp);
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pid1, &status, 0);
-	if ((WIFEXITED(status)))
-	{
-		if (WEXITSTATUS(status) != 0)
-			exit(WEXITSTATUS(status));
-	}
-	waitpid(pid2, &status, 0);
-	if ((WIFEXITED(status)))
-	{
-		if (WEXITSTATUS(status) != 0)
-			exit(WEXITSTATUS(status));
-	}
+	wait_child(pid1);
+	wait_child(pid2);
 	return (0);
 }
