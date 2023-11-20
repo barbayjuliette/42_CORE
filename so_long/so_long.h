@@ -58,4 +58,7 @@ int	get_height(char *map);
 int	ft_strlen(const char *string);
 void	ft_strjoin(char **map, char *buffer, int i, int j);
 void	ft_putstr(char *s);
-
+char	**populate_input_matrix(int height, int width, char *buff, int j);
+char	**create_matrix(int height);
+void print_matrix(char **matrix, int rows, int cols);
+int	check_walls(char **matrix, int height, int width);
