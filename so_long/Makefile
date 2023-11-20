@@ -1,4 +1,6 @@
-SRCS = so_long.c
+SRCS = so_long.c \
+		validation.c \
+		read_map.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf

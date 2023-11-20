@@ -13,7 +13,12 @@
 #include <mlx.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <stdio.h>
 
+#define BUFFER_SIZE  1
 #define HEIGHT 400
 #define WIDTH 400
 #define MALLOC_ERROR 1
@@ -23,3 +28,34 @@ typedef struct s_mlx_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_mlx_data;
+
+typedef struct s_img
+{
+	t_mlx_data	window;
+	void		*img_ptr;
+	char		*addr;
+	int			height;
+	int			width;
+	int			bpp;
+	int			endian;
+	int			line_len;
+}	t_img;
+
+typedef struct s_square {
+	unsigned short int	x;
+	unsigned short int	y;
+	unsigned short int	size;
+	int					color;
+}		t_square;
+
+int get_map_and_validate(int argc, char *argv[]);
+int	map_validation(char *map);
+int	check_characters(char *map);
+int	count_char_map(int *exit, int *start, int *collectible, char *map);
+int	get_width(char *map);
+int	is_rectangle(char *map, int width);
+int	get_height(char *map);
+int	ft_strlen(const char *string);
+void	ft_strjoin(char **map, char *buffer, int i, int j);
+void	ft_putstr(char *s);
+
