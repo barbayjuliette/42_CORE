@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/21 15:31:21 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/11/21 15:31:23 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	get_height(char *map)
@@ -80,7 +92,7 @@ int	count_char_map(int *exit, int *start, int *collectible, char *map)
 	return (1);
 }
 
-int	check_characters(char *map)
+int	check_characters(char *map, t_mlx_data *data)
 {
 	int	exit;
 	int	start;
@@ -92,15 +104,18 @@ int	check_characters(char *map)
 	if (!count_char_map(&exit, &start, &collectible, map))
 		return (0);
 	if (exit == 1 && start == 1 && collectible > 0)
+	{
+		data->collectibles = collectible;
 		return (1);
+	}
 	return (0);
 }
 
-int	map_validation(char *map)
+int	map_validation(char *map, t_mlx_data *data)
 {
 	printf("HEIGHT: %d\n", get_height(map));
 	printf("WIDTH: %d\n", get_width(map));
-	if (check_characters(map) && get_width(map))
+	if (check_characters(map, data) && get_width(map))
 		return (1);
 	return (0);
 }

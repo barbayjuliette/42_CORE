@@ -25,16 +25,50 @@ int exit_program(t_mlx_data *data)
 
 int	handle_input(int keysym, t_mlx_data *data)
 {
+	int	row;
+	int	col;
+	t_img *player = malloc(sizeof(t_img));
+
+	row = data->position[0];
+	col = data->position[1];
 	if (keysym == XK_Escape)
 		exit_program(data);
-	printf("Key %d has been pressed\n", keysym);
+	if (keysym == UP)
+	{
+		// Check if row-1, col is not a wall
+		if (data->map[row-1][col] == '1')
+			return (1);
+		printf("Total collectibles: %d\n", data->collectibles);
+		// If row-1, col is a collectible, collectible--;
+		if (data->map[row-1][col] == 'C')
+			data->collectibles--;
+		printf("Total collectibles: %d\n", data->collectibles);
+		
+		// // Remove player image
+		// I have to clear the whole window and rebuild everything again. Clear all images first.
+		// mlx_destroy_image(data->mlx_ptr, ((t_img *)data->player)->img_ptr);
+		// free(data->player);
+		// // Add player to row-1, col
+		// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->player)->img_ptr, col * IMAGE_SIZE, (row - 1) * IMAGE_SIZE);
+		// player->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/player.xpm", &(player->width), &(player->height));
+		// // Add to moves
+		// data->moves++;
+		// // If exit and collectibles == 0, end of game
+		// // Update position in data
+		// data->position[0] = row - 1;
+		// printf("Number of moves: %d\n", data->moves);
+	}
+	// data->moves++;
+	// printf("Key pressed: %d\n", keysym);
 	return (0);
 }
 
+// Function to create data struct
 void	get_window_size(t_mlx_data *data)
 {
 	data->win_height = IMAGE_SIZE * data->map_height;
 	data->win_width = IMAGE_SIZE * data->map_width;
+	data->moves = 0;
 }
 
 void	create_images(t_mlx_data *data)
@@ -60,44 +94,29 @@ void	create_images(t_mlx_data *data)
 	data->player = player;
 }
 
-void	put_pixel_img(t_img img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img.addr + (y * img.line_len + x * (img.bpp / 8));
-	*(unsigned int *) dst = color;
-}
-
 void	build_map_screen(t_mlx_data *data)
 {
 	int	col;
 	int	row;
-	int	x;
-	int	y;
 
 	col = 0;
 	row = 0;
-	x = 0;
-	y = 0;
 	while (row < data->map_height)
 	{
 		col = 0;
-		x = 0;
 		while (col < data->map_width)
 		{
 			if (data->map[row][col] == '1')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->wall)->img_ptr, x, y);
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->wall)->img_ptr, col * IMAGE_SIZE, row * IMAGE_SIZE);
 			if (data->map[row][col] == 'E')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->exit)->img_ptr, x, y);
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->exit)->img_ptr, col * IMAGE_SIZE, row * IMAGE_SIZE);
 			if (data->map[row][col] == 'C')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->food)->img_ptr, x, y);
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->food)->img_ptr, col * IMAGE_SIZE, row * IMAGE_SIZE);
 			if (data->map[row][col] == 'P')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->player)->img_ptr, x, y);
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->player)->img_ptr, col * IMAGE_SIZE, row * IMAGE_SIZE);
 			col++;
-			x+= IMAGE_SIZE;
 		}
 		row++;
-		y+= IMAGE_SIZE;
 	}
 	return ;
 }
@@ -121,19 +140,17 @@ int main(int argc, char *argv[])
 		free(program.mlx_ptr);
 		return (MALLOC_ERROR);
 	}
-	// Exit when I click on X from window.
-	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
-	// Exit with esacpe nd key commands
-	mlx_key_hook(program.win_ptr, handle_input, &program);
-
+	// Create map
 	create_images(&program);
 	build_map_screen(&program);
-	// mlx_put_image_to_window(program.mlx_ptr, program.win_ptr, ((t_img *)program.wall)->img_ptr, 0, 0);
+	printf("Collectibles: %d\n", program.collectibles);
+	printf("Position player row: %d\n", program.position[0]);
+	printf("Position player col: %d\n", program.position[1]);
+	// Exit with X and ESC + Key hook
+	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
+	mlx_key_hook(program.win_ptr, handle_input, &program);
 
 	mlx_loop(program.mlx_ptr);
-
-	// mlx_destroy_display(program.mlx_ptr);
-	// free(program.mlx_ptr);
 	return 0;
 }
 

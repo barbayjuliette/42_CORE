@@ -1,51 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/21 15:31:10 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/11/21 15:31:13 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-
-int	ft_strlen(const char *string)
-{
-	int	i;
-
-	i = 0;
-	while (string[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_strjoin(char **map, char *buffer, int i, int j)
-{
-	char	*string;
-
-	string = (char *)malloc((ft_strlen(*map) + ft_strlen(buffer) + 1) * sizeof(char));
-	if (!string)
-		return ;
-	while ((*map)[i])
-	{
-		string[j] = (*map)[i];
-		i++;
-		j++;
-	}
-	i = 0;
-	while (buffer[i])
-	{
-		string[j] = buffer[i];
-		i++;
-		j++;
-	}
-	string[j] = '\0';
-	free(*map);
-	*map = string;
-}
-
-void	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-}
 
 int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 {
@@ -87,7 +52,7 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 		ft_strjoin(&map, buffer, 0, 0);
 	}
 	free(buffer);
-	if (!(map_validation(map)))
+	if (!(map_validation(map, data)))
 	{
 		ft_putstr("Map not valid\n");
 		return (1);
@@ -95,7 +60,7 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	// ft_putstr("Valid map\n");
 	data->map_width = get_width(map);
 	data->map_height = get_height(map);
-	data->map = populate_input_matrix(data->map_height, data->map_width, map, -1);
+	data->map = populate_input_matrix(data, map, -1);
 	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
 		ft_putstr("Map not valid\n");
@@ -136,44 +101,6 @@ int	check_walls(char **matrix, int height, int width)
 	return (1);
 }
 
-char	**create_matrix(int height)
-{
-	char	**matrix;
-
-	matrix = (char **)malloc(height * sizeof(char *));
-	if (!matrix)
-		exit(1);
-	return (matrix);
-}
-
-char	**populate_input_matrix(int height, int width, char *buff, int j)
-{
-	char	*matrix_row;
-	int		row_index;
-	char	**matrix;
-	int		col;
-
-	matrix = create_matrix(height);
-	col = 0;
-	while (++j < height)
-	{
-		matrix_row = (char *)malloc((width + 1) * sizeof(char));
-		if (!matrix_row)
-			exit(1);
-		row_index = 0;
-		while (row_index < width)
-		{
-			if (buff[col] == '\n')
-				col++;
-			matrix_row[row_index] = buff[col];
-			col++;
-			row_index++;
-		}
-		matrix_row[row_index] = '\0';
-		matrix[j] = matrix_row;
-	}
-	return (matrix);
-}
 // void print_matrix(char **matrix, int rows, int cols) {
 //     for (int i = 0; i < rows; ++i) {
 //         for (int j = 0; j < cols; ++j) 
