@@ -47,7 +47,7 @@ void	ft_putstr(char *s)
 	}
 }
 
-int get_map_and_validate(int argc, char *argv[])
+int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 {
 	int	fd;
 	char	*buffer;
@@ -93,14 +93,16 @@ int get_map_and_validate(int argc, char *argv[])
 		return (1);
 	}
 	// ft_putstr("Valid map\n");
-	matrix = populate_input_matrix(get_height(map), get_width(map), map, -1);
-	if (!check_walls(matrix, get_height(map), get_width(map)))
+	data->map_width = get_width(map);
+	data->map_height = get_height(map);
+	data->map = populate_input_matrix(data->map_height, data->map_width, map, -1);
+	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
 		ft_putstr("Map not valid\n");
 		return (1);
 	}
 	ft_putstr("Valid map\n");
-	// print_matrix(matrix, get_height(map), get_width(map));
+	// print_matrix(data->map, data->map_height, data->map_width);
 	free(map);
 	close(fd);
 

@@ -31,24 +31,33 @@ int	handle_input(int keysym, t_mlx_data *data)
 	return (0);
 }
 
-t_img	new_image(int width, int height, t_mlx_data window)
+void	get_window_size(t_mlx_data *data)
 {
-	t_img	image;
+	data->win_height = IMAGE_SIZE * data->map_height;
+	data->win_width = IMAGE_SIZE * data->map_width;
+}
 
-	image.window = window;
-	image.img_ptr = mlx_new_image(window.mlx_ptr, width, height);
-	image.addr = mlx_get_data_addr(image.img_ptr,&(image.bpp), &(image.line_len), &(image.endian));
-	image.width = width;
-	image.height = height;
+void	create_images(t_mlx_data *data)
+{
+	t_img *wall = malloc(sizeof(t_img));
+	t_img *exit = malloc(sizeof(t_img));
+	t_img *food = malloc(sizeof(t_img));
+	t_img *player = malloc(sizeof(t_img));
 
-	// printf("Let's Find out what's inside our structure :D\n");
-	// printf("img_ptr		: [%p]\n", image.img_ptr);
-	// printf("bpp		: [%d]\n", image.bpp);
-	// printf("line_len	: [%d]\n", image.line_len);
-	// printf("endian		: [%d]\n", image.endian);
-	// printf("addr		: [%p]\n", image.addr);
+	wall->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/wall.xpm", &(wall->width), &(wall->height));
+	exit->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/exit.xpm", &(exit->width), &(exit->height));
+	food->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/food.xpm", &(food->width), &(food->height));
+	player->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/player.xpm", &(player->width), &(player->height));
 
-	return (image);
+	wall->addr = mlx_get_data_addr(wall->img_ptr,&(wall->bpp), &(wall->line_len), &(wall->endian));
+	exit->addr = mlx_get_data_addr(exit->img_ptr,&(exit->bpp), &(exit->line_len), &(exit->endian));
+	food->addr = mlx_get_data_addr(food->img_ptr,&(food->bpp), &(food->line_len), &(food->endian));
+	player->addr = mlx_get_data_addr(player->img_ptr,&(player->bpp), &(player->line_len), &(player->endian));
+
+	data->wall = wall;
+	data->exit = exit;
+	data->food = food;
+	data->player = player;
 }
 
 void	put_pixel_img(t_img img, int x, int y, int color)
@@ -59,65 +68,67 @@ void	put_pixel_img(t_img img, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-void	draw_square(t_square square, t_img img)
+void	build_map_screen(t_mlx_data *data)
 {
-	unsigned short int	i;
-	unsigned short int	j;
+	int	col;
+	int	row;
+	int	x;
+	int	y;
 
-	i = 0;
-	while (i < square.size && i + square.y < img.height)
+	col = 0;
+	row = 0;
+	x = 0;
+	y = 0;
+	while (row < data->map_height)
 	{
-		j = 0;
-		while (j < square.size && j + square.x < img.width)
+		col = 0;
+		x = 0;
+		while (col < data->map_width)
 		{
-			put_pixel_img(img, j + square.x, i + square.y, square.color);
-			j++;
+			if (data->map[row][col] == '1')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->wall)->img_ptr, x, y);
+			if (data->map[row][col] == 'E')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->exit)->img_ptr, x, y);
+			if (data->map[row][col] == 'C')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->food)->img_ptr, x, y);
+			if (data->map[row][col] == 'P')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->player)->img_ptr, x, y);
+			col++;
+			x+= IMAGE_SIZE;
 		}
-		i++;
+		row++;
+		y+= IMAGE_SIZE;
 	}
+	return ;
 }
 
 int main(int argc, char *argv[])
 {
-	// void	*mlx_connection;
-	// void	*window;
 	t_mlx_data	program;
-	t_img	first_image;
 
-	if (get_map_and_validate(argc, argv))
+	if (get_map_and_validate(argc, argv, &program))
 		return (0);
 	program.mlx_ptr = mlx_init();
 	if (!program.mlx_ptr)
 		return (MALLOC_ERROR);
 	
-	program.win_ptr = mlx_new_window(program.mlx_ptr, HEIGHT, WIDTH, "First window");
+	get_window_size(&program);
+
+	program.win_ptr = mlx_new_window(program.mlx_ptr, program.win_width, program.win_height, "So_long");
 	if (!program.win_ptr)
 	{
 		mlx_destroy_display(program.mlx_ptr);
 		free(program.mlx_ptr);
 		return (MALLOC_ERROR);
 	}
-
 	// Exit when I click on X from window.
 	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
-
+	// Exit with esacpe nd key commands
 	mlx_key_hook(program.win_ptr, handle_input, &program);
-	// When a key is released the handle_input function will be called
-	// mlx_key_hook function is an alias of mlx_hook on key up event (3)
-	// 3 = ON_KEYUP. This is the prototype pf the function we have to use: int (*f)(int keycode, void *param)
 
-	// Create image
-	// first_image = new_image(300, 300, program);
-	// put_pixel_img(first_image, 150, 150,  0x00FFFFFF);
-	// mlx_put_image_to_window(first_image.window.mlx_ptr, first_image.window.win_ptr, first_image.img_ptr, 0, 0);
-
-
-	// Draw square
-	// t_square square = { 0, 0, 300, 0x00FF00};
-	// draw_square(square, first_image);
-	// mlx_put_image_to_window(first_image.window.mlx_ptr, first_image.window.win_ptr, first_image.img_ptr, 0, 0);
-	first_image.img_ptr = mlx_xpm_file_to_image(program.mlx_ptr, "./assets/wall.xpm", &(first_image.width), &(first_image.height));
-	mlx_put_image_to_window(program.mlx_ptr, program.win_ptr, first_image.img_ptr, 0, 0);
+	create_images(&program);
+	build_map_screen(&program);
+	// mlx_put_image_to_window(program.mlx_ptr, program.win_ptr, ((t_img *)program.wall)->img_ptr, 0, 0);
 
 	mlx_loop(program.mlx_ptr);
 
