@@ -70,3 +70,4 @@ char	**populate_input_matrix(t_mlx_data *data, char *buff, int j);
 char	**create_matrix(int height);
 void 	print_matrix(char **matrix, int rows, int cols);
 int		check_walls(char **matrix, int height, int width);
+void	build_map_screen(t_mlx_data *data);

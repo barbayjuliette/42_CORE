@@ -27,7 +27,6 @@ int	handle_input(int keysym, t_mlx_data *data)
 {
 	int	row;
 	int	col;
-	t_img *player = malloc(sizeof(t_img));
 
 	row = data->position[0];
 	col = data->position[1];
@@ -35,31 +34,124 @@ int	handle_input(int keysym, t_mlx_data *data)
 		exit_program(data);
 	if (keysym == UP)
 	{
-		// Check if row-1, col is not a wall
-		if (data->map[row-1][col] == '1')
+
+		if (data->map[row - 1][col] == '1')
 			return (1);
-		printf("Total collectibles: %d\n", data->collectibles);
-		// If row-1, col is a collectible, collectible--;
-		if (data->map[row-1][col] == 'C')
+
+		if (data->map[row - 1][col] == 'C')
 			data->collectibles--;
-		printf("Total collectibles: %d\n", data->collectibles);
 		
-		// // Remove player image
-		// I have to clear the whole window and rebuild everything again. Clear all images first.
-		// mlx_destroy_image(data->mlx_ptr, ((t_img *)data->player)->img_ptr);
-		// free(data->player);
-		// // Add player to row-1, col
-		// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, ((t_img *)data->player)->img_ptr, col * IMAGE_SIZE, (row - 1) * IMAGE_SIZE);
-		// player->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/player.xpm", &(player->width), &(player->height));
-		// // Add to moves
-		// data->moves++;
-		// // If exit and collectibles == 0, end of game
-		// // Update position in data
-		// data->position[0] = row - 1;
-		// printf("Number of moves: %d\n", data->moves);
+		if (data->map[row - 1][col] == 'E' && data->collectibles == 0)
+		{
+			data->map[row][col] = '0';
+			data->map[row - 1][col] = 'P';
+			mlx_clear_window(data->mlx_ptr, data->win_ptr);
+			build_map_screen(data);
+			exit_program(data);
+		}
+
+		data->map[row][col] = '0';
+		data->map[row - 1][col] = 'P';
+		data->position[0] = row - 1;
+
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		build_map_screen(data);
+
+		data->moves++;
+
+		// if (data->map[row-1][col] == 'E' && data->collectibles != 0)
+		printf("Number of moves: %d\n", data->moves);
 	}
-	// data->moves++;
-	// printf("Key pressed: %d\n", keysym);
+
+	if (keysym == DOWN)
+	{
+
+		if (data->map[row + 1][col] == '1')
+			return (1);
+
+		if (data->map[row + 1][col] == 'C')
+			data->collectibles--;
+
+		if (data->map[row + 1][col] == 'E' && data->collectibles == 0)
+		{
+			data->map[row][col] = '0';
+			data->map[row + 1][col] = 'P';
+			mlx_clear_window(data->mlx_ptr, data->win_ptr);
+			build_map_screen(data);
+			exit_program(data);
+		}
+
+		data->map[row][col] = '0';
+		data->map[row + 1][col] = 'P';
+		data->position[0] = row + 1;
+
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		build_map_screen(data);
+
+		data->moves++;
+
+		// if (data->map[row-1][col] == 'E' && data->collectibles != 0)
+		printf("Number of moves: %d\n", data->moves);
+	}
+	if (keysym == RIGHT)
+	{
+
+		if (data->map[row][col + 1] == '1')
+			return (1);
+
+		if (data->map[row][col + 1] == 'C')
+			data->collectibles--;
+
+		if (data->map[row][col + 1] == 'E' && data->collectibles == 0)
+		{
+			data->map[row][col] = '0';
+			data->map[row][col + 1] = 'P';
+			mlx_clear_window(data->mlx_ptr, data->win_ptr);
+			build_map_screen(data);
+			exit_program(data);
+		}
+
+		data->map[row][col] = '0';
+		data->map[row][col + 1] = 'P';
+		data->position[1] = col + 1;
+
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		build_map_screen(data);
+
+		data->moves++;
+
+		// if (data->map[row-1][col] == 'E' && data->collectibles != 0)
+		printf("Number of moves: %d\n", data->moves);
+	}
+	if (keysym == LEFT)
+	{
+
+		if (data->map[row][col - 1] == '1')
+			return (1);
+
+		if (data->map[row][col - 1] == 'C')
+			data->collectibles--;
+
+		if (data->map[row][col - 1] == 'E' && data->collectibles == 0)
+		{
+			data->map[row][col] = '0';
+			data->map[row][col - 1] = 'P';
+			mlx_clear_window(data->mlx_ptr, data->win_ptr);
+			build_map_screen(data);
+			exit_program(data);
+		}
+
+		data->map[row][col] = '0';
+		data->map[row][col - 1] = 'P';
+		data->position[1] = col - 1;
+
+		mlx_clear_window(data->mlx_ptr, data->win_ptr);
+		build_map_screen(data);
+
+		data->moves++;
+		// if (data->map[row-1][col] == 'E' && data->collectibles != 0)
+		printf("Number of moves: %d\n", data->moves);
+	}
 	return (0);
 }
 
@@ -143,9 +235,6 @@ int main(int argc, char *argv[])
 	// Create map
 	create_images(&program);
 	build_map_screen(&program);
-	printf("Collectibles: %d\n", program.collectibles);
-	printf("Position player row: %d\n", program.position[0]);
-	printf("Position player col: %d\n", program.position[1]);
 	// Exit with X and ESC + Key hook
 	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
 	mlx_key_hook(program.win_ptr, handle_input, &program);
