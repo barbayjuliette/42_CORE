@@ -4,7 +4,7 @@ SRCS = so_long.c \
 		helpers.c \
 		end_game.c \
 		movements.c \
-		ft_split.c
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
@@ -20,14 +20,18 @@ all: ${NAME}
 %.o: %.c
 	$(CC) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJS) runlibft
+	$(CC) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -o $(NAME)
 
 # $(NAME): runlibft $(OBJS)
 # 		$(CC) -o $(NAME) $(OBJS) $(LFLAGS)
 
+# $(NAME):
+# 		@make all -C libft
+# 		$(CC) $(CFLAGS) $(SRCS) -L./libft -lft -o ${NAME}
+
 runlibft:
-	make -C libft --no-print-directory
+	@make all -C libft
 
 clean:
 		${RM} ${OBJS}

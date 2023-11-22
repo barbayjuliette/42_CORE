@@ -16,8 +16,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <stdio.h>
 #include <X11/keysym.h>
+#include "libft/libft.h"
+#include "libft/ft_printf/ft_printf.h"
 
 #define BUFFER_SIZE  1
 #define	IMAGE_SIZE 32
@@ -59,16 +60,14 @@ typedef struct s_img
 
 int 	get_map_and_validate(int argc, char *argv[], t_mlx_data *data);
 int		map_validation(char *map, t_mlx_data *data);
+int		ft_strjoin_2(char **map, char *buffer, int i, int j);
 int		check_characters(char *map, t_mlx_data *data);
+int		is_rectangle(char *map, int width);
 int		count_char_map(int *exit, int *start, int *collectible, char *map);
 int		get_width(char *map);
-int		is_rectangle(char *map, int width);
 int		get_height(char *map);
 int		ft_strlen(const char *string);
-int		ft_strjoin(char **map, char *buffer, int i, int j);
 void	ft_putstr(char *s);
-char	**populate_input_matrix(t_mlx_data *data, char *buff, int j);
-char	**create_matrix(int height);
 void 	print_matrix(char **matrix, int rows, int cols);
 int		check_walls(char **matrix, int height, int width);
 void	build_map_screen(t_mlx_data *data);
@@ -80,9 +79,7 @@ int		move_down(t_mlx_data *data, int row, int col);
 int		move_right(t_mlx_data *data, int row, int col);
 int		move_left(t_mlx_data *data, int row, int col);
 int 	exit_program(t_mlx_data *data);
-// void	free_matrix(char **map);
 void 	print_matrix(char **matrix, int rows, int cols);
-char	**ft_split(char *s, char c);
-void	free_matrix(char **map, int	width, int height);
+void	free_matrix(char **map);
 int		get_height_matrix(char **map);
 void	get_position_player(t_mlx_data *data);

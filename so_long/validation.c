@@ -19,14 +19,13 @@ int	get_height(char *map)
 
 	height = 0;
 	i = 0;
-
 	while (map[i])
 	{
 		if (map[i] == '\n')
 			height++;
 		i++;
 	}
-	if (map[i-1] && map[i-1] != '\n')
+	if (map[i - 1] && map[i - 1] != '\n')
 		height++;
 	return (height);
 }
@@ -64,7 +63,7 @@ int	get_width(char *map)
 	i = 0;
 	width = 0;
 	temp_width = 0;
-	while ( map[i] && map[i] != '\n')
+	while (map[i] && map[i] != '\n')
 	{
 		width++;
 		i++;
@@ -85,7 +84,8 @@ int	count_char_map(int *exit, int *start, int *collectible, char *map)
 			(*start)++;
 		if (map[i] == 'C')
 			(*collectible)++;
-		if (!(map[i] == 'E' || map[i] == 'C' || map[i] == 'P' || map[i] == '0'|| map[i] == '1' || map[i] == '\n'))
+		if (!(map[i] == 'E' || map[i] == 'C' || map[i] == 'P' || 
+				map[i] == '0' || map[i] == '1' || map[i] == '\n'))
 			return (0);
 		i++;
 	}
@@ -96,7 +96,7 @@ int	check_characters(char *map, t_mlx_data *data)
 {
 	int	exit;
 	int	start;
-	int collectible;
+	int	collectible;
 
 	exit = 0;
 	start = 0;
@@ -113,8 +113,6 @@ int	check_characters(char *map, t_mlx_data *data)
 
 int	map_validation(char *map, t_mlx_data *data)
 {
-	// printf("HEIGHT: %d\n", get_height(map));
-	// printf("WIDTH: %d\n", get_width(map));
 	if (check_characters(map, data) && get_width(map))
 		return (1);
 	return (0);

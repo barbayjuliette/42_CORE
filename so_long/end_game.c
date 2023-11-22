@@ -18,12 +18,11 @@ int exit_program(t_mlx_data *data)
 	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->food)->img_ptr);
 	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->player)->img_ptr);
 	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->wall)->img_ptr);
-	
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	data->mlx_ptr = NULL;
-	free_matrix(data->map, data->map_width, data->map_height);
+	free_matrix(data->map);
 	free(data->exit);
 	free(data->food);
 	free(data->player);
@@ -31,12 +30,12 @@ int exit_program(t_mlx_data *data)
 	exit(0);
 }
 
-void	free_matrix(char **map, int	width, int height)
+void	free_matrix(char **map)
 {
-	int	row = 0;
-	int	col = 0;
+	int	row;
 
-	while (row < height)
+	row = 0;
+	while (map[row])
 	{
 		free(map[row]);
 		row++;
@@ -48,7 +47,7 @@ void	game_win(t_mlx_data *data)
 {
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	build_map_screen(data);
-	printf("Well done, you finished the game in %d moves.\n", data->moves);
+	ft_printf("Well done, you finished the game in %d moves.\n", data->moves);
 	exit_program(data);
 }
 
@@ -56,6 +55,6 @@ void	game_lost(t_mlx_data *data)
 {
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	build_map_screen(data);
-	printf("Game over\nYou forgot to get all collectibles.\n");
+	ft_printf("Game over\nYou forgot to get all collectibles.\n");
 	exit_program(data);
 }

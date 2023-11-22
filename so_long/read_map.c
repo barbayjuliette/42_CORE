@@ -48,7 +48,7 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 			exit(1);
 		}
 		buffer[bytes_read] = '\0';
-		ft_strjoin(&map, buffer, 0, 0);
+		ft_strjoin_2(&map, buffer, 0, 0);
 	}
 	free(buffer);
 	close(fd);
@@ -65,7 +65,7 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
 		ft_putstr("Map not valid\n");
-		free_matrix(data->map, data->map_width, data->map_height);
+		free_matrix(data->map);
 		free(map);
 		return (1);
 	}

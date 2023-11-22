@@ -21,7 +21,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 	col = data->position[1];
 	if (keysym == XK_Escape)
 	{
-		printf("Giving up so fast?\n");
+		ft_printf("Giving up so fast?\n");
 		exit_program(data);
 	}
 	if (keysym == UP)
@@ -40,7 +40,7 @@ void	update_map(t_mlx_data *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	build_map_screen(data);
 	data->moves++;
-	printf("Number of moves: %d\n", data->moves);
+	ft_printf("Number of moves: %d\n", data->moves);
 }
 
 int	move_up(t_mlx_data	*data, int row, int col)
