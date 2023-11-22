@@ -3,7 +3,8 @@ SRCS = so_long.c \
 		read_map.c \
 		helpers.c \
 		end_game.c \
-		movements.c
+		movements.c \
+		ft_split.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf

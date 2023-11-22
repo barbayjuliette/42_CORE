@@ -25,8 +25,7 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 		ft_putstr("Error, where is the map?\n");
 		exit(1);
 	}
-
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	map = (char *)malloc(sizeof(char));
 	map[0] = '\0';
 	fd = open(argv[1], O_RDONLY);
@@ -52,25 +51,26 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 		ft_strjoin(&map, buffer, 0, 0);
 	}
 	free(buffer);
+	close(fd);
 	if (!(map_validation(map, data)))
 	{
 		ft_putstr("Map not valid\n");
+		free(map);
 		return (1);
 	}
-	// ft_putstr("Valid map\n");
 	data->map_width = get_width(map);
 	data->map_height = get_height(map);
-	data->map = populate_input_matrix(data, map, -1);
+	data->map = ft_split(map, '\n');
+	get_position_player(data);
 	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
 		ft_putstr("Map not valid\n");
+		free_matrix(data->map, data->map_width, data->map_height);
+		free(map);
 		return (1);
 	}
 	ft_putstr("Valid map\n");
-	// print_matrix(data->map, data->map_height, data->map_width);
 	free(map);
-	close(fd);
-
 	return (0);
 }
 
@@ -101,12 +101,36 @@ int	check_walls(char **matrix, int height, int width)
 	return (1);
 }
 
-// void print_matrix(char **matrix, int rows, int cols) {
-//     for (int i = 0; i < rows; ++i) {
-//         for (int j = 0; j < cols; ++j) 
-// 		{
-//             write(1, &matrix[i][j], 1);
-//         }
-//         write(1, "\n", 1);
-//     }
-// }
+void print_matrix(char **matrix, int rows, int cols) 
+{
+	int	row = 0;
+	int	col = 0;
+
+	while (row < rows)
+	{
+		ft_putstr(matrix[row]);
+		write(1, "\n", 1);
+		row++;
+	}
+}
+
+void	get_position_player(t_mlx_data *data)
+{
+	int	row = 0;
+	int	col = 0;
+
+	while (row < data->map_height)
+	{
+		col = 0;
+		while (col < data->map_width)
+		{
+			if ( data->map[row][col] == 'P')
+			{
+				data->position[0] = row;
+				data->position[1] = col;
+			}
+			col++;
+		}
+		row++;
+	}
+}

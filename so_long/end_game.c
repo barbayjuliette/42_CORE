@@ -14,10 +14,34 @@
 
 int exit_program(t_mlx_data *data)
 {
+	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->exit)->img_ptr);
+	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->food)->img_ptr);
+	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->player)->img_ptr);
+	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->wall)->img_ptr);
+	
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
+	data->mlx_ptr = NULL;
+	free_matrix(data->map, data->map_width, data->map_height);
+	free(data->exit);
+	free(data->food);
+	free(data->player);
+	free(data->wall);
 	exit(0);
+}
+
+void	free_matrix(char **map, int	width, int height)
+{
+	int	row = 0;
+	int	col = 0;
+
+	while (row < height)
+	{
+		free(map[row]);
+		row++;
+	}
+	free(map);
 }
 
 void	game_win(t_mlx_data *data)

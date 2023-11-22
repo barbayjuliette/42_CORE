@@ -113,8 +113,8 @@ int	check_characters(char *map, t_mlx_data *data)
 
 int	map_validation(char *map, t_mlx_data *data)
 {
-	printf("HEIGHT: %d\n", get_height(map));
-	printf("WIDTH: %d\n", get_width(map));
+	// printf("HEIGHT: %d\n", get_height(map));
+	// printf("WIDTH: %d\n", get_width(map));
 	if (check_characters(map, data) && get_width(map))
 		return (1);
 	return (0);

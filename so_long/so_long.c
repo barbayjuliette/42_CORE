@@ -32,10 +32,10 @@ void	create_images(t_mlx_data *data)
 	food->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/food.xpm", &(food->width), &(food->height));
 	player->img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/player.xpm", &(player->width), &(player->height));
 
-	wall->addr = mlx_get_data_addr(wall->img_ptr,&(wall->bpp), &(wall->line_len), &(wall->endian));
-	exit->addr = mlx_get_data_addr(exit->img_ptr,&(exit->bpp), &(exit->line_len), &(exit->endian));
-	food->addr = mlx_get_data_addr(food->img_ptr,&(food->bpp), &(food->line_len), &(food->endian));
-	player->addr = mlx_get_data_addr(player->img_ptr,&(player->bpp), &(player->line_len), &(player->endian));
+	wall->addr = mlx_get_data_addr(wall->img_ptr, &(wall->bpp), &(wall->line_len), &(wall->endian));
+	exit->addr = mlx_get_data_addr(exit->img_ptr, &(exit->bpp), &(exit->line_len), &(exit->endian));
+	food->addr = mlx_get_data_addr(food->img_ptr, &(food->bpp), &(food->line_len), &(food->endian));
+	player->addr = mlx_get_data_addr(player->img_ptr, &(player->bpp), &(player->line_len), &(player->endian));
 
 	data->wall = wall;
 	data->exit = exit;
@@ -79,9 +79,7 @@ int main(int argc, char *argv[])
 	program.mlx_ptr = mlx_init();
 	if (!program.mlx_ptr)
 		return (MALLOC_ERROR);
-	
 	get_window_size(&program);
-
 	program.win_ptr = mlx_new_window(program.mlx_ptr, program.win_width, program.win_height, "So_long");
 	if (!program.win_ptr)
 	{
@@ -89,13 +87,10 @@ int main(int argc, char *argv[])
 		free(program.mlx_ptr);
 		return (MALLOC_ERROR);
 	}
-	// Create map
 	create_images(&program);
 	build_map_screen(&program);
-	// Exit with X and ESC + Key hook
 	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
 	mlx_key_hook(program.win_ptr, handle_input, &program);
-
 	mlx_loop(program.mlx_ptr);
 	return 0;
 }
