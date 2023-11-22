@@ -1,7 +1,9 @@
 SRCS = so_long.c \
 		validation.c \
 		read_map.c \
-		helpers.c
+		helpers.c \
+		end_game.c \
+		movements.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf

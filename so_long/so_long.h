@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <X11/keysym.h>
 
 #define BUFFER_SIZE  1
 #define	IMAGE_SIZE 32
@@ -57,8 +58,8 @@ typedef struct s_img
 }	t_img;
 
 int 	get_map_and_validate(int argc, char *argv[], t_mlx_data *data);
-int	map_validation(char *map, t_mlx_data *data);
-int	check_characters(char *map, t_mlx_data *data);
+int		map_validation(char *map, t_mlx_data *data);
+int		check_characters(char *map, t_mlx_data *data);
 int		count_char_map(int *exit, int *start, int *collectible, char *map);
 int		get_width(char *map);
 int		is_rectangle(char *map, int width);
@@ -71,3 +72,11 @@ char	**create_matrix(int height);
 void 	print_matrix(char **matrix, int rows, int cols);
 int		check_walls(char **matrix, int height, int width);
 void	build_map_screen(t_mlx_data *data);
+void	game_lost(t_mlx_data *data);
+void	game_win(t_mlx_data *data);
+int		handle_input(int keysym, t_mlx_data *data);
+int		move_up(t_mlx_data *data, int row, int col);
+int		move_down(t_mlx_data *data, int row, int col);
+int		move_right(t_mlx_data *data, int row, int col);
+int		move_left(t_mlx_data *data, int row, int col);
+int 	exit_program(t_mlx_data *data);
