@@ -21,7 +21,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 	col = data->position[1];
 	if (keysym == XK_Escape)
 	{
-		printf("Giving up so fast?");
+		printf("Giving up so fast?\n");
 		exit_program(data);
 	}
 	if (keysym == UP)
@@ -35,32 +35,32 @@ int	handle_input(int keysym, t_mlx_data *data)
 	return (0);
 }
 
-int	move_up(t_mlx_data	*data, int row, int col)
+void	update_map(t_mlx_data *data)
 {
-	if (data->map[row - 1][col] == '1')
-		return (0);
-
-	if (data->map[row - 1][col] == 'C')
-		data->collectibles--;
-	
-	data->map[row][col] = '0';
-	if (data->map[row - 1][col] == 'E' && data->collectibles == 0)
-	{
-		data->map[row - 1][col] = 'P';
-		game_win(data);
-	}
-	if (data->map[row - 1][col] == 'E' && data->collectibles == 0)
-	{
-		data->map[row - 1][col] = 'P';
-		game_lost(data);
-	}
-	data->map[row - 1][col] = 'P';
-	data->position[0] = row - 1;
-
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	build_map_screen(data);
 	data->moves++;
 	printf("Number of moves: %d\n", data->moves);
+}
+
+int	move_up(t_mlx_data	*data, int row, int col)
+{
+	if (data->map[row - 1][col] == '1')
+		return (0);
+	if (data->map[row - 1][col] == 'C')
+		data->collectibles--;
+	data->map[row][col] = '0';
+	if (data->map[row - 1][col] == 'E')
+	{
+		data->map[row - 1][col] = 'P';
+		if (data->collectibles == 0)
+			game_win(data);
+		else
+			game_lost(data);
+	}
+	data->map[row - 1][col] = 'P';
+	data->position[0] = row - 1;
+	update_map(data);
 	return (1);
 }
 
@@ -68,31 +68,20 @@ int	move_down(t_mlx_data *data, int row, int col)
 {
 	if (data->map[row + 1][col] == '1')
 		return (0);
-
 	if (data->map[row + 1][col] == 'C')
 		data->collectibles--;
-
 	data->map[row][col] = '0';
-	if (data->map[row + 1][col] == 'E' && data->collectibles == 0)
+	if (data->map[row + 1][col] == 'E')
 	{
 		data->map[row + 1][col] = 'P';
-		game_win(data);
+		if (data->collectibles == 0)
+			game_win(data);
+		else
+			game_lost(data);
 	}
-	if (data->map[row + 1][col] == 'E' && data->collectibles != 0)
-	{
-		data->map[row + 1][col] = 'P';
-		game_lost(data);
-	}
-
 	data->map[row + 1][col] = 'P';
 	data->position[0] = row + 1;
-
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	build_map_screen(data);
-
-	data->moves++;
-
-	printf("Number of moves: %d\n", data->moves);
+	update_map(data);
 	return (1);
 }
 
@@ -105,25 +94,17 @@ int	move_right(t_mlx_data *data, int row, int col)
 		data->collectibles--;
 
 	data->map[row][col] = '0';
-	if (data->map[row][col + 1] == 'E' && data->collectibles == 0)
+	if (data->map[row][col + 1] == 'E')
 	{
 		data->map[row][col + 1] = 'P';
-		game_win(data);
-	}
-	if (data->map[row][col + 1] == 'E' && data->collectibles == 0)
-	{
-		data->map[row][col + 1] = 'P';
-		game_lost(data);
+		if (data->collectibles == 0)
+			game_win(data);
+		else
+			game_lost(data);
 	}
 	data->map[row][col + 1] = 'P';
 	data->position[1] = col + 1;
-
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	build_map_screen(data);
-
-	data->moves++;
-
-	printf("Number of moves: %d\n", data->moves);
+	update_map(data);
 	return (1);
 }
 
@@ -136,23 +117,16 @@ int	move_left(t_mlx_data *data, int row, int col)
 		data->collectibles--;
 
 	data->map[row][col] = '0';
-	if (data->map[row][col - 1] == 'E' && data->collectibles == 0)
+	if (data->map[row][col - 1] == 'E')
 	{
 		data->map[row][col - 1] = 'P';
-		game_win(data);
-	}
-	if (data->map[row][col - 1] == 'E' && data->collectibles != 0)
-	{
-		data->map[row][col - 1] = 'P';
-		game_lost(data);
+		if (data->collectibles == 0)
+			game_win(data);
+		else
+			game_lost(data);
 	}
 	data->map[row][col - 1] = 'P';
 	data->position[1] = col - 1;
-
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	build_map_screen(data);
-
-	data->moves++;
-	printf("Number of moves: %d\n", data->moves);
+	update_map(data);
 	return (1);
 }
