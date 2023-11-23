@@ -4,6 +4,7 @@ SRCS = so_long.c \
 		helpers.c \
 		end_game.c \
 		movements.c \
+		validation_2.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

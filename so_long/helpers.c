@@ -50,3 +50,21 @@ void	ft_putstr(char *s)
 		i++;
 	}
 }
+
+int	get_height(char *map)
+{
+	int	height;
+	int	i;
+
+	height = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] == '\n')
+			height++;
+		i++;
+	}
+	if (map[i - 1] && map[i - 1] != '\n')
+		height++;
+	return (height);
+}

@@ -12,24 +12,6 @@
 
 #include "so_long.h"
 
-int	get_height(char *map)
-{
-	int	height;
-	int	i;
-
-	height = 0;
-	i = 0;
-	while (map[i])
-	{
-		if (map[i] == '\n')
-			height++;
-		i++;
-	}
-	if (map[i - 1] && map[i - 1] != '\n')
-		height++;
-	return (height);
-}
-
 int	is_rectangle(char *map, int width)
 {
 	int	i;
@@ -83,7 +65,8 @@ int	count_char_map(int *exit, int *start, int *collectible, char *map)
 			(*start)++;
 		if (map[i] == 'C')
 			(*collectible)++;
-		if (!(map[i] == 'E' || map[i] == 'C' || map[i] == 'P' || map[i] == '0' || map[i] == '1' || map[i] == '\n'))
+		if (!(map[i] == 'E' || map[i] == 'C' || map[i] == 'P' || map[i] == '0' 
+				|| map[i] == '1' || map[i] == '\n'))
 		{
 			ft_printf("Error\nThe map must contain only 01ECP characters.\n");
 			return (0);
@@ -109,7 +92,7 @@ int	check_characters(char *map, t_mlx_data *data)
 		data->collectibles = collectible;
 		return (1);
 	}
-	ft_printf("Error\nThe map must contain 1 exit, at least 1 collectible, and 1 starting position to be valid.\n");
+	ft_printf("Error\nThe map must contain 1 E, min 1 C, 1 P to be valid.\n");
 	return (0);
 }
 
@@ -128,16 +111,4 @@ int	map_validation_1(char *map, t_mlx_data *data, char *filename)
 		return (0);
 	}
 	return (1);
-}
-
-int	check_ber_file(char *filename)
-{
-	int	length;
-	int	result;
-
-	length = ft_strlen(filename);
-	filename += (length - 4);
-	result = ft_strncmp(filename, ".ber", 4);
-	filename -= (length - 4);
-	return (result);
 }
