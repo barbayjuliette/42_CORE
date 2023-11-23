@@ -76,11 +76,9 @@ int main(int argc, char *argv[])
 
 	if (get_map_and_validate(argc, argv, &program))
 		return (0);
-	ft_printf("HERE\n");
 	program.mlx_ptr = mlx_init();
 	if (!program.mlx_ptr)
 		return (MALLOC_ERROR);
-	ft_printf("HEREWWW\n");
 	get_window_size(&program);
 	program.win_ptr = mlx_new_window(program.mlx_ptr, program.win_width, program.win_height, "So_long");
 	if (!program.win_ptr)
@@ -89,15 +87,10 @@ int main(int argc, char *argv[])
 		free(program.mlx_ptr);
 		return (MALLOC_ERROR);
 	}
-	ft_printf("HEREXX\n");
 	create_images(&program);
-	ft_printf("HEREVV\n");
 	build_map_screen(&program);
-	ft_printf("HELLO\n");
 	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
-	ft_printf("AGAIN\n");
 	mlx_key_hook(program.win_ptr, handle_input, &program);
-	ft_printf("AGAIN2\n");
 	mlx_loop(program.mlx_ptr);
 	return 0;
 }

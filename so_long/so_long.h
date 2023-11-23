@@ -44,6 +44,7 @@ typedef struct s_mlx_data
 	int		moves;
 	int		collectibles;
 	int		position[2];
+	int		pos_exit[2];
 }	t_mlx_data;
 
 typedef struct s_img
@@ -84,3 +85,5 @@ int		get_height_matrix(char **map);
 void	get_position_player(t_mlx_data *data);
 int		check_ber_file(char *filename);
 int		map_validation(char *map, t_mlx_data *data, char *filename);
+void	flood_fill(char **map, int row, int col);
+int		valid_path(char **filled_map, t_mlx_data *data);

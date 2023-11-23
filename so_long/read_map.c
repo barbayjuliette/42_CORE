@@ -14,7 +14,7 @@
 
 int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 {
-	int	fd;
+	int		fd;
 	char	*buffer;
 	int		bytes_read;
 	char	*map;
@@ -35,7 +35,6 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 		ft_putstr("Sorry, I couldn't read the file you gave me.\n");
 		exit(1);
 	}
-
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
@@ -52,9 +51,6 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	}
 	free(buffer);
 	close(fd);
-	// ft_printf("BER file: %s\n", argv[1]);
-	// ft_printf("BER file: %d\n", check_ber_file(argv[1]));
-	// return (1);
 	if (!map_validation(map, data, argv[1]))
 	{
 		ft_putstr("Map not valid\n");
@@ -65,7 +61,17 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	data->map_height = get_height(map);
 	data->map = ft_split(map, '\n');
 	get_position_player(data);
+	char **test_map = ft_split(map, '\n');
+	if (!valid_path(test_map, data))
+	{
+		ft_putstr("Map not valid\n");
+		free_matrix(data->map);
+		free_matrix(test_map);
+		free(map);
+		return (1);
+	}
 	free(map);
+	free_matrix(test_map);
 	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
 		ft_putstr("Map not valid\n");
@@ -131,8 +137,55 @@ void	get_position_player(t_mlx_data *data)
 				data->position[0] = row;
 				data->position[1] = col;
 			}
+			if ( data->map[row][col] == 'E')
+			{
+				data->pos_exit[0] = row;
+				data->pos_exit[1] = col;
+			}
 			col++;
 		}
 		row++;
 	}
+}
+
+void	flood_fill(char **map, int row, int col)
+{
+	if (map[row][col] == 'C' || map[row][col] == '0' ||  map[row][col] == 'P')
+	{
+		map[row][col] = 'X';
+		flood_fill(map, row + 1, col);
+	 	flood_fill(map, row - 1, col);
+		flood_fill(map, row, col + 1);
+		flood_fill(map, row, col - 1);
+	}
+	else
+		return ; 
+}
+
+int	valid_path(char **filled_map, t_mlx_data *data)
+{
+	int	row = 0;
+	int	col = 0;
+	int	exit_row;
+	int	exit_col;
+
+	flood_fill(filled_map, data->position[0],  data->position[1]);
+	print_matrix(filled_map, data->map_height, data->map_width);
+	write(1, "\n", 1);
+	exit_row = data->pos_exit[0];
+	exit_col = data->pos_exit[1];
+	while (row < data->map_height)
+	{
+		col = 0;
+		while (col < data->map_width)
+		{
+			if (filled_map[row][col] == 'C')
+				return (0);
+			col++;
+		}
+		row++;
+	}
+	if (filled_map[exit_row + 1][exit_col] == 'X' || filled_map[exit_row - 1][exit_col] == 'X' || filled_map[exit_row][exit_col + 1] == 'X' || filled_map[exit_row][exit_col - 1] == 'X')
+		return (1);
+	return (0);
 }
