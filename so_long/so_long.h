@@ -84,6 +84,7 @@ void	free_matrix(char **map);
 int		get_height_matrix(char **map);
 void	get_position_player(t_mlx_data *data);
 int		check_ber_file(char *filename);
-int		map_validation(char *map, t_mlx_data *data, char *filename);
+int		map_validation_1(char *map, t_mlx_data *data, char *filename);
 void	flood_fill(char **map, int row, int col);
 int		valid_path(char **filled_map, t_mlx_data *data);
+void	read_map(char *filename, char *map);

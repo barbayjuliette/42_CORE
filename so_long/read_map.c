@@ -22,26 +22,31 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 
 	if (argc != 2)
 	{
-		ft_putstr("Error, where is the map?\n");
+		ft_putstr("Error\nWhere is the map?\n");
 		exit(1);
 	}
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		exit(MALLOC_ERROR);
 	map = (char *)malloc(sizeof(char));
 	map[0] = '\0';
 	fd = open(argv[1], O_RDONLY);
 
 	if (fd == -1)
 	{
-		ft_putstr("Sorry, I couldn't read the file you gave me.\n");
+		free(map);
+		free(buffer);
+		ft_putstr("Error\nSorry, I couldn't read the file you gave me.\n");
 		exit(1);
 	}
+	
 	bytes_read = 1;
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
-			ft_putstr("Oops, I am having trouble while reading the file.\n");
+			ft_putstr("Error\nI am having trouble while reading the file.\n");
 			free(buffer);
 			free(map);
 			exit(1);
@@ -51,20 +56,22 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	}
 	free(buffer);
 	close(fd);
-	if (!map_validation(map, data, argv[1]))
+
+	if (!map_validation_1(map, data, argv[1]))
 	{
-		ft_putstr("Map not valid\n");
 		free(map);
 		return (1);
 	}
 	data->map_width = get_width(map);
 	data->map_height = get_height(map);
+	// ft_printf("WIDTH: %d\n", data->map_width);
+	// ft_printf("HEIGHT: %d\n", data->map_height);
 	data->map = ft_split(map, '\n');
 	get_position_player(data);
 	char **test_map = ft_split(map, '\n');
 	if (!valid_path(test_map, data))
 	{
-		ft_putstr("Map not valid\n");
+		ft_putstr("Error\nThere is no valid path\n");
 		free_matrix(data->map);
 		free_matrix(test_map);
 		free(map);
@@ -74,7 +81,7 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	free_matrix(test_map);
 	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
-		ft_putstr("Map not valid\n");
+		ft_putstr("Error\nThe map must be surrounded by walls.\n");
 		free_matrix(data->map);
 		return (1);
 	}
@@ -170,8 +177,8 @@ int	valid_path(char **filled_map, t_mlx_data *data)
 	int	exit_col;
 
 	flood_fill(filled_map, data->position[0],  data->position[1]);
-	print_matrix(filled_map, data->map_height, data->map_width);
-	write(1, "\n", 1);
+	// print_matrix(filled_map, data->map_height, data->map_width);
+	// write(1, "\n", 1);
 	exit_row = data->pos_exit[0];
 	exit_col = data->pos_exit[1];
 	while (row < data->map_height)

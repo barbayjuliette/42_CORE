@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 	t_mlx_data	program;
 
 	if (get_map_and_validate(argc, argv, &program))
-		return (0);
+		return (1);
 	program.mlx_ptr = mlx_init();
 	if (!program.mlx_ptr)
 		return (MALLOC_ERROR);
@@ -92,6 +92,6 @@ int main(int argc, char *argv[])
 	mlx_hook(program.win_ptr, 17, 0, exit_program, &program);
 	mlx_key_hook(program.win_ptr, handle_input, &program);
 	mlx_loop(program.mlx_ptr);
-	return 0;
+	return (0);
 }
 
