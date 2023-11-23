@@ -13,8 +13,12 @@
 #include "so_long.h"
 
 // Function to create data struct
-void	get_window_size(t_mlx_data *data)
+void	add_mlx_data(t_mlx_data *data, char *map)
 {
+	data->map_width = get_width(map);
+	data->map_height = get_height(map);
+	data->map = ft_split(map, '\n');
+	get_position_player(data);
 	data->win_height = IMAGE_SIZE * data->map_height;
 	data->win_width = IMAGE_SIZE * data->map_width;
 	data->moves = 0;
@@ -79,7 +83,6 @@ int main(int argc, char *argv[])
 	program.mlx_ptr = mlx_init();
 	if (!program.mlx_ptr)
 		return (MALLOC_ERROR);
-	get_window_size(&program);
 	program.win_ptr = mlx_new_window(program.mlx_ptr, program.win_width, program.win_height, "So_long");
 	if (!program.win_ptr)
 	{
