@@ -59,7 +59,6 @@ typedef struct s_img
 }	t_img;
 
 int 	get_map_and_validate(int argc, char *argv[], t_mlx_data *data);
-int		map_validation(char *map, t_mlx_data *data);
 int		ft_strjoin_2(char **map, char *buffer, int i, int j);
 int		check_characters(char *map, t_mlx_data *data);
 int		is_rectangle(char *map, int width);
@@ -83,3 +82,5 @@ void 	print_matrix(char **matrix, int rows, int cols);
 void	free_matrix(char **map);
 int		get_height_matrix(char **map);
 void	get_position_player(t_mlx_data *data);
+int		check_ber_file(char *filename);
+int		map_validation(char *map, t_mlx_data *data, char *filename);

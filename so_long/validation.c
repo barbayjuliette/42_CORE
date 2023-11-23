@@ -111,9 +111,23 @@ int	check_characters(char *map, t_mlx_data *data)
 	return (0);
 }
 
-int	map_validation(char *map, t_mlx_data *data)
+int	map_validation(char *map, t_mlx_data *data, char *filename)
 {
+	if (check_ber_file(filename) != 0)
+		return (0);
 	if (check_characters(map, data) && get_width(map))
 		return (1);
 	return (0);
+}
+
+int	check_ber_file(char *filename)
+{
+	int	length;
+	int	result;
+
+	length = ft_strlen(filename);
+	filename += (length - 4);
+	result = ft_strncmp(filename, ".ber", 4);
+	filename -= (length - 4);
+	return (result);
 }

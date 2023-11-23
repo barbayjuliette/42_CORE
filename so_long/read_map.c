@@ -52,7 +52,10 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	}
 	free(buffer);
 	close(fd);
-	if (!(map_validation(map, data)))
+	// ft_printf("BER file: %s\n", argv[1]);
+	// ft_printf("BER file: %d\n", check_ber_file(argv[1]));
+	// return (1);
+	if (!map_validation(map, data, argv[1]))
 	{
 		ft_putstr("Map not valid\n");
 		free(map);
@@ -62,15 +65,14 @@ int get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 	data->map_height = get_height(map);
 	data->map = ft_split(map, '\n');
 	get_position_player(data);
+	free(map);
 	if (!check_walls(data->map, data->map_height, data->map_width))
 	{
 		ft_putstr("Map not valid\n");
 		free_matrix(data->map);
-		free(map);
 		return (1);
 	}
 	ft_putstr("Valid map\n");
-	free(map);
 	return (0);
 }
 
