@@ -12,7 +12,6 @@ RM = rm -rf
 NAME = so_long
 OBJS = ${SRCS:.c=.o}
 LIBFT = ./libft
-LFLAGS = -L${LIBFT} -lft
 all: ${NAME}
 
 %.o: %.c
