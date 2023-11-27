@@ -20,8 +20,8 @@
 #include "libft/libft.h"
 #include "libft/ft_printf/ft_printf.h"
 
-#define BUFFER_SIZE  1
-#define	IMAGE_SIZE 32
+#define BUFFER_SIZE 1
+#define IMAGE_SIZE 32
 #define MALLOC_ERROR 1
 #define UP 65362
 #define DOWN 65364
@@ -51,46 +51,40 @@ typedef struct s_img
 {
 	t_mlx_data	window;
 	void		*img_ptr;
-	char		*addr;
 	int			height;
 	int			width;
-	int			bpp;
-	int			endian;
-	int			line_len;
 }	t_img;
 
-int 	get_map_and_validate(int argc, char *argv[], t_mlx_data *data);
-int		ft_strjoin_2(char **map, char *buffer, int i, int j);
-int		check_characters(char *map, t_mlx_data *data);
-int		is_rectangle(char *map, int width);
-int		count_char_map(int *exit, int *start, int *collectible, char *map);
-int		get_width(char *map);
-int		get_height(char *map);
-int		ft_strlen(const char *string);
-void	ft_putstr(char *s);
-void 	print_matrix(char **matrix, int rows, int cols);
-int		check_walls(char **matrix, int height, int width);
-void	build_map_screen(t_mlx_data *data);
-void	game_lost(t_mlx_data *data);
-void	game_win(t_mlx_data *data);
+void	create_mlx_data(t_mlx_data *data, char *map);
+void	create_images(t_mlx_data *data);
+void	display_image(t_mlx_data *data, int row, int col);
+void	build_map_screen(t_mlx_data *data, int row, int col);
 int		handle_input(int keysym, t_mlx_data *data);
 int		move_up(t_mlx_data *data, int row, int col);
 int		move_down(t_mlx_data *data, int row, int col);
 int		move_right(t_mlx_data *data, int row, int col);
 int		move_left(t_mlx_data *data, int row, int col);
-int 	exit_program(t_mlx_data *data);
-void 	print_matrix(char **matrix, int rows, int cols);
+int		exit_program(t_mlx_data *data);
 void	free_matrix(char **map);
-int		get_height_matrix(char **map);
-void	get_position_player(t_mlx_data *data);
-int		check_ber_file(char *filename);
-int		map_validation_1(char *map, t_mlx_data *data, char *filename);
-void	flood_fill(char **map, int row, int col);
-void	read_map(char *filename, char *map);
-void	add_mlx_data(t_mlx_data *data, char *map);
-void	call_valid_path(char *map, t_mlx_data *data);
-void	error_file(char *buffer, char *map, char *message);
+void	game_lost(t_mlx_data *data);
+void	game_win(t_mlx_data *data);
+void	update_map(t_mlx_data *data);
+int		get_map_and_validate(int argc, char *argv[], t_mlx_data *data);
 void	read_file(char **map, char *filename);
 void	call_check_walls(t_mlx_data *data);
-int		check_walls(char **matrix, int height, int width);
+void	error_file(char *buffer, char *map, char *message);
+void	get_position_player(t_mlx_data *data);
+int		ft_strjoin_2(char **map, char *buffer, int i, int j);
+void	ft_putstr(char *s);
+int		get_width(char *map);
+int		get_height(char *map);
+int		is_rectangle(char *map, int width);
+int		check_characters(char *map, t_mlx_data *data);
+int		count_char_map(int *exit, int *start, int *collectible, char *map);
+int		map_validation_1(char *map, t_mlx_data *data, char *filename);
+void	flood_fill(char **map, int row, int col);
 int		valid_path(char **flood, t_mlx_data *data);
+int		check_walls(char **matrix, int height, int width);
+void	call_valid_path(char *map, t_mlx_data *data);
+int		check_ber_file(char *filename);
+int		check_walls(char **matrix, int height, int width);

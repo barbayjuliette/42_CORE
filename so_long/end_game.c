@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int exit_program(t_mlx_data *data)
+int	exit_program(t_mlx_data *data)
 {
 	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->exit)->img_ptr);
 	mlx_destroy_image(data->mlx_ptr, ((t_img *)data->food)->img_ptr);
@@ -46,7 +46,7 @@ void	free_matrix(char **map)
 void	game_win(t_mlx_data *data)
 {
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	build_map_screen(data);
+	build_map_screen(data, 0, 0);
 	ft_printf("Well done, you finished the game in %d moves.\n", data->moves);
 	exit_program(data);
 }
@@ -54,7 +54,15 @@ void	game_win(t_mlx_data *data)
 void	game_lost(t_mlx_data *data)
 {
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	build_map_screen(data);
+	build_map_screen(data, 0, 0);
 	ft_printf("Game over\nYou forgot to get all collectibles.\n");
 	exit_program(data);
+}
+
+void	update_map(t_mlx_data *data)
+{
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	build_map_screen(data, 0, 0);
+	data->moves++;
+	ft_printf("Number of moves: %d\n", data->moves);
 }

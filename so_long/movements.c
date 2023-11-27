@@ -35,14 +35,6 @@ int	handle_input(int keysym, t_mlx_data *data)
 	return (0);
 }
 
-void	update_map(t_mlx_data *data)
-{
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	build_map_screen(data);
-	data->moves++;
-	ft_printf("Number of moves: %d\n", data->moves);
-}
-
 int	move_up(t_mlx_data	*data, int row, int col)
 {
 	if (data->map[row - 1][col] == '1')
@@ -89,10 +81,8 @@ int	move_right(t_mlx_data *data, int row, int col)
 {
 	if (data->map[row][col + 1] == '1')
 		return (0);
-
 	if (data->map[row][col + 1] == 'C')
 		data->collectibles--;
-
 	data->map[row][col] = '0';
 	if (data->map[row][col + 1] == 'E')
 	{
@@ -112,10 +102,8 @@ int	move_left(t_mlx_data *data, int row, int col)
 {
 	if (data->map[row][col - 1] == '1')
 		return (0);
-
 	if (data->map[row][col - 1] == 'C')
 		data->collectibles--;
-
 	data->map[row][col] = '0';
 	if (data->map[row][col - 1] == 'E')
 	{

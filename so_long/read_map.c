@@ -43,7 +43,6 @@ void	read_file(char **map, char *filename)
 int	get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 {
 	char	*map;
-	char	**matrix;
 
 	if (argc != 2)
 	{
@@ -60,7 +59,7 @@ int	get_map_and_validate(int argc, char *argv[], t_mlx_data *data)
 		free(map);
 		return (1);
 	}
-	add_mlx_data(data, map);
+	create_mlx_data(data, map);
 	call_valid_path(map, data);
 	call_check_walls(data);
 	return (0);
