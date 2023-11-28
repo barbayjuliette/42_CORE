@@ -12,39 +12,15 @@
 
 #include "push_swap.h"
 
-int	check_duplicates(char *args[])
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (args[i])
-	{
-		j = i + 1;
-		while (args[j])
-		{
-			if (ft_atoi(args[i]) == ft_atoi(args[j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-void	create_list(char *args[], t_stack **stack_a, int i)
+void	create_list(char *args[], t_stack **stack_a, int i, int free)
 {
 	int		num;
 
-
+	check_int(args, free);
 	if (!check_duplicates(args))
-	{
-		ft_printf("Error\n");
-		if (i == 0)
-			free_matrix(args);
-		exit(1);
-	}
-	*stack_a = ft_new_list(ft_atoi(args[i]));
+		input_error(free, args);
+	num = ft_atoi(args[i]);
+	*stack_a = ft_new_list(num);
 	i++;
 	while (args[i])
 	{
@@ -66,14 +42,16 @@ int main(int argc, char *argv[])
 	else if (argc == 2)
 	{
 		args = ft_split(argv[1], ' ');
-		create_list(args, &stack_a, 0);
+		create_list(args, &stack_a, 0, 0);
 		free_matrix(args);
 	}
 	else 
 	{
-		create_list(argv, &stack_a, 1);
+		create_list(argv, &stack_a, 1, 1);
 	}
 	print_stack(stack_a);
+	if (is_ordered(stack_a))
+		ft_printf("The stack is ordered\n");
 	free_list(&stack_a);
 	return (0);
 }

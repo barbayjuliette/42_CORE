@@ -13,7 +13,7 @@
 SRCS = main.c \
 	helpers.c \
 	linked_list_helpers.c \
-	
+	input_validation.c \
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
