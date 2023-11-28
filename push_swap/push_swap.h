@@ -10,18 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
 # include <stdlib.h>
 # include "libft/libft.h"
 # include "libft/ft_printf/ft_printf.h"
 
-typedef struct s_stack
-{
-	int			content;
-	struct s_stack	*next;
-}	t_stack;
+// typedef struct s_stack
+// {
+// 	int			content;
+// 	struct s_stack	*next;
+// }	t_stack;
 
 void	print_stack(t_stack *stack_a);
-void	ft_listadd_back(t_stack **lst, t_stack *new);
-t_stack	*ft_new_list(int content);
 void	one_arg(char const *argv[], t_stack **stack_a);
 void	x_arg(char const *argv[], t_stack **stack_a, int argc);
+
+#endif
