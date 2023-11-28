@@ -12,15 +12,6 @@
 
 #include "push_swap.h"
 
-void	print_stack(t_stack *stack_a)
-{
-	while (stack_a)
-	{
-		ft_printf("Node: %d\n", (stack_a->content));
-		stack_a = stack_a->next;
-	}
-}
-
 int	check_duplicates(char *args[])
 {
 	int i;
@@ -76,12 +67,13 @@ int main(int argc, char *argv[])
 	{
 		args = ft_split(argv[1], ' ');
 		create_list(args, &stack_a, 0);
-		free(args);
+		free_matrix(args);
 	}
 	else 
 	{
 		create_list(argv, &stack_a, 1);
 	}
 	print_stack(stack_a);
+	free_list(&stack_a);
 	return (0);
 }

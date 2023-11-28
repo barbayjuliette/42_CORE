@@ -24,10 +24,9 @@
 // }	t_stack;
 
 void	print_stack(t_stack *stack_a);
-void	one_arg(char const *argv[], t_stack **stack_a);
-void	x_arg(char const *argv[], t_stack **stack_a, int argc);
 void	create_list(char *args[], t_stack **stack_a, int i);
 void	free_matrix(char **map);
 int		check_duplicates(char *args[]);
+void	free_list(t_stack **lst);
 
 #endif

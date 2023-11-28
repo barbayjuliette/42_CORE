@@ -12,6 +12,8 @@
 
 SRCS = main.c \
 	helpers.c \
+	linked_list_helpers.c \
+	
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
