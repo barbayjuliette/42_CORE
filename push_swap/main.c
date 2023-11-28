@@ -12,34 +12,6 @@
 
 #include "push_swap.h"
 
-// t_stack	*ft_new_list(int content)
-// {
-// 	t_stack	*new_list;
-
-// 	new_list = (t_stack *)malloc(sizeof(t_stack));
-// 	if (!new_list)
-// 		return (NULL);
-// 	new_list->content = content;
-// 	new_list->next = NULL;
-// 	return (new_list);
-// }
-
-// void	ft_listadd_back(t_stack **lst, t_stack *new)
-// {
-// 	t_stack	*temp;
-
-// 	temp = *lst;
-// 	if (*lst == NULL)
-// 		*lst = new;
-// 	else
-// 	{
-// 		while (temp->next)
-// 			temp = temp->next;
-// 		temp->next = new;
-// 		new->next = NULL;
-// 	}
-// }
-
 void	print_stack(t_stack *stack_a)
 {
 	while (stack_a)
@@ -49,15 +21,40 @@ void	print_stack(t_stack *stack_a)
 	}
 }
 
-void	one_arg(char const *argv[], t_stack **stack_a)
+int	check_duplicates(char *args[])
 {
-	char	**args;
-	int		i;
+	int i;
+	int j;
+
+	i = 0;
+	while (args[i])
+	{
+		j = i + 1;
+		while (args[j])
+		{
+			if (ft_atoi(args[i]) == ft_atoi(args[j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+void	create_list(char *args[], t_stack **stack_a, int i)
+{
 	int		num;
 
-	i = 1;
-	args = ft_split(argv[1], ' ');
-	*stack_a = ft_new_list(ft_atoi(args[0]));
+
+	if (!check_duplicates(args))
+	{
+		ft_printf("Error\n");
+		if (i == 0)
+			free_matrix(args);
+		exit(1);
+	}
+	*stack_a = ft_new_list(ft_atoi(args[i]));
+	i++;
 	while (args[i])
 	{
 		num = ft_atoi(args[i]);
@@ -66,34 +63,25 @@ void	one_arg(char const *argv[], t_stack **stack_a)
 	}
 }
 
-void	x_arg(char const *argv[], t_stack **stack_a, int argc)
-{
-	int		i;
-	int		num;
-
-	i = 1;
-	*stack_a = ft_new_list(ft_atoi(argv[i]));
-	i++;
-	while (i < argc)
-	{
-		num = ft_atoi(argv[i]);
-		ft_listadd_back(stack_a, ft_new_list(num));
-		i++;
-	}
-}
-
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
 
 	t_stack	*stack_a;
+	char	**args;
 
 	stack_a = NULL;
 	if (argc == 1)
 		ft_printf("Where is the argument?\n");
 	else if (argc == 2)
-		one_arg(argv, &stack_a);
+	{
+		args = ft_split(argv[1], ' ');
+		create_list(args, &stack_a, 0);
+		free(args);
+	}
 	else 
-		x_arg(argv, &stack_a, argc);
+	{
+		create_list(argv, &stack_a, 1);
+	}
 	print_stack(stack_a);
 	return (0);
 }
