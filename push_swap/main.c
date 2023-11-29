@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 16:19:29 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:57:49 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	create_list(char *args[], t_stack **stack_a, int i, int free)
 	if (!check_duplicates(args))
 		input_error(free, args);
 	num = ft_atoi(args[i]);
-	*stack_a = ft_new_list(num);
+	*stack_a = new_stack(num);
 	i++;
 	while (args[i])
 	{
 		num = ft_atoi(args[i]);
-		ft_listadd_back(stack_a, ft_new_list(num));
+		stack_add_back(stack_a, new_stack(num));
 		i++;
 	}
 }
@@ -65,6 +65,25 @@ void	tiny_sort(t_stack **stack_a, t_list	**instructions)
 	if (!is_ordered(*stack_a))
 		swap(stack_a, instructions, 'a');
 }
+
+// void	big_sort(t_stack **stack_a, t_list	**instructions)
+// {
+// 	t_stack	*stack_b;
+
+// 	stack_b = 0;
+// 	if (ft_lstsize(stack_a) > 3)
+// 		push(&stack_b, stack_a, instructions, 'b');
+// 	if (ft_lstsize(stack_a) > 3)
+// 		push(&stack_b, stack_a, instructions, 'b');
+// 	while ((ft_lstsize(stack_a) > 3))
+// 	{
+
+// 	}
+// 	tiny_sort(stack_a, instructions);
+// 	while (ft_lstsize(stack_b) > 0)
+// 		push(stack_a, &stack_b, instructions, 'a');
+
+// }
 
 void	sort_stack(t_stack *stack_a)
 {

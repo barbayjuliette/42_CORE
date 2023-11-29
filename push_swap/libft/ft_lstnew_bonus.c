@@ -6,20 +6,19 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:43:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 14:33:45 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:49:44 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_stack	*ft_new_list(int content)
+t_list	*ft_lstnew(void *content)
 {
-	t_stack	*new_list;
+	t_list	*new_list;
 
-	new_list = (t_stack *)malloc(sizeof(t_stack));
+	new_list = (t_list *)malloc(sizeof(t_list));
 	if (!new_list)
 		return (NULL);
-	// new_list->previous = NULL;
 	new_list->content = content;
 	new_list->next = NULL;
 	return (new_list);

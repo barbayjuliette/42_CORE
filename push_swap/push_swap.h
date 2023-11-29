@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 16:10:06 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:58:42 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	sort_stack(t_stack *stack_a);
 void	print_instructions(t_list *stack_a);
 
 // Linked lists
-void	ft_lstadd_back(t_list **lst, t_list *new);
-t_list	*ft_lstnew(void *content);
-t_stack	*ft_listlast(t_stack *lst);
-t_stack	*ft_list_before_last(t_stack *lst);
+void	stack_add_back(t_stack **lst, t_stack *new);
+t_stack	*new_stack(int content);
+t_stack	*stack_last_node(t_stack *lst);
+t_stack	*stack_before_last_node(t_stack *lst);
 
 // Instructions
 void 	swap(t_stack **stack, t_list **instructions, char c);

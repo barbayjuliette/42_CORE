@@ -22,13 +22,13 @@
 // 	while (lst)
 // 	{
 // 		new_content = f(lst->content);
-// 		new_element = ft_new_list(new_content);
+// 		new_element = new_stack(new_content);
 // 		if (!new_element)
 // 		{
 // 			ft_lstclear(&new_list, del);
 // 			return (NULL);
 // 		}
-// 		ft_listadd_back(&new_list, new_element);
+// 		stack_add_back(&new_list, new_element);
 // 		lst = lst->next;
 // 	}
 // 	return (new_list);

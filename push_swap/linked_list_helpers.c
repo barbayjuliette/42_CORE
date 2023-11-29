@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 15:25:56 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:56:43 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,40 @@ int	is_ordered(t_stack *stack_a)
 	return (1);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	stack_add_back(t_stack **lst, t_stack *new)
 {
-	t_list	*temp;
+	t_stack	*temp;
 
 	temp = *lst;
 	if (*lst == NULL)
+	{
 		*lst = new;
+		// (*lst)->previous = NULL;
+	}
 	else
 	{
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new;
+		// new->previous = temp;
+		new->next = NULL;
 	}
 }
 
-t_list	*ft_lstnew(void *content)
+t_stack	*new_stack(int content)
 {
-	t_list	*new_list;
+	t_stack	*new_list;
 
-	new_list = (t_list *)malloc(sizeof(t_list));
+	new_list = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_list)
 		return (NULL);
+	// new_list->previous = NULL;
 	new_list->content = content;
 	new_list->next = NULL;
 	return (new_list);
 }
 
-t_stack	*ft_listlast(t_stack *lst)
+t_stack	*stack_last_node(t_stack *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -97,7 +103,7 @@ t_stack	*ft_listlast(t_stack *lst)
 	return (lst);
 }
 
-t_stack	*ft_list_before_last(t_stack *lst)
+t_stack	*stack_before_last_node(t_stack *lst)
 {
 	if (lst == NULL)
 		return (NULL);
