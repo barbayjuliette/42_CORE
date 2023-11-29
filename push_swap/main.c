@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 16:57:49 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:28:34 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ void	tiny_sort(t_stack **stack_a, t_list	**instructions)
 // 	t_stack	*stack_b;
 
 // 	stack_b = 0;
-// 	if (ft_lstsize(stack_a) > 3)
+// 	if (stack_size(stack_a) > 3)
 // 		push(&stack_b, stack_a, instructions, 'b');
-// 	if (ft_lstsize(stack_a) > 3)
+// 	if (stack_size(stack_a) > 3)
 // 		push(&stack_b, stack_a, instructions, 'b');
-// 	while ((ft_lstsize(stack_a) > 3))
+// 	while ((stack_size(stack_a) > 3))
 // 	{
 
 // 	}
 // 	tiny_sort(stack_a, instructions);
-// 	while (ft_lstsize(stack_b) > 0)
+// 	while (stack_size(stack_b) > 0)
 // 		push(stack_a, &stack_b, instructions, 'a');
 
 // }
@@ -91,7 +91,7 @@ void	sort_stack(t_stack *stack_a)
 	t_list	*instructions;
 
 	instructions = NULL;
-	size = ft_lstsize(stack_a);
+	size = stack_size(stack_a);
 	if (is_ordered(stack_a))
 		ft_printf("\n");
 	else if (size == 2)

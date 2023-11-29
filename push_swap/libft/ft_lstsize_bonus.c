@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   stack_size.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarbay<marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_lstsize(t_stack*lst)
+int	stack_size(t_list *lst)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ int	ft_lstsize(t_stack*lst)
 // 	node.content = "second node";
 // 	list->next = &node;
 
-// 	int count = ft_lstsize(list);
+// 	int count = stack_size(list);
 // 	printf("There are %d nodes", count);
 // 	return 0;
 // }

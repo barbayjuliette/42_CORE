@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 16:56:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:27:56 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,17 @@ t_stack	*stack_before_last_node(t_stack *lst)
 	while (lst->next->next)
 		lst = lst->next;
 	return (lst);
+}
+
+int	stack_size(t_stack *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
