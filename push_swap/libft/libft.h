@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:25:58 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/07 17:26:03 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:49:54 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_stack
 {
 	int			content;
 	struct s_stack	*next;
+	// struct s_stack	*previous;
 }	t_stack;
 
 int		ft_strlen(const char *string);
@@ -64,7 +65,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	*ft_calloc(size_t count, size_t size);
 t_stack	*ft_new_list(int content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
+int		ft_lstsize(t_stack*lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_listadd_back(t_stack **lst, t_stack *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));

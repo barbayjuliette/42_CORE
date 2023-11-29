@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:43:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/07 17:43:33 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:33:45 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_stack	*ft_new_list(int content)
 	new_list = (t_stack *)malloc(sizeof(t_stack));
 	if (!new_list)
 		return (NULL);
+	// new_list->previous = NULL;
 	new_list->content = content;
 	new_list->next = NULL;
 	return (new_list);

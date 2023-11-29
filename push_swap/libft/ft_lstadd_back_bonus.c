@@ -18,12 +18,16 @@ void	ft_listadd_back(t_stack **lst, t_stack *new)
 
 	temp = *lst;
 	if (*lst == NULL)
+	{
 		*lst = new;
+		// (*lst)->previous = NULL;
+	}
 	else
 	{
 		while (temp->next)
 			temp = temp->next;
 		temp->next = new;
+		// new->previous = temp;
 		new->next = NULL;
 	}
 }

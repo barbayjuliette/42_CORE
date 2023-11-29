@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/27 15:01:10 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 15:41:34 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,64 @@ void	create_list(char *args[], t_stack **stack_a, int i, int free)
 	}
 }
 
+int	find_biggest(t_stack *stack_a)
+{
+	int	max;
+	int	pos;
+	int	i;
+
+	max = stack_a->content;
+	i = 1;
+	pos = 0;
+	stack_a = stack_a->next;
+	while (stack_a)
+	{
+		if (stack_a->content > max)
+		{
+			max = stack_a->content;
+			pos = i;
+		}
+		i++;
+		stack_a = stack_a->next;
+	}
+	return (pos);
+}
+
+void	tiny_sort(t_stack **stack_a, t_list	**instructions)
+{
+	int biggest;
+
+	biggest = find_biggest(*stack_a);
+	ft_printf("Position biggest: %d\n", biggest);
+	if (biggest == 0)
+		rotate(stack_a, instructions, 'a');
+	else if (biggest == 1)
+		reverse_rotate(stack_a, instructions, 'a');
+	if (!is_ordered(*stack_a))
+		swap(stack_a, instructions, 'a');
+}
+
+void	sort_stack(t_stack *stack_a)
+{
+	int	size;
+	t_list	*instructions;
+
+	size = ft_lstsize(stack_a);
+	instructions = NULL;
+	if (is_ordered(stack_a))
+		ft_printf("The stack is already ordered\n"); // Just display new line
+	else if (size == 2) // 2 nums that are not ordered
+		swap(&stack_a, &instructions, 'a');
+	else if (size == 3)
+		tiny_sort(&stack_a, &instructions);
+	
+	ft_printf("New stack after swapping:\n");
+	print_stack(stack_a);
+
+	ft_printf("List of instructions: \n");
+	print_instructions(instructions);
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -38,7 +96,7 @@ int main(int argc, char *argv[])
 
 	stack_a = NULL;
 	if (argc == 1)
-		ft_printf("Where is the argument?\n");
+		return (1);
 	else if (argc == 2)
 	{
 		args = ft_split(argv[1], ' ');
@@ -50,8 +108,7 @@ int main(int argc, char *argv[])
 		create_list(argv, &stack_a, 1, 1);
 	}
 	print_stack(stack_a);
-	if (is_ordered(stack_a))
-		ft_printf("The stack is ordered\n");
+	sort_stack(stack_a);
 	free_list(&stack_a);
 	return (0);
 }
