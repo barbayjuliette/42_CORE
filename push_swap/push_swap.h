@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 15:43:14 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:10:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ t_stack	*ft_list_before_last(t_stack *lst);
 void 	swap(t_stack **stack, t_list **instructions, char c);
 void	rotate(t_stack **stack, t_list **instructions, char c);
 void	reverse_rotate(t_stack **stack, t_list **instructions, char c);
+void	push(t_stack **stack_a, t_stack **stack_b, t_list **inst, char c);
 
 #endif

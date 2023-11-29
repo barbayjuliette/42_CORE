@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:18:51 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 15:46:54 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:15:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void swap(t_stack **stack, t_list **instructions, char c)
 		ft_lstadd_back(instructions, ft_lstnew("sb"));
 }
 
-void rotate(t_stack **stack, t_list **instructions, char c)
+void	rotate(t_stack **stack, t_list **instructions, char c)
 {
 	t_stack	*first_node;
 	t_stack	*second_node;
@@ -65,4 +65,23 @@ void	reverse_rotate(t_stack **stack, t_list **instructions, char c)
 		ft_lstadd_back(instructions, ft_lstnew("rra"));
 	else
 		ft_lstadd_back(instructions, ft_lstnew("rrb"));
+}
+
+void	push(t_stack **stack_a, t_stack **stack_b, t_list **inst, char c)
+{
+	t_stack	*first_a;
+	t_stack	*first_b;
+	t_stack	*second_b;
+
+	first_a = *stack_a;
+	first_b = *stack_b;
+	second_b = first_b->next;
+
+	first_b->next = first_a;
+	*stack_a = first_b;
+	*stack_b = second_b;
+	if (c == 'a')
+		ft_lstadd_back(inst, ft_lstnew("pa"));
+	else
+		ft_lstadd_back(inst, ft_lstnew("pb"));
 }

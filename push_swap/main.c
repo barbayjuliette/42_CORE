@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 15:41:34 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:19:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	tiny_sort(t_stack **stack_a, t_list	**instructions)
 	int biggest;
 
 	biggest = find_biggest(*stack_a);
-	ft_printf("Position biggest: %d\n", biggest);
 	if (biggest == 0)
 		rotate(stack_a, instructions, 'a');
 	else if (biggest == 1)
@@ -72,20 +71,18 @@ void	sort_stack(t_stack *stack_a)
 	int	size;
 	t_list	*instructions;
 
-	size = ft_lstsize(stack_a);
 	instructions = NULL;
+	size = ft_lstsize(stack_a);
 	if (is_ordered(stack_a))
-		ft_printf("The stack is already ordered\n"); // Just display new line
-	else if (size == 2) // 2 nums that are not ordered
+		ft_printf("\n");
+	else if (size == 2)
 		swap(&stack_a, &instructions, 'a');
 	else if (size == 3)
 		tiny_sort(&stack_a, &instructions);
-	
+	// else
+	// 	big_sort(&stack_a, &instructions);
 	ft_printf("New stack after swapping:\n");
 	print_stack(stack_a);
-
-	ft_printf("List of instructions: \n");
-	print_instructions(instructions);
 }
 
 int main(int argc, char *argv[])
@@ -108,6 +105,7 @@ int main(int argc, char *argv[])
 		create_list(argv, &stack_a, 1, 1);
 	}
 	print_stack(stack_a);
+	ft_printf("\n");
 	sort_stack(stack_a);
 	free_list(&stack_a);
 	return (0);
