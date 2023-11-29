@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 17:28:15 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/11/29 17:32:44 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ typedef struct s_stack
 {
 	int	content;
 	struct s_stack	*next;
+	int	index;
+	int	push_cost;
+	int	above_median;
+	int	cheapest;
+	struct s_stack *target_node;
 }	t_stack;
 
 void	free_matrix(char **map);
