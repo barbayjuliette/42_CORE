@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/01 19:21:51 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/01 20:13:05 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,28 @@ void	find_target(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
+void	push_cost(t_stack *stack_a, t_stack *stack_b)
+{
+	int	len_a;
+	int	len_b;
+
+	len_a = stack_size(stack_a);
+	len_b = stack_size(stack_b);
+	while (stack_a)
+	{
+		if (stack_a->above_median)
+			stack_a->push_cost = stack_a->index;
+		else
+			stack_a->push_cost = len_a - stack_a->index;
+		
+		if (stack_a->target_node->above_median)
+			stack_a->push_cost += stack_a->target_node->index;
+		else
+			stack_a->push_cost += len_b - stack_a->target_node->index;
+		// ft_printf("Push cost: %d\n", stack_a->push_cost);
+		stack_a = stack_a->next;
+	}
+}
 
 void	big_sort(t_stack **stack_a, t_list	**instructions)
 {
@@ -136,6 +158,7 @@ void	big_sort(t_stack **stack_a, t_list	**instructions)
 	add_index_median(*stack_a);
 	add_index_median(stack_b);
 	find_target(*stack_a, stack_b);
+	push_cost(*stack_a, stack_b);
 	print_stack(*stack_a);
 	// ft_printf("\nSTACK A:\n");
 	// ft_printf("\nSTACK B:\n");

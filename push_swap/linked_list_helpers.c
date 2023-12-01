@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/01 19:17:02 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/01 20:05:50 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	print_stack(t_stack *stack_a)
 	{
 		ft_printf("Node: %d, Index: %d, Above median: %d", (stack_a->content), (stack_a->index), (stack_a->above_median));
 		// ft_printf("\n");
-		ft_printf(" target node value: %d\n", (stack_a->target_node->content));
+		ft_printf(" target node value: %d", (stack_a->target_node->content));
+		ft_printf(" push cost: %d",(stack_a->push_cost));
+		ft_printf("\n");
 		stack_a = stack_a->next;
 	}
 }
