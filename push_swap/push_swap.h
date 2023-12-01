@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 17:32:44 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/01 18:47:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 # include "libft/ft_printf/ft_printf.h"
+# include <stdbool.h>
+# include <limits.h>
 
 typedef struct s_stack
 {
@@ -23,21 +25,27 @@ typedef struct s_stack
 	struct s_stack	*next;
 	int	index;
 	int	push_cost;
-	int	above_median;
-	int	cheapest;
+	bool	above_median;
+	bool	cheapest;
 	struct s_stack *target_node;
 }	t_stack;
 
 void	free_matrix(char **map);
-int		check_duplicates(char *args[]);
+int		check_duplicates(char *args[], int free);
 void	free_list(t_stack **lst);
 void	create_list(char *args[], t_stack **stack_a, int i, int free);
 void	input_error(int free, char *args[]);
 int		ft_atoi_int(const char *str, char *args[], int free);
 void	check_int(char *args[], int free);
 void	is_a_num(const char *str, char *args[], int free);
+
+// Sorting
 int		is_ordered(t_stack *stack_a);
 void	sort_stack(t_stack *stack_a);
+void	big_sort(t_stack **stack_a, t_list	**instructions);
+void	tiny_sort(t_stack **stack_a, t_list	**instructions);
+void	add_index_median(t_stack *node);
+void	find_target(t_stack *stack_a, t_stack *stack_b);
 
 // Tesing helpers
 void	print_stack(t_stack *stack_a);
