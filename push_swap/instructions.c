@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juliettebarbay <juliettebarbay@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 13:18:51 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/11/29 16:56:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:33:40 by juliettebar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ void swap(t_stack **stack, t_list **instructions, char c)
 	*stack = second_node;
 	if (c == 'a')
 		ft_lstadd_back(instructions, ft_lstnew("sa"));
-	else
+	else if (c == 'b')
 		ft_lstadd_back(instructions, ft_lstnew("sb"));
+}
+
+void	swap_both(t_stack **stack_a, t_stack **stack_b, t_list **instructions)
+{
+	swap(stack_a, instructions, 'x');
+	swap(stack_b, instructions, 'x');
+	ft_lstadd_back(instructions, ft_lstnew("ss"));
 }
 
 void	rotate(t_stack **stack, t_list **instructions, char c)
@@ -44,8 +51,15 @@ void	rotate(t_stack **stack, t_list **instructions, char c)
 	*stack = second_node;
 	if (c == 'a')
 		ft_lstadd_back(instructions, ft_lstnew("ra"));
-	else
+	else if (c == 'b')
 		ft_lstadd_back(instructions, ft_lstnew("rb"));
+}
+
+void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_list **instructions)
+{
+	rotate(stack_a, instructions, 'x');
+	rotate(stack_b, instructions, 'x');
+	ft_lstadd_back(instructions, ft_lstnew("rr"));
 }
 
 void	reverse_rotate(t_stack **stack, t_list **instructions, char c)
@@ -63,8 +77,15 @@ void	reverse_rotate(t_stack **stack, t_list **instructions, char c)
 	*stack = last_node;
 	if (c == 'a')
 		ft_lstadd_back(instructions, ft_lstnew("rra"));
-	else
+	else if (c == 'b')
 		ft_lstadd_back(instructions, ft_lstnew("rrb"));
+}
+
+void	reverse_rotate_both(t_stack **stack_a, t_stack **stack_b, t_list **instructions)
+{
+	reverse_rotate(stack_a, instructions, 'x');
+	reverse_rotate(stack_b, instructions, 'x');
+	ft_lstadd_back(instructions, ft_lstnew("rrr"));
 }
 
 void	push(t_stack **stack_a, t_stack **stack_b, t_list **inst, char c)
@@ -82,6 +103,6 @@ void	push(t_stack **stack_a, t_stack **stack_b, t_list **inst, char c)
 	*stack_b = second_b;
 	if (c == 'a')
 		ft_lstadd_back(inst, ft_lstnew("pa"));
-	else
+	else if (c == 'b')
 		ft_lstadd_back(inst, ft_lstnew("pb"));
 }

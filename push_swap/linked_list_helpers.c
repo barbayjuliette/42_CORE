@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_helpers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juliettebarbay <juliettebarbay@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/01 20:05:50 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:46:01 by juliettebar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,32 @@ void	print_stack(t_stack *stack_a)
 {
 	while (stack_a)
 	{
-		ft_printf("Node: %d, Index: %d, Above median: %d", (stack_a->content), (stack_a->index), (stack_a->above_median));
-		// ft_printf("\n");
-		ft_printf(" target node value: %d", (stack_a->target_node->content));
-		ft_printf(" push cost: %d",(stack_a->push_cost));
+		// ft_printf("Node: %d, Index: %d, Above median: %d\n", (stack_a->content), (stack_a->index), (stack_a->above_median));
+		ft_printf("Node: %d ", stack_a->content);
+		ft_printf("Index: %d ", stack_a->index);
+		ft_printf("Above median: %d ", stack_a->above_median);
+		ft_printf("target node value: %d ", (stack_a->target_node->content));
+		ft_printf("push cost: %d ",(stack_a->push_cost));
+		ft_printf("cheapest: %d ",(stack_a->cheapest));
 		ft_printf("\n");
 		stack_a = stack_a->next;
 	}
 }
+
+void	print_stack_b(t_stack *stack_a)
+{
+	while (stack_a)
+	{
+		// ft_printf("Node: %d, Index: %d, Above median: %d\n", (stack_a->content), (stack_a->index), (stack_a->above_median));
+		ft_printf("Node: %d ", stack_a->content);
+		ft_printf("Index: %d ", stack_a->index);
+		ft_printf("Above median: %d ", stack_a->above_median);
+		ft_printf("push cost: %d ",(stack_a->push_cost));
+		ft_printf("\n");
+		stack_a = stack_a->next;
+	}
+}
+
 
 void	print_instructions(t_list *stack_a)
 {
@@ -56,7 +74,7 @@ int	is_ordered(t_stack *stack_a)
 	num = stack_a->content;
 	stack_a = stack_a->next;
 	while (stack_a)
-	{	
+	{
 		if (num > stack_a->content)
 			return (0);
 		num = stack_a->content;

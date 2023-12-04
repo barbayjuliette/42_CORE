@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juliettebarbay <juliettebarbay@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/01 20:13:05 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/04 22:56:24 by juliettebar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ void	add_index_median(t_stack *node)
 	while (node)
 	{
 		node->index = i;
+		node->cheapest = 0;
 		if (i <= median)
-			node->above_median = true;
+			node->above_median = 1;
 		else
-			node->above_median = false;
+			node->above_median = 0;
 		i++;
 		node = node->next;
 	}
@@ -123,27 +124,167 @@ void	find_target(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	push_cost(t_stack *stack_a, t_stack *stack_b)
+void	push_cost(t_stack *stack_a)
 {
 	int	len_a;
-	int	len_b;
+	// int	len_b;
 
 	len_a = stack_size(stack_a);
-	len_b = stack_size(stack_b);
+	// len_b = stack_size(stack_b);
 	while (stack_a)
 	{
 		if (stack_a->above_median)
 			stack_a->push_cost = stack_a->index;
 		else
 			stack_a->push_cost = len_a - stack_a->index;
-		
-		if (stack_a->target_node->above_median)
-			stack_a->push_cost += stack_a->target_node->index;
-		else
-			stack_a->push_cost += len_b - stack_a->target_node->index;
-		// ft_printf("Push cost: %d\n", stack_a->push_cost);
+
+		// if (stack_a->target_node->above_median)
+		// 	stack_a->push_cost = stack_a->target_node->index;
+		// else
+		// 	stack_a->push_cost += len_b - stack_a->target_node->index;
 		stack_a = stack_a->next;
 	}
+}
+
+int	get_total_cost(t_stack *stack)
+{
+		int	cost_a;
+		int	cost_b;
+
+		cost_a = stack->push_cost;
+		cost_b = stack->target_node->push_cost;
+
+		if (stack->above_median == stack->target_node->above_median)
+		{
+			if (cost_a > cost_b)
+				return (cost_a);
+			else
+				return (cost_b);
+		}
+		return (cost_a + cost_b);
+}
+
+void	find_cheapest(t_stack *stack)
+{
+	int	current_cost;
+	long	cheapest_cost;
+	t_stack	*cheapest_node;
+
+	if (!stack)
+		return ;
+	cheapest_cost = LONG_MAX;
+	while (stack)
+	{
+		current_cost = get_total_cost(stack);
+		if (current_cost < cheapest_cost)
+		{
+			cheapest_cost = current_cost;
+			cheapest_node = stack;
+		}
+		stack = stack->next;
+	}
+	cheapest_node->cheapest = 1;
+}
+
+void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**instructions)
+{
+	int		smallest;
+	int		biggest;
+	char	extra_pushes;
+	int		i;
+	t_stack	*a;
+	// t_stack	*b;
+
+	a = *stack_a;
+	// b = *stack_b;
+	while (a->cheapest == 0)
+		a = a->next;
+// OPTION 1: Both above median
+	if (a->above_median == 1 && a->target_node->above_median == 1)
+	{
+		ft_printf("HERE1");
+		if (a->push_cost > a->target_node->push_cost)
+		{
+			smallest = a->target_node->push_cost;
+			biggest = a->push_cost;
+			extra_pushes = 'a';
+		}
+		else
+		{
+			biggest = a->target_node->push_cost;
+			smallest = a->push_cost;
+			extra_pushes = 'b';
+		}
+		if (a->push_cost == a->target_node->push_cost)
+			extra_pushes = 'b';
+		i = smallest;
+		ft_printf("Smallest: %d\n", smallest);
+		ft_printf("biggest: %d\n", biggest);
+		while (i)
+		{
+			rotate_both(stack_a, stack_b, instructions);
+			ft_printf("i: %d\n", i);
+			i--;
+		}
+		i = biggest - smallest;
+		while (i)
+		{
+			if (extra_pushes == 'a')
+			rotate(stack_a, instructions, 'a');
+			i--;
+		}
+	}
+	// OPTION 2: BOTH NOT ABOVE MEDIAN
+	if (a->above_median == 0 && a->target_node->above_median == 0)
+	{
+		ft_printf("HERE2");
+		if (a->push_cost > a->target_node->push_cost)
+		{
+			smallest = a->target_node->push_cost;
+			biggest = a->push_cost;
+			extra_pushes = 'a';
+		}
+		else
+		{
+			biggest = a->target_node->push_cost;
+			smallest = a->push_cost;
+			extra_pushes = 'b';
+		}
+		if (a->push_cost == a->target_node->push_cost)
+			extra_pushes = 'b';
+		i = smallest;
+		while (i)
+		{
+			reverse_rotate_both(stack_a, stack_b, instructions);
+			i--;
+		}
+		i = biggest - smallest;
+		while (i)
+		{
+			if (extra_pushes == 'a')
+			reverse_rotate(stack_a, instructions, 'a');
+			i--;
+		}
+	}
+
+	// OPTION 3: ONE ABOVE ONE BELOW
+	if (a->above_median == 1)
+	{
+		// a above median and b below
+		while ((*stack_a) != a)
+			rotate(stack_a, instructions, 'a');
+		while ((*stack_b) != a->target_node)
+			reverse_rotate(stack_b, instructions, 'b');
+	}
+	else
+	{
+		while ((*stack_a) != a)
+			reverse_rotate(stack_a, instructions, 'a');
+		while ((*stack_b) != a->target_node)
+			rotate(stack_b, instructions, 'b');
+		ft_printf("HERE\n");
+	}
+
 }
 
 void	big_sort(t_stack **stack_a, t_list	**instructions)
@@ -155,18 +296,29 @@ void	big_sort(t_stack **stack_a, t_list	**instructions)
 		push(&stack_b, stack_a, instructions, 'b');
 	if (stack_size(*stack_a) > 3)
 		push(&stack_b, stack_a, instructions, 'b');
+	push(&stack_b, stack_a, instructions, 'b');
+	push(&stack_b, stack_a, instructions, 'b');
+
 	add_index_median(*stack_a);
 	add_index_median(stack_b);
+	print_stack_b(stack_b);
+	ft_printf("\n");
 	find_target(*stack_a, stack_b);
-	push_cost(*stack_a, stack_b);
+	push_cost(*stack_a);
+	push_cost(stack_b);
+	find_cheapest(*stack_a);
+	push_cheapest(stack_a, &stack_b, instructions);
+	ft_printf("\nSTACK A:\n");
 	print_stack(*stack_a);
+	ft_printf("\nSTACK B:\n");
+	print_stack_b(stack_b);
+	print_instructions(*instructions);
 	// ft_printf("\nSTACK A:\n");
 	// ft_printf("\nSTACK B:\n");
 	// print_stack(stack_b);
 	// print_stack(stack_b);
-	// print_instructions(*instructions);
 	return ;
-	
+
 	// while ((stack_size(stack_a) > 3))
 	// {
 	// 	find_target(stack_a, stack_b);
@@ -211,7 +363,7 @@ int main(int argc, char *argv[])
 		create_list(args, &stack_a, 0, 0);
 		free_matrix(args);
 	}
-	else 
+	else
 	{
 		create_list(argv, &stack_a, 1, 1);
 	}
