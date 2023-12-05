@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliettebarbay <juliettebarbay@student.    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/04 15:46:13 by juliettebar      ###   ########.fr       */
+/*   Updated: 2023/12/05 10:28:19 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void	is_a_num(const char *str, char *args[], int free);
 int		is_ordered(t_stack *stack_a);
 void	sort_stack(t_stack *stack_a);
 void	big_sort(t_stack **stack_a, t_list	**instructions);
+int		find_biggest(t_stack *stack_a);
 void	tiny_sort(t_stack **stack_a, t_list	**instructions);
-void	add_index_median(t_stack *node);
-void	find_target(t_stack *stack_a, t_stack *stack_b);
+void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**instructions);
+void	find_cheapest(t_stack *stack);
 
 // Init stacks
+void	add_index_median(t_stack *node);
+void	find_target(t_stack *stack_a, t_stack *stack_b);
 void	push_cost(t_stack *stack_a);
 
 // Tesing helpers

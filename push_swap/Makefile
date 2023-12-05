@@ -6,7 +6,7 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 15:01:19 by jbarbay           #+#    #+#              #
-#    Updated: 2023/11/29 17:16:54 by jbarbay          ###   ########.fr        #
+#    Updated: 2023/12/05 10:26:06 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ SRCS = main.c \
 	linked_list_helpers.c \
 	input_validation.c \
 	instructions.c \
+	init_stack.c \
+	sorting.c \
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
