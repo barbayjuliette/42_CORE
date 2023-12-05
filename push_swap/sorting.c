@@ -6,11 +6,53 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 10:07:11 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 11:44:35 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 12:26:19 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack	*find_smallest(t_stack *stack)
+{
+	int	smallest;
+	t_stack	*smallest_node;
+
+	smallest = stack->content;
+	smallest_node = stack;
+	stack = stack->next;
+	while (stack)
+	{
+		if (stack->content < smallest)
+		{
+			smallest = stack->content;
+			smallest_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (smallest_node);
+}
+
+void	find_target_b(t_stack *stack_a, t_stack *stack_b)
+{
+// Set it to NULL, and then check if it is NULL at the end, then use the min.
+	long	target_num;
+	t_stack	*target_node;
+
+	target_num = LONG_MAX;
+	while (stack_a)
+	{
+		if (stack_a->content > stack_b->content && stack_a->content < target_num)
+		{
+			target_num = stack_a->content;
+			target_node	= stack_a;
+		}
+		stack_a = stack_a->next;
+	}
+	if (target_num == LONG_MAX)
+		stack_b->target_node = find_smallest(stack_a);
+	else
+		stack_b->target_node = target_node;
+}
 
 void	big_sort(t_stack **stack_a, t_list	**instructions)
 {
@@ -33,25 +75,33 @@ void	big_sort(t_stack **stack_a, t_list	**instructions)
 		push_cost(*stack_a);
 		push_cost(stack_b);
 		find_cheapest(*stack_a);
-		ft_printf("NUM %d: ", i);
-		ft_printf("\nSTACK A:\n");
-		print_stack(*stack_a);
-		ft_printf("\nSTACK B:\n");
-		print_stack_b(stack_b);
-		ft_printf("\n");
+		// ft_printf("NUM %d: ", i);
+		// ft_printf("\nSTACK A:\n");
+		// print_stack(*stack_a);
+		// ft_printf("\nSTACK B:\n");
+		// print_stack_b(stack_b);
+		// ft_printf("\n");
 		push_cheapest(stack_a, &stack_b, instructions);
 		push(&stack_b, stack_a, instructions, 'b');
 		i++;
 	}
 
-	ft_printf("\n");
-	ft_printf("\nSTACK A:\n");
-	print_stack(*stack_a);
-	ft_printf("\nSTACK B:\n");
-	print_stack_b(stack_b);
-	print_instructions(*instructions);
+	// ft_printf("\n");
 	// ft_printf("\nSTACK A:\n");
+	// print_stack(*stack_a);
 	// ft_printf("\nSTACK B:\n");
+	// print_stack_b(stack_b);
+	// print_instructions(*instructions);
+
+	tiny_sort(stack_a, instructions);
+	find_target_b(*stack_a, stack_b);
+	ft_printf("Target of B: %d\n", stack_b->target_node->content);
+	// Push everything back to A.
+	// while ((stack_size(stack_b) > 0))
+	// {
+	// 	find_target_b(*stack_a, stack_b);
+	// }
+
 	return ;
 
 	// while ((stack_size(stack_a) > 3))
