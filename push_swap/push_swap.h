@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 15:12:07 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 17:27:52 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int		find_biggest(t_stack *stack_a);
 void	tiny_sort(t_stack **stack_a, t_list	**instructions);
 void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**instructions);
 void	find_cheapest(t_stack *stack);
+void	both_above_median(t_stack **stack_a, t_stack **stack_b, t_list	**inst, t_stack *a);
+int		set_values(int *smallest, int *biggest, int *extra_pushes, t_stack *a);
+void	both_below_median(t_stack **stack_a, t_stack **stack_b, t_list	**inst, t_stack *a);
 
 // Push back to A
 t_stack	*find_smallest(t_stack *stack);
@@ -57,6 +60,7 @@ void	put_smallest_top(t_stack **stack_a, t_list	**instructions);
 // Init stacks
 void	add_index_median(t_stack *node);
 void	find_target(t_stack *stack_a, t_stack *stack_b);
+t_stack	*biggest_node(t_stack *stack);
 void	push_cost(t_stack *stack_a);
 
 // Tesing helpers

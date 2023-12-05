@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:56:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/01 18:47:40 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 17:32:21 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_duplicates(char *args[], int free)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = free;
 	while (args[i])
@@ -80,11 +80,8 @@ int	ft_atoi_int(const char *str, char *args[], int free)
 		num = num * 10 + (str[i] - '0');
 		i++;
 	}
-	if (sign * num > 2147483647 || sign * num < - 2147483647)
-	{
-		ft_printf("In atoi\n");
-        input_error(free, args);
-	}
+	if (sign * num > 2147483647 || sign * num < -2147483647)
+		input_error(free, args);
 	return (sign * num);
 }
 
@@ -95,5 +92,3 @@ void	input_error(int free, char *args[])
 		free_matrix(args);
 	exit(1);
 }
-
-
