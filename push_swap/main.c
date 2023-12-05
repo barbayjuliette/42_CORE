@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 12:46:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 15:08:46 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,5 @@ int main(int argc, char *argv[])
 	// print_stack(stack_a);
 	// ft_printf("\n");
 	sort_stack(stack_a);
-	free_list(&stack_a);
 	return (0);
 }

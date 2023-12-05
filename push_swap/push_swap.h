@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 14:56:32 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 15:12:07 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_stack
 
 void	free_matrix(char **map);
 int		check_duplicates(char *args[], int free);
-void	free_list(t_stack **lst);
 void	create_list(char *args[], t_stack **stack_a, int i, int free);
 void	input_error(int free, char *args[]);
 int		ft_atoi_int(const char *str, char *args[], int free);
@@ -70,7 +69,9 @@ void	stack_add_back(t_stack **lst, t_stack *new);
 t_stack	*new_stack(int content);
 t_stack	*stack_last_node(t_stack *lst);
 t_stack	*stack_before_last_node(t_stack *lst);
-int	stack_size(t_stack *lst);
+int		stack_size(t_stack *lst);
+void	free_instructions(t_list **lst);
+void	free_list(t_stack **lst);
 
 // Instructions
 void 	swap(t_stack **stack, t_list **instructions, char c);

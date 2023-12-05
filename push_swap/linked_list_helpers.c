@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_helpers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliettebarbay <juliettebarbay@student.    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 15:59:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/04 15:46:01 by juliettebar      ###   ########.fr       */
+/*   Updated: 2023/12/05 15:25:52 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@ void	free_list(t_stack **lst)
 {
 	t_stack	*next;
 	t_stack	*current;
+
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*lst = NULL;
+}
+
+void	free_instructions(t_list **lst)
+{
+	t_list	*next;
+	t_list	*current;
 
 	current = *lst;
 	while (current)
@@ -62,7 +77,7 @@ void	print_instructions(t_list *stack_a)
 {
 	while (stack_a)
 	{
-		ft_printf("Node: %s\n", (stack_a->content));
+		ft_printf("%s\n", (stack_a->content));
 		stack_a = stack_a->next;
 	}
 }
