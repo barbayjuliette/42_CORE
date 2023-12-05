@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 12:20:34 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 14:56:32 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	find_cheapest(t_stack *stack);
 // Push back to A
 t_stack	*find_smallest(t_stack *stack);
 void	find_target_b(t_stack *stack_a, t_stack *stack_b);
+void	push_target_top(t_stack **stack_a, t_stack *stack_b, t_list *instructions);
+void	put_smallest_top(t_stack **stack_a, t_list	**instructions);
 
 // Init stacks
 void	add_index_median(t_stack *node);

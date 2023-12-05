@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 11:40:51 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/05 12:46:21 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**instructions)
 // OPTION 1: Both above median
 	if (a->above_median == 1 && a->target_node->above_median == 1)
 	{
-		ft_printf("Both above median\n");
+		// ft_printf("Both above median\n");
 		if (a->push_cost > a->target_node->push_cost)
 		{
 			smallest = a->target_node->push_cost;
@@ -81,7 +81,7 @@ void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**instructions)
 	// OPTION 2: BOTH NOT ABOVE MEDIAN
 	else if (a->above_median == 0 && a->target_node->above_median == 0)
 	{
-		ft_printf("Both below median\n");
+		// ft_printf("Both below median\n");
 		if (a->push_cost > a->target_node->push_cost)
 		{
 			smallest = a->target_node->push_cost;
@@ -116,7 +116,7 @@ void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**instructions)
 	// OPTION 3: ONE ABOVE ONE BELOW
 	else if (a->above_median == 1)
 	{
-		ft_printf("One below, one above median\n");
+		// ft_printf("One below, one above median\n");
 		// a above median and b below
 		while ((*stack_a) != a)
 			rotate(stack_a, instructions, 'a');
