@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:34:33 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 17:35:48 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 12:29:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	swap_both(t_stack **stack_a, t_stack **stack_b, t_list **instructions)
 	ft_lstadd_back(instructions, ft_lstnew("ss"));
 }
 
-void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_list **instructions)
+void	rotate_both(t_stack **stack_a, t_stack **stack_b, t_list **inst)
 {
-	rotate(stack_a, instructions, 'x');
-	rotate(stack_b, instructions, 'x');
-	ft_lstadd_back(instructions, ft_lstnew("rr"));
+	rotate(stack_a, inst, 'x');
+	rotate(stack_b, inst, 'x');
+	ft_lstadd_back(inst, ft_lstnew("rr"));
 }
 
-void	reverse_rotate_both(t_stack **stack_a, t_stack **stack_b, t_list **inst)
+void	reverse_rotate_both(t_stack **stack_a, t_stack **stack_b, t_list **ins)
 {
-	reverse_rotate(stack_a, inst, 'x');
-	reverse_rotate(stack_b, inst, 'x');
-	ft_lstadd_back(inst, ft_lstnew("rrr"));
+	reverse_rotate(stack_a, ins, 'x');
+	reverse_rotate(stack_b, ins, 'x');
+	ft_lstadd_back(ins, ft_lstnew("rrr"));
 }

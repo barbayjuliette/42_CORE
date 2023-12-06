@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:17:13 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 17:21:24 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 12:27:03 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	set_values(int *smallest, int *biggest, int *extra_pushes, t_stack *a)
 	return (*smallest);
 }
 
-void	both_above_median(t_stack **s_a, t_stack **s_b, t_list **in, t_stack *a)
+void	both_above(t_stack **s_a, t_stack **s_b, t_list **in, t_stack *a)
 {
 	int		smallest;
 	int		biggest;
@@ -55,7 +55,7 @@ void	both_above_median(t_stack **s_a, t_stack **s_b, t_list **in, t_stack *a)
 	}
 }
 
-void	both_below_median(t_stack **s_a, t_stack **s_b, t_list **in, t_stack *a)
+void	both_below(t_stack **s_a, t_stack **s_b, t_list **in, t_stack *a)
 {
 	int		smallest;
 	int		biggest;
@@ -87,9 +87,9 @@ void	push_cheapest(t_stack **stack_a, t_stack **stack_b, t_list	**inst)
 	while (a->cheapest == 0)
 		a = a->next;
 	if (a->above_median == 1 && a->target_node->above_median == 1)
-		both_above_median(stack_a, stack_b, inst, a);
+		both_above(stack_a, stack_b, inst, a);
 	else if (a->above_median == 0 && a->target_node->above_median == 0)
-		both_below_median(stack_a, stack_b, inst, a);
+		both_below(stack_a, stack_b, inst, a);
 	else if (a->above_median == 1)
 	{
 		while ((*stack_a) != a)

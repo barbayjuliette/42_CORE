@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:10:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 16:11:24 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 12:09:41 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ void	free_list(t_stack **lst)
 		current = next;
 	}
 	*lst = NULL;
+}
+
+void	free_matrix(char **map)
+{
+	int	row;
+
+	row = 0;
+	while (map[row])
+	{
+		free(map[row]);
+		row++;
+	}
+	free(map);
 }
 
 void	free_instructions(t_list **lst)
