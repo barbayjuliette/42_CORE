@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:56:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 17:32:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 13:06:38 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	is_a_num(const char *str, char *args[], int free)
 	if (!ft_isdigit(str[0]))
 	{
 		if (!(str[0] == '-' && str[1] && ft_isdigit(str[1])))
-		{
-			ft_printf("In is_a_num\n");
 			input_error(free, args);
-		}
 	}
 }
 
@@ -87,7 +84,7 @@ int	ft_atoi_int(const char *str, char *args[], int free)
 
 void	input_error(int free, char *args[])
 {
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	if (!free)
 		free_matrix(args);
 	exit(1);

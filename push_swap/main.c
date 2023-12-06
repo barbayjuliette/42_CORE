@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:01:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 17:17:30 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 15:39:42 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void	create_list(char *args[], t_stack **stack_a, int i, int free)
 		stack_add_back(stack_a, new_stack(num));
 		i++;
 	}
+}
+
+void	end_program(t_stack **stack_a, t_list **instructions)
+{
+	print_instructions(*instructions);
+	free_list(stack_a);
+	free_instructions(instructions);
 }
 
 int	main(int argc, char *argv[])

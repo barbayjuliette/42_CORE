@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:25:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/06 12:29:40 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 15:25:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	big_sort(t_stack **stack_a, t_list **instructions);
 void	sort_stack(t_stack *stack_a);
 void	tiny_sort(t_stack **stack_a, t_list	**instructions);
 int		find_biggest(t_stack *stack_a);
+void	end_program(t_stack **stack_a, t_list **instructions);
 
 // Instructions
 void	swap(t_stack **stack, t_list **instructions, char c);

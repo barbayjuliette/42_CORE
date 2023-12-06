@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 10:07:11 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/05 17:53:42 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/06 15:39:33 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,15 @@ void	big_sort(t_stack **stack_a, t_list **instructions)
 	tiny_sort(stack_a, instructions);
 	while ((stack_size(stack_b) > 0))
 	{
+		add_index_median(*stack_a);
+		add_index_median(stack_b);
 		find_target_b(*stack_a, stack_b);
 		push_target_top(stack_a, stack_b, *instructions);
 		push(stack_a, &stack_b, instructions, 'a');
 	}
 	put_smallest_top(stack_a, instructions);
-	print_instructions(*instructions);
 	free_list(stack_a);
-	free_list(&stack_b);
-	free_instructions(instructions);
-	return ;
+	end_program(stack_a, instructions);
 }
 
 void	sort_stack(t_stack *stack_a)
@@ -58,13 +57,17 @@ void	sort_stack(t_stack *stack_a)
 	instructions = NULL;
 	size = stack_size(stack_a);
 	if (is_ordered(stack_a))
-		ft_printf("\n");
+	{
+		end_program(&stack_a, &instructions);
+		return ;
+	}
 	else if (size == 2)
 		swap(&stack_a, &instructions, 'a');
 	else if (size == 3)
 		tiny_sort(&stack_a, &instructions);
 	else
 		big_sort(&stack_a, &instructions);
+	end_program(&stack_a, &instructions);
 }
 
 void	tiny_sort(t_stack **stack_a, t_list	**instructions)
