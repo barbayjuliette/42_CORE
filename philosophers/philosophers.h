@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/11 20:35:34 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/11 21:51:20 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ typedef struct s_program
 	int	min_nb_eats_each;
 	unsigned long	timestamp_start;
 } t_program;
+
+typedef	struct s_philo
+{
+	pthread_t	td;
+	int	num;
+	int	status;
+	int	fork;
+	int	total_meals;
+	unsigned long	last_meal;
+} t_philo;
+
+// Statuses:
+//  1: Think
+//  2: Take a fork
+//  4: Eat
+//  4: Sleep
 
 // Helpers
 int	ft_atoi(char *str);
