@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/11 16:10:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/11 20:35:34 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_program
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	min_nb_eats_each;
+	unsigned long	timestamp_start;
 } t_program;
 
 // Helpers

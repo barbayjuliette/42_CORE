@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:37 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/11 20:10:48 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/11 20:45:03 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int	valid_input(char *argv[], int argc)
 	return (1);
 }
 
+unsigned long	get_timestamp()
+{
+	unsigned long	timestamp;
+	struct	timeval time;
+
+	gettimeofday(&time, NULL);
+	timestamp = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (timestamp);
+}
+
 int main(int argc, char *argv[])
 {
 	t_program program;
@@ -47,5 +57,7 @@ int main(int argc, char *argv[])
 	program.time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		program.min_nb_eats_each = ft_atoi(argv[5]);
+	program.timestamp_start = get_timestamp();
+	create_threads(program);
 	return (0);
 }
