@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/12 13:15:41 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/12 14:30:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ int	right_fork(t_philo *philo)
 	return (fork);
 }
 
-void	take_two_forks(t_philo *philo)
-{
-	int	i;
-	
-	i = (philo->num) - 1;
-	if (i == 0)
-		i = philo->program->total_philo;
-	(philo->philos)[i].left_fork = 0;
-	philo->left_fork = 0;
-	printf("Philo %d picked up 2 forks\n", philo->num);
-}
-
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -46,8 +34,15 @@ void	*routine(void *arg)
 	{
 		// printf("Philo %d is eating\n", philo->num);
 		take_two_forks(philo);
+		pthread_mutex_unlock(philo->program->mutex);
+		start_eating(philo);
+		start_sleeping(philo);
+		start_thinking(philo);
 	}
-	pthread_mutex_unlock(philo->program->mutex);
+	else
+	{
+		pthread_mutex_unlock(philo->program->mutex);
+	}
 	return (arg);
 }
 

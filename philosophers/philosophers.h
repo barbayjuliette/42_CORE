@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/12 13:03:35 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/12 14:33:01 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef	struct s_philo
 // Statuses:
 //  1: Think
 //  2: Take a fork
-//  4: Eat
+//  3: Eat
 //  4: Sleep
 
 // Helpers
@@ -58,6 +58,16 @@ int		valid_input(char *argv[], int argc);
 // Threads
 void	*routine(void *arg);
 void	create_threads(t_program *program);
+
+// Thread helpers
+int		right_fork(t_philo *philo);
+
+// Actions
+void	take_two_forks(t_philo *philo);
+void	start_eating(t_philo *philo);
+void	start_sleeping(t_philo *philo);
+void	start_thinking(t_philo *philo);
+
 
 
 unsigned long	get_timestamp();

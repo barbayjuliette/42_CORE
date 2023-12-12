@@ -1,7 +1,8 @@
 SRCS = philosophers.c \
 			helpers.c \
-			threads.c
-			
+			threads.c \
+			actions.c
+
 CC = cc -pthread
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
