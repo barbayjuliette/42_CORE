@@ -1,7 +1,9 @@
 SRCS = philosophers.c \
-			helpers.c
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+			helpers.c \
+			threads.c
+			
+CC = cc -pthread
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 NAME = philo
 OBJS = ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/11 21:51:20 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/12 13:03:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_program
 	int	time_to_sleep;
 	int	min_nb_eats_each;
 	unsigned long	timestamp_start;
+	pthread_mutex_t	*mutex;
 } t_program;
 
 typedef	struct s_philo
@@ -35,9 +36,11 @@ typedef	struct s_philo
 	pthread_t	td;
 	int	num;
 	int	status;
-	int	fork;
+	int	left_fork;
 	int	total_meals;
 	unsigned long	last_meal;
+	struct s_philo		*philos;
+	t_program	*program;
 } t_philo;
 
 // Statuses:
@@ -48,5 +51,15 @@ typedef	struct s_philo
 
 // Helpers
 int	ft_atoi(char *str);
+
+// Input validation
+int		valid_input(char *argv[], int argc);
+
+// Threads
+void	*routine(void *arg);
+void	create_threads(t_program *program);
+
+
+unsigned long	get_timestamp();
 
 #endif
