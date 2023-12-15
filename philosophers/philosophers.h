@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 17:56:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 18:41:00 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_program
 	int	max_meals;
 	unsigned long	timestamp_start;
 	pthread_mutex_t	*meals_mutex;
+	pthread_mutex_t	*print_mutex;
 } t_program;
 
 typedef	struct s_philo

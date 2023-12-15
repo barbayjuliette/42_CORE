@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 18:38:15 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 18:51:27 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,16 @@ void	create_threads(t_program *program)
 	int		i;
 	t_philo	*philos;
 	pthread_mutex_t meals_mutex;
+	pthread_mutex_t print_mutex;
 
 	i = 0;
 	philos = malloc(sizeof(t_philo) * (program->total_philo + 1));
 	philos[program->total_philo].index = 0;
 
 	pthread_mutex_init(&meals_mutex, NULL);
+	pthread_mutex_init(&print_mutex, NULL);
 	program->meals_mutex = &meals_mutex;
+	program->print_mutex = &print_mutex;
 	while (i < program->total_philo)
 	{
 		philos[i].fork_mutex = malloc(sizeof(pthread_mutex_t));
@@ -113,4 +116,5 @@ void	create_threads(t_program *program)
 	}
 	free(philos);
 	pthread_mutex_destroy(&meals_mutex);
+	pthread_mutex_destroy(&print_mutex);
 }

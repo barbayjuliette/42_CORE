@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 18:04:46 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 18:44:47 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,19 @@ void	take_two_forks(t_philo *philo)
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	
+	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
+	pthread_mutex_unlock(philo->program->print_mutex);
 
 	pthread_mutex_lock(philo->fork_mutex);
 	philo->left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
+
+	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
+	pthread_mutex_unlock(philo->program->print_mutex);
 	
 	philo->status = 2;
 }
@@ -45,7 +50,11 @@ void	start_eating(t_philo *philo)
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 3;
+
+	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d is eating\n", timestamp, philo->index + 1);
+	pthread_mutex_unlock(philo->program->print_mutex);
+
 	philo->last_meal = timestamp;
 	usleep(philo->program->time_to_eat * 1000);
 	philo->total_meals++;
@@ -71,7 +80,9 @@ void	start_sleeping(t_philo *philo)
 	(philo->philos)[i].left_fork = 1;
 	philo->left_fork = 1;
 	pthread_mutex_unlock(philo->fork_mutex);
+	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d is sleeping\n", timestamp, philo->index + 1);
+	pthread_mutex_unlock(philo->program->print_mutex);
 	usleep(philo->program->time_to_sleep * 1000);
 }
 
