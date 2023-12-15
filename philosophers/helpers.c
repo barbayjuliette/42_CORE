@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:06:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/11 16:11:03 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 19:15:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,24 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (sign * num);
+}
+
+unsigned long	get_timestamp()
+{
+	unsigned long	timestamp;
+	struct	timeval time;
+
+	gettimeofday(&time, NULL);
+	timestamp = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (timestamp);
+}
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_timestamp();
+	while ((get_timestamp() - start) < milliseconds)
+		usleep(500);
+	return (0);
 }

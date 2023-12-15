@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 18:41:00 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 19:15:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ typedef	struct s_philo
 //  4: Sleep
 
 // Helpers
-int	ft_atoi(char *str);
+int				ft_atoi(char *str);
+int				ft_usleep(size_t milliseconds);
+unsigned long	get_timestamp();
 
 // Input validation
 int		valid_input(char *argv[], int argc);
@@ -75,6 +77,5 @@ void	start_sleeping(t_philo *philo);
 void	start_thinking(t_philo *philo);
 
 
-unsigned long	get_timestamp();
 
 #endif

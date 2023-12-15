@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 18:44:47 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 19:21:32 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	start_eating(t_philo *philo)
 	pthread_mutex_unlock(philo->program->print_mutex);
 
 	philo->last_meal = timestamp;
-	usleep(philo->program->time_to_eat * 1000);
+	ft_usleep(philo->program->time_to_eat);
 	philo->total_meals++;
 	if (philo->total_meals == philo->program->max_meals)
 	{
@@ -83,7 +83,7 @@ void	start_sleeping(t_philo *philo)
 	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d is sleeping\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
-	usleep(philo->program->time_to_sleep * 1000);
+	ft_usleep(philo->program->time_to_sleep);
 }
 
 void	start_thinking(t_philo *philo)
