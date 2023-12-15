@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 17:58:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 18:04:46 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ void	take_two_forks(t_philo *philo)
 	if (i < 0)
 		i = philo->program->total_philo - 1;
 
-	
+	pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 0;
+	pthread_mutex_unlock(philo->fork_mutex);
+
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	
 	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
+
+	pthread_mutex_lock(philo->fork_mutex);
 	philo->left_fork = 0;
+	pthread_mutex_unlock(philo->fork_mutex);
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
@@ -62,8 +67,10 @@ void	start_sleeping(t_philo *philo)
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = philo->program->total_philo - 1;
+	pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 1;
 	philo->left_fork = 1;
+	pthread_mutex_unlock(philo->fork_mutex);
 	printf("%ld %d is sleeping\n", timestamp, philo->index + 1);
 	usleep(philo->program->time_to_sleep * 1000);
 }
