@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 17:44:25 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:59:46 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,10 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (1)
+	while (!all_enough_meals(philo->philos, philo->program))
 	{
 		pthread_mutex_lock(philo->fork_mutex);
-		if (all_enough_meals(philo->philos, philo->program))
-		{
-			printf("All philosophers have eaten enough\n");
-			pthread_mutex_unlock(philo->fork_mutex);
-			exit(1);
-		}
-		else if (philo->left_fork && right_fork(philo) && philo->status == 1)
+		if (philo->left_fork && right_fork(philo) && philo->status == 1)
 		{
 			take_two_forks(philo);
 			start_eating(philo);
