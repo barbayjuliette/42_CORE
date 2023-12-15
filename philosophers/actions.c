@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 17:26:26 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:58:01 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	start_eating(t_philo *philo)
 	philo->last_meal = timestamp;
 	usleep(philo->program->time_to_eat * 1000);
 	philo->total_meals++;
-	if (philo->total_meals == philo->program->min_nb_eats_each)
+	if (philo->total_meals == philo->program->max_meals)
 	{
 		pthread_mutex_lock(philo->program->meals_mutex);
 		philo->is_full = 1;
@@ -57,18 +57,13 @@ void	start_sleeping(t_philo *philo)
 	unsigned long	timestamp;
 	int	i;
 	
-
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 4;
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = philo->program->total_philo - 1;
-	// pthread_mutex_lock(philo->program->fork_mutex);
-	// pthread_mutex_lock(philo->program->meals_mutex);
 	(philo->philos)[i].left_fork = 1;
 	philo->left_fork = 1;
-	// pthread_mutex_unlock(philo->program->fork_mutex);
-	// pthread_mutex_unlock(philo->program->meals_mutex);
 	printf("%ld %d is sleeping\n", timestamp, philo->index + 1);
 	usleep(philo->program->time_to_sleep * 1000);
 }
