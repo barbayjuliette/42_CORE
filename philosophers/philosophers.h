@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/12 14:33:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/15 19:15:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,29 @@
 # include <stdlib.h>
 # include <string.h> // For memset
 
+# define ENOUGH_MEALS 2
+
 typedef struct s_program
 {
 	int	total_philo;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	min_nb_eats_each;
+	int	max_meals;
 	unsigned long	timestamp_start;
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	*meals_mutex;
+	pthread_mutex_t	*print_mutex;
 } t_program;
 
 typedef	struct s_philo
 {
 	pthread_t	td;
-	int	num;
+	int	index;
 	int	status;
 	int	left_fork;
 	int	total_meals;
+	int	is_full;
+	pthread_mutex_t	*fork_mutex;
 	unsigned long	last_meal;
 	struct s_philo		*philos;
 	t_program	*program;
@@ -50,7 +55,9 @@ typedef	struct s_philo
 //  4: Sleep
 
 // Helpers
-int	ft_atoi(char *str);
+int				ft_atoi(char *str);
+int				ft_usleep(size_t milliseconds);
+unsigned long	get_timestamp();
 
 // Input validation
 int		valid_input(char *argv[], int argc);
@@ -58,6 +65,7 @@ int		valid_input(char *argv[], int argc);
 // Threads
 void	*routine(void *arg);
 void	create_threads(t_program *program);
+int	all_enough_meals(t_philo *philos, t_program *program);
 
 // Thread helpers
 int		right_fork(t_philo *philo);
@@ -69,7 +77,5 @@ void	start_sleeping(t_philo *philo);
 void	start_thinking(t_philo *philo);
 
 
-
-unsigned long	get_timestamp();
 
 #endif
