@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 19:21:32 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:04:47 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	take_two_forks(t_philo *philo)
 {
 	int	i;
 	unsigned long	timestamp;
-	
+
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = philo->program->total_philo - 1;
@@ -24,9 +24,9 @@ void	take_two_forks(t_philo *philo)
 	pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
-
+	if (philo_is_dying(philo))
+		return (0);
 	timestamp = get_timestamp() - philo->program->timestamp_start;
-	
 	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
@@ -36,12 +36,13 @@ void	take_two_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->fork_mutex);
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
-
 	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
-	
 	philo->status = 2;
+	if (philo_is_dying(philo))
+		return (0);
+	return (1);
 }
 
 void	start_eating(t_philo *philo)
@@ -70,7 +71,7 @@ void	start_sleeping(t_philo *philo)
 {
 	unsigned long	timestamp;
 	int	i;
-	
+
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 4;
 	i = (philo->index) - 1;

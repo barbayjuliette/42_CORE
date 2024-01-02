@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 19:15:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2023/12/16 17:46:18 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		valid_input(char *argv[], int argc);
 void	*routine(void *arg);
 void	create_threads(t_program *program);
 int	all_enough_meals(t_philo *philos, t_program *program);
+int	philo_is_dying(t_philo *philo);
 
 // Thread helpers
 int		right_fork(t_philo *philo);
