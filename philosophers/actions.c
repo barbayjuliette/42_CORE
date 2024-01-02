@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/16 18:04:47 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/02 13:34:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	take_two_forks(t_philo *philo)
 {
 	int	i;
-	unsigned long	timestamp;
+	int	timestamp;
 
 	i = (philo->index) - 1;
 	if (i < 0)
@@ -24,11 +24,9 @@ void	take_two_forks(t_philo *philo)
 	pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
-	if (philo_is_dying(philo))
-		return (0);
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
+	printf("%d %d has taken a fork\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
 
 	pthread_mutex_lock(philo->fork_mutex);
@@ -37,23 +35,20 @@ void	take_two_forks(t_philo *philo)
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%ld %d has taken a fork\n", timestamp, philo->index + 1);
+	printf("%d %d has taken a fork\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
 	philo->status = 2;
-	if (philo_is_dying(philo))
-		return (0);
-	return (1);
 }
 
 void	start_eating(t_philo *philo)
 {
-	unsigned long	timestamp;
+	int	timestamp;
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 3;
 
 	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%ld %d is eating\n", timestamp, philo->index + 1);
+	printf("%d %d is eating\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
 
 	philo->last_meal = timestamp;
@@ -69,7 +64,7 @@ void	start_eating(t_philo *philo)
 
 void	start_sleeping(t_philo *philo)
 {
-	unsigned long	timestamp;
+	int	timestamp;
 	int	i;
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
@@ -82,16 +77,18 @@ void	start_sleeping(t_philo *philo)
 	philo->left_fork = 1;
 	pthread_mutex_unlock(philo->fork_mutex);
 	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%ld %d is sleeping\n", timestamp, philo->index + 1);
+	printf("%d %d is sleeping\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
 	ft_usleep(philo->program->time_to_sleep);
 }
 
 void	start_thinking(t_philo *philo)
 {
-	unsigned long	timestamp;
+	int	timestamp;
 
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 1;
-	printf("%ld %d is thinking\n", timestamp, philo->index + 1);
+	pthread_mutex_lock(philo->program->print_mutex);
+	printf("%d %d is thinking\n", timestamp, philo->index + 1);
+	pthread_mutex_unlock(philo->program->print_mutex);
 }

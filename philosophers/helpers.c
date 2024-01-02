@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:06:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 19:15:29 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/02 13:56:21 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	ft_atoi(char *str)
 	return (sign * num);
 }
 
-unsigned long	get_timestamp()
+size_t	get_timestamp()
 {
-	unsigned long	timestamp;
+	size_t	timestamp;
 	struct	timeval time;
 
 	gettimeofday(&time, NULL);
