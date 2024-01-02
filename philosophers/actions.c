@@ -6,21 +6,33 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 13:34:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/02 16:45:16 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+// int	check_end_simulation(t_program *program)
+// {
+// 	pthread_mutex_lock(program->sim_mutex);
+// 	if (program->end_simulation)
+// 	{
+// 		pthread_mutex_unlock(program->sim_mutex);
+// 		return (1);
+// 	}
+// 	pthread_mutex_unlock(program->sim_mutex);
+// }
 
 void	take_two_forks(t_philo *philo)
 {
 	int	i;
 	int	timestamp;
 
+	if (end_simulation(philo->program))
+		return ;
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = philo->program->total_philo - 1;
-
 	pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
@@ -28,11 +40,9 @@ void	take_two_forks(t_philo *philo)
 	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%d %d has taken a fork\n", timestamp, philo->index + 1);
 	pthread_mutex_unlock(philo->program->print_mutex);
-
 	pthread_mutex_lock(philo->fork_mutex);
 	philo->left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
-
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	pthread_mutex_lock(philo->program->print_mutex);
 	printf("%d %d has taken a fork\n", timestamp, philo->index + 1);
@@ -44,6 +54,8 @@ void	start_eating(t_philo *philo)
 {
 	int	timestamp;
 
+	if (end_simulation(philo->program))
+		return ;
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 3;
 
@@ -67,6 +79,8 @@ void	start_sleeping(t_philo *philo)
 	int	timestamp;
 	int	i;
 
+	if (end_simulation(philo->program))
+		return ;
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 4;
 	i = (philo->index) - 1;
@@ -86,6 +100,8 @@ void	start_thinking(t_philo *philo)
 {
 	int	timestamp;
 
+	if (end_simulation(philo->program))
+		return ;
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 1;
 	pthread_mutex_lock(philo->program->print_mutex);

@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 15:48:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/02 16:41:36 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,17 @@ int	all_enough_meals(t_philo *philos, t_program *program)
 
 	i = 0;
 
+	pthread_mutex_lock(program->sim_mutex);
 	if (program->end_simulation)
+	{
+		pthread_mutex_unlock(program->sim_mutex);
 		return (1);
+	}
+	pthread_mutex_unlock(program->sim_mutex);
+
 	if (program->max_meals == -1)
 		return (0);
+	
 	pthread_mutex_lock(program->meals_mutex);
 	while (i < program->total_philo)
 	{
@@ -50,6 +57,15 @@ int	all_enough_meals(t_philo *philos, t_program *program)
 	return (1);
 }
 
+int	end_simulation(t_program *program)
+{	
+	int	ret;
+	pthread_mutex_lock(program->sim_mutex);
+	ret = program->end_simulation;
+	pthread_mutex_unlock(program->sim_mutex);
+	return (ret);
+}
+
 void	*is_dying(void *arg)
 {
 	t_philo		*philos;
@@ -59,12 +75,9 @@ void	*is_dying(void *arg)
 
 	philos = ((t_philo *)arg)->philos;
 	program = ((t_philo *)arg)->program;
-	while (!program->end_simulation)
+	while (!end_simulation(program))
 	{
 		i = 0;
-		// pthread_mutex_lock(philos[i].program->print_mutex);
-		// printf("RUNNING DETACHED THREAD\n");
-		// pthread_mutex_unlock(philos[i].program->print_mutex);
 		while (i < program->total_philo)
 		{
 			if (!philo_is_full(&philos[i]))
@@ -75,7 +88,10 @@ void	*is_dying(void *arg)
 					pthread_mutex_lock(philos[i].program->print_mutex);
 					printf("%d %d died\n", timestamp, philos[i].index + 1);
 					pthread_mutex_unlock(philos[i].program->print_mutex);
-					program->end_simulation = 1;
+
+					pthread_mutex_lock(philos[i].program->sim_mutex);
+					philos[i].program->end_simulation = 1;
+					pthread_mutex_unlock(philos[i].program->sim_mutex);
 					return (arg);
 				}
 			}
@@ -133,6 +149,7 @@ void	create_threads(t_program *program)
 	t_philo			*philos;
 	pthread_mutex_t meals_mutex;
 	pthread_mutex_t print_mutex;
+	pthread_mutex_t sim_mutex;
 	pthread_t		th;
 
 	i = 0;
@@ -143,14 +160,17 @@ void	create_threads(t_program *program)
 	// Initialize all the values
 	pthread_mutex_init(&meals_mutex, NULL);
 	pthread_mutex_init(&print_mutex, NULL);
+	pthread_mutex_init(&sim_mutex, NULL);
 	program->meals_mutex = &meals_mutex;
 	program->print_mutex = &print_mutex;
+	program->sim_mutex = &sim_mutex;
 	while (i < program->total_philo)
 	{
 		philos[i].fork_mutex = malloc(sizeof(pthread_mutex_t));
 		pthread_mutex_init(philos[i].fork_mutex, NULL);
 		philos[i].index = i;
 		philos[i].status = 1;
+		philos[i].dead = 0;
 		philos[i].left_fork = 1;
 		philos[i].total_meals = 0;
 		philos[i].is_full = 0;
@@ -182,4 +202,5 @@ void	create_threads(t_program *program)
 	free(philos);
 	pthread_mutex_destroy(&meals_mutex);
 	pthread_mutex_destroy(&print_mutex);
+	pthread_mutex_destroy(&sim_mutex);
 }

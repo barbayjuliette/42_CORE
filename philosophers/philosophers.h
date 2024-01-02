@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 15:47:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/02 16:38:12 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef	struct s_philo
 	int				left_fork;
 	int				total_meals;
 	int				is_full;
+	int				dead;
 	pthread_mutex_t	*fork_mutex;
+	pthread_mutex_t	*status_mutex;
 	int				last_meal;
 	struct s_philo	*philos;
 	t_program		*program;
@@ -56,6 +58,8 @@ typedef	struct s_philo
 //  3: Eat
 //  4: Sleep
 //  5: Dying
+
+
 
 // Helpers
 int		ft_atoi(char *str);
@@ -80,5 +84,7 @@ void	take_two_forks(t_philo *philo);
 void	start_eating(t_philo *philo);
 void	start_sleeping(t_philo *philo);
 void	start_thinking(t_philo *philo);
+int		end_simulation(t_program *program);
+
 
 #endif
