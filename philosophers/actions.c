@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 13:38:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 14:40:49 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	take_two_forks(t_philo *philo)
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = philo->program->total_philo - 1;
+	// pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
 	

@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 12:19:14 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 15:50:27 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,24 @@ typedef	struct s_philo
 int		ft_atoi(char *str);
 int		ft_usleep(size_t milliseconds);
 size_t	get_timestamp();
+void	ft_error(char *message, t_program *program, t_philo *philos);
 
 // Input validation
 int		valid_input(char *argv[], int argc);
 
 // Threads
+
 void	*routine(void *arg);
-void	create_threads(t_program *program);
+void	*monitor(void *arg);
 int		all_enough_meals(t_philo *philos, t_program *program);
 void	*is_dying(void *arg);
+
+// Init Threads
+void	create_threads(t_program *program);
+void	initialize_philos(t_program *program, t_philo *philos);
+int		start_threads(t_program *program, t_philo *philos);
+int		join_threads(t_program *program, t_philo *philos);
+void	destroy_program(t_program *program, t_philo *philos);
 
 // Thread helpers
 int		right_fork(t_philo *philo);
@@ -84,6 +93,5 @@ void	start_eating(t_philo *philo);
 void	start_sleeping(t_philo *philo);
 void	start_thinking(t_philo *philo);
 int		end_simulation(t_program *program);
-
 
 #endif

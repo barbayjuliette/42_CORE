@@ -6,11 +6,17 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 12:20:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 15:49:46 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	ft_error(char *message, t_program *program, t_philo *philos)
+{
+	printf("%s\n", message);
+	destroy_program(program, philos);
+}
 
 int	right_fork(t_philo *philo)
 {
@@ -31,15 +37,6 @@ int	all_enough_meals(t_philo *philos, t_program *program)
 	int	i;
 
 	i = 0;
-
-	// pthread_mutex_lock(program->sim_mutex);
-	// if (program->end_simulation)
-	// {
-	// 	pthread_mutex_unlock(program->sim_mutex);
-	// 	return (1);
-	// }
-	// pthread_mutex_unlock(program->sim_mutex);
-
 	if (program->max_meals == -1)
 		return (0);
 	pthread_mutex_lock(program->meals_mutex);
@@ -63,53 +60,6 @@ int	end_simulation(t_program *program)
 	ret = program->end_simulation;
 	pthread_mutex_unlock(program->sim_mutex);
 	return (ret);
-}
-
-// Checks both 
-//  - Meal condition
-//  - time_to_die
-// If one of the conditions is met, end_simulation = 1
-// Routine stopped
-// Actions stopped
-
-void	*monitor(void *arg)
-{
-	t_philo		*philos;
-	t_program	*program;
-	int			timestamp;
-	int			i;
-
-	philos = ((t_philo *)arg)->philos;
-	program = ((t_philo *)arg)->program;
-	while (!end_simulation(program))
-	{
-		i = 0;
-		if (all_enough_meals(philos, program))
-		{
-			pthread_mutex_lock(philos[i].program->sim_mutex);
-			philos[i].program->end_simulation = 1;
-			pthread_mutex_unlock(philos[i].program->sim_mutex);
-			return (arg);
-		}
-		while (i < program->total_philo)
-		{
-			if (!philo_is_full(&philos[i]))
-			{
-				timestamp = get_timestamp() - philos[i].program->timestamp_start;
-				if (timestamp - philos[i].last_meal > program->time_to_die)
-				{
-					print_message(program->print_mutex, timestamp, philos[i].index + 1, "died");
-					printf("Status: %d\n", philos[i].status);
-					pthread_mutex_lock(philos[i].program->sim_mutex);
-					philos[i].program->end_simulation = 1;
-					pthread_mutex_unlock(philos[i].program->sim_mutex);
-					return (arg);
-				}
-			}
-			i++;
-		}
-	}
-	return (arg);
 }
 
 int	philo_is_full(t_philo *philo)
@@ -141,7 +91,6 @@ void	*routine(void *arg)
 			if (philo->left_fork && right_fork(philo) && philo->status == 1)
 			{
 				take_two_forks(philo);
-				// pthread_mutex_unlock(philo->fork_mutex);
 				start_eating(philo);
 				start_sleeping(philo);
 				start_thinking(philo);
@@ -150,71 +99,6 @@ void	*routine(void *arg)
 				pthread_mutex_unlock(philo->fork_mutex);
 		}
 	}
-	// pthread_mutex_lock(philo->program->print_mutex);
-	// printf("all enough meals\n");
-	// pthread_mutex_unlock(philo->program->print_mutex);
 	return (arg);
 }
 
-void	create_threads(t_program *program)
-{
-	int				i;
-	t_philo			*philos;
-	pthread_mutex_t meals_mutex;
-	pthread_mutex_t print_mutex;
-	pthread_mutex_t sim_mutex;
-	pthread_t		th;
-
-	i = 0;
-	philos = malloc(sizeof(t_philo) * (program->total_philo + 1));
-	philos[program->total_philo].index = 0;
-	philos[program->total_philo].left_fork = 0;
-
-	// Initialize all the values
-	pthread_mutex_init(&meals_mutex, NULL);
-	pthread_mutex_init(&print_mutex, NULL);
-	pthread_mutex_init(&sim_mutex, NULL);
-	program->meals_mutex = &meals_mutex;
-	program->print_mutex = &print_mutex;
-	program->sim_mutex = &sim_mutex;
-	while (i < program->total_philo)
-	{
-		philos[i].fork_mutex = malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init(philos[i].fork_mutex, NULL);
-		philos[i].index = i;
-		philos[i].status = 1;
-		philos[i].dead = 0;
-		philos[i].left_fork = 1;
-		philos[i].total_meals = 0;
-		philos[i].is_full = 0;
-		philos[i].last_meal = 0;
-		philos[i].program = program;
-		philos[i].philos = philos;
-		i++;
-	}
-	// Detached thread
-	pthread_create(&th, NULL, &monitor,  &philos[0]);
-	pthread_detach(th);
-	
-	// program->timestamp_start = get_timestamp();
-	// Create threads
-	i = 0;
-	while (i < program->total_philo)
-	{
-		pthread_create(&philos[i].td, NULL, &routine, &philos[i]);
-		i++;
-	}
-	// Join the threads
-	i = 0;
-	while (i < program->total_philo)
-	{
-		pthread_join(philos[i].td, NULL);
-		pthread_mutex_destroy(philos[i].fork_mutex);
-		free(philos[i].fork_mutex);
-		i++;
-	}
-	free(philos);
-	pthread_mutex_destroy(&meals_mutex);
-	pthread_mutex_destroy(&print_mutex);
-	pthread_mutex_destroy(&sim_mutex);
-}
