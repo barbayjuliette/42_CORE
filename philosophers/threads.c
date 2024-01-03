@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 16:29:19 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:46:43 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*routine(void *arg)
 		if (!is_full(philo))
 		{
 			pthread_mutex_lock(philo->fork_mutex);
-			if (philo->left_fork && right_fork(philo) && philo->status == 1)
+			if (philo->left_fork && right_fork(philo))
 			{
 				take_two_forks(philo, philo->program);
 				start_eating(philo, philo->program);

@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 16:33:58 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:46:45 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	take_two_forks(t_philo *philo, t_program *prog)
 	pthread_mutex_unlock(philo->fork_mutex);
 	timestamp = get_timestamp() - prog->timestamp_start;
 	print_message(prog->print_mutex, timestamp, philo->index, msg);
-	philo->status = 2;
 }
 
 void	start_eating(t_philo *philo, t_program *prog)
@@ -46,7 +45,6 @@ void	start_eating(t_philo *philo, t_program *prog)
 	if (end_simulation(prog))
 		return ;
 	timestamp = get_timestamp() - prog->timestamp_start;
-	philo->status = 3;
 	print_message(prog->print_mutex, timestamp, philo->index, "is eating");
 	philo->last_meal = timestamp;
 	philo->total_meals++;
@@ -67,7 +65,6 @@ void	start_sleeping(t_philo *philo, t_program *prog)
 	if (end_simulation(prog))
 		return ;
 	timestamp = get_timestamp() - prog->timestamp_start;
-	philo->status = 4;
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = prog->total_philo - 1;
@@ -86,7 +83,6 @@ void	start_thinking(t_philo *philo, t_program *prog)
 	if (end_simulation(prog))
 		return ;
 	timestamp = get_timestamp() - prog->timestamp_start;
-	philo->status = 1;
 	print_message(prog->print_mutex, timestamp, philo->index, "is thinking");
 	if (prog->total_philo % 2 == 1)
 		ft_usleep(1);

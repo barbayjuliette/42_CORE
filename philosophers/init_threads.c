@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:11:16 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 15:47:44 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:46:27 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	initialize_philos(t_program *program, t_philo *philos)
 		philos[i].fork_mutex = malloc(sizeof(pthread_mutex_t));
 		pthread_mutex_init(philos[i].fork_mutex, NULL);
 		philos[i].index = i;
-		philos[i].status = 1;
 		philos[i].dead = 0;
 		philos[i].left_fork = 1;
 		philos[i].total_meals = 0;

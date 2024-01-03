@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 16:40:50 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:46:41 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_philo
 {
 	pthread_t		td;
 	int				index;
-	int				status;
 	int				left_fork;
 	int				total_meals;
 	int				is_full;
@@ -50,13 +49,6 @@ typedef struct s_philo
 	struct s_philo	*philos;
 	t_program		*program;
 }	t_philo;
-
-// Statuses:
-//  1: Think
-//  2: Take a fork
-//  3: Eat
-//  4: Sleep
-//  5: Dying
 
 // Helpers
 int		ft_atoi(char *str);
