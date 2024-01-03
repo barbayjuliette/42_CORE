@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 16:46:41 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:00:48 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdlib.h>
-
-# define ENOUGH_MEALS 2
 
 typedef struct s_program
 {
@@ -70,7 +68,7 @@ void	set_end_simulation(t_program *program);
 
 // Init Threads
 void	create_threads(t_program *program);
-void	initialize_philos(t_program *program, t_philo *philos);
+int	initialize_philos(t_program *program, t_philo *philos);
 int		start_threads(t_program *program, t_philo *philos);
 int		join_threads(t_program *program, t_philo *philos);
 void	destroy_program(t_program *program, t_philo *philos);
