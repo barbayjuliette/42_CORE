@@ -6,22 +6,11 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:30:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 16:45:16 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:38:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-// int	check_end_simulation(t_program *program)
-// {
-// 	pthread_mutex_lock(program->sim_mutex);
-// 	if (program->end_simulation)
-// 	{
-// 		pthread_mutex_unlock(program->sim_mutex);
-// 		return (1);
-// 	}
-// 	pthread_mutex_unlock(program->sim_mutex);
-// }
 
 void	take_two_forks(t_philo *philo)
 {
@@ -29,24 +18,26 @@ void	take_two_forks(t_philo *philo)
 	int	timestamp;
 
 	if (end_simulation(philo->program))
+	{
+		pthread_mutex_unlock(philo->fork_mutex);
 		return ;
+	}
 	i = (philo->index) - 1;
 	if (i < 0)
 		i = philo->program->total_philo - 1;
-	pthread_mutex_lock(philo->fork_mutex);
 	(philo->philos)[i].left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
+	
 	timestamp = get_timestamp() - philo->program->timestamp_start;
-	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%d %d has taken a fork\n", timestamp, philo->index + 1);
-	pthread_mutex_unlock(philo->program->print_mutex);
+	print_message(philo->program->print_mutex, timestamp, philo->index + 1, "has taken a fork");
+
 	pthread_mutex_lock(philo->fork_mutex);
 	philo->left_fork = 0;
 	pthread_mutex_unlock(philo->fork_mutex);
+	
 	timestamp = get_timestamp() - philo->program->timestamp_start;
-	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%d %d has taken a fork\n", timestamp, philo->index + 1);
-	pthread_mutex_unlock(philo->program->print_mutex);
+	print_message(philo->program->print_mutex, timestamp, philo->index + 1, "has taken a fork");
+	
 	philo->status = 2;
 }
 
@@ -59,12 +50,9 @@ void	start_eating(t_philo *philo)
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 3;
 
-	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%d %d is eating\n", timestamp, philo->index + 1);
-	pthread_mutex_unlock(philo->program->print_mutex);
+	print_message(philo->program->print_mutex, timestamp, philo->index + 1, "is eating");
 
 	philo->last_meal = timestamp;
-	ft_usleep(philo->program->time_to_eat);
 	philo->total_meals++;
 	if (philo->total_meals == philo->program->max_meals)
 	{
@@ -72,6 +60,7 @@ void	start_eating(t_philo *philo)
 		philo->is_full = 1;
 		pthread_mutex_unlock(philo->program->meals_mutex);
 	}
+	ft_usleep(philo->program->time_to_eat);
 }
 
 void	start_sleeping(t_philo *philo)
@@ -90,9 +79,7 @@ void	start_sleeping(t_philo *philo)
 	(philo->philos)[i].left_fork = 1;
 	philo->left_fork = 1;
 	pthread_mutex_unlock(philo->fork_mutex);
-	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%d %d is sleeping\n", timestamp, philo->index + 1);
-	pthread_mutex_unlock(philo->program->print_mutex);
+	print_message(philo->program->print_mutex, timestamp, philo->index + 1, "is sleeping");
 	ft_usleep(philo->program->time_to_sleep);
 }
 
@@ -104,7 +91,7 @@ void	start_thinking(t_philo *philo)
 		return ;
 	timestamp = get_timestamp() - philo->program->timestamp_start;
 	philo->status = 1;
-	pthread_mutex_lock(philo->program->print_mutex);
-	printf("%d %d is thinking\n", timestamp, philo->index + 1);
-	pthread_mutex_unlock(philo->program->print_mutex);
+	print_message(philo->program->print_mutex, timestamp, philo->index + 1, "is thinking");
+	if (philo->program->total_philo % 2 == 1)
+		ft_usleep(1);
 }

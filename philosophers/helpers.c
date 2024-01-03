@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:06:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 13:56:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 10:58:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,11 @@ int	ft_usleep(size_t milliseconds)
 	while ((get_timestamp() - start) < milliseconds)
 		usleep(500);
 	return (0);
+}
+
+void	print_message(pthread_mutex_t *mutex, int timestamp, int id, char *message)
+{
+	pthread_mutex_lock(mutex);
+	printf("%d %d %s\n", timestamp, id, message);
+	pthread_mutex_unlock(mutex);
 }

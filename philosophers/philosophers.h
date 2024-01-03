@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 16:38:12 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 12:19:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ typedef	struct s_philo
 //  4: Sleep
 //  5: Dying
 
-
-
 // Helpers
 int		ft_atoi(char *str);
 int		ft_usleep(size_t milliseconds);
@@ -78,6 +76,7 @@ void	*is_dying(void *arg);
 // Thread helpers
 int		right_fork(t_philo *philo);
 int		philo_is_full(t_philo *philo);
+void	print_message(pthread_mutex_t *mutex, int timestamp, int id, char *string);
 
 // Actions
 void	take_two_forks(t_philo *philo);

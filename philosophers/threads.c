@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 16:41:36 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 12:20:11 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ int	all_enough_meals(t_philo *philos, t_program *program)
 
 	i = 0;
 
-	pthread_mutex_lock(program->sim_mutex);
-	if (program->end_simulation)
-	{
-		pthread_mutex_unlock(program->sim_mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(program->sim_mutex);
+	// pthread_mutex_lock(program->sim_mutex);
+	// if (program->end_simulation)
+	// {
+	// 	pthread_mutex_unlock(program->sim_mutex);
+	// 	return (1);
+	// }
+	// pthread_mutex_unlock(program->sim_mutex);
 
 	if (program->max_meals == -1)
 		return (0);
-	
 	pthread_mutex_lock(program->meals_mutex);
 	while (i < program->total_philo)
 	{
@@ -66,7 +65,14 @@ int	end_simulation(t_program *program)
 	return (ret);
 }
 
-void	*is_dying(void *arg)
+// Checks both 
+//  - Meal condition
+//  - time_to_die
+// If one of the conditions is met, end_simulation = 1
+// Routine stopped
+// Actions stopped
+
+void	*monitor(void *arg)
 {
 	t_philo		*philos;
 	t_program	*program;
@@ -78,6 +84,13 @@ void	*is_dying(void *arg)
 	while (!end_simulation(program))
 	{
 		i = 0;
+		if (all_enough_meals(philos, program))
+		{
+			pthread_mutex_lock(philos[i].program->sim_mutex);
+			philos[i].program->end_simulation = 1;
+			pthread_mutex_unlock(philos[i].program->sim_mutex);
+			return (arg);
+		}
 		while (i < program->total_philo)
 		{
 			if (!philo_is_full(&philos[i]))
@@ -85,10 +98,8 @@ void	*is_dying(void *arg)
 				timestamp = get_timestamp() - philos[i].program->timestamp_start;
 				if (timestamp - philos[i].last_meal > program->time_to_die)
 				{
-					pthread_mutex_lock(philos[i].program->print_mutex);
-					printf("%d %d died\n", timestamp, philos[i].index + 1);
-					pthread_mutex_unlock(philos[i].program->print_mutex);
-
+					print_message(program->print_mutex, timestamp, philos[i].index + 1, "died");
+					printf("Status: %d\n", philos[i].status);
 					pthread_mutex_lock(philos[i].program->sim_mutex);
 					philos[i].program->end_simulation = 1;
 					pthread_mutex_unlock(philos[i].program->sim_mutex);
@@ -120,15 +131,17 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (!all_enough_meals(philo->philos, philo->program))
+	if ((philo->index + 1) % 2 == 0)
+		ft_usleep(50);
+	while (!end_simulation(philo->program))
 	{
 		if (!philo_is_full(philo))
 		{
 			pthread_mutex_lock(philo->fork_mutex);
 			if (philo->left_fork && right_fork(philo) && philo->status == 1)
 			{
-				pthread_mutex_unlock(philo->fork_mutex);
 				take_two_forks(philo);
+				// pthread_mutex_unlock(philo->fork_mutex);
 				start_eating(philo);
 				start_sleeping(philo);
 				start_thinking(philo);
@@ -174,15 +187,16 @@ void	create_threads(t_program *program)
 		philos[i].left_fork = 1;
 		philos[i].total_meals = 0;
 		philos[i].is_full = 0;
-		philos[i].last_meal = 0; // Change timestamp to more recent
+		philos[i].last_meal = 0;
 		philos[i].program = program;
 		philos[i].philos = philos;
 		i++;
 	}
 	// Detached thread
-	pthread_create(&th, NULL, &is_dying,  &philos[0]);
+	pthread_create(&th, NULL, &monitor,  &philos[0]);
 	pthread_detach(th);
 	
+	// program->timestamp_start = get_timestamp();
 	// Create threads
 	i = 0;
 	while (i < program->total_philo)
