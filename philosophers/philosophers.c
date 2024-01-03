@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:37 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/02 17:57:23 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:42:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	valid_input(char *argv[], int argc)
 
 	if (!(argc == 6 || argc == 5))
 	{
-		printf("Error\nRun as follow: ./philo num_of_philo time_to_die time_to_eat"
-		"time_to_sleep [num_of_times_each_philo_must_eat]\n");
+		printf("Error\nRun as follow: ./philo num_of_philo "
+			"time_to_die time_to_eat "
+			"time_to_sleep [num_of_times_each_philo_must_eat]\n");
 		return (0);
 	}
 	i = 1;
@@ -37,7 +38,7 @@ int	valid_input(char *argv[], int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_program program;
+	t_program	program;
 
 	if (!valid_input(argv, argc))
 		return (1);

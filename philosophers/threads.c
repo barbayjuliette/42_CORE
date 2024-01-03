@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 15:49:46 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:29:19 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,17 @@ int	right_fork(t_philo *philo)
 	return (fork);
 }
 
-int	all_enough_meals(t_philo *philos, t_program *program)
-{
-	int	i;
-
-	i = 0;
-	if (program->max_meals == -1)
-		return (0);
-	pthread_mutex_lock(program->meals_mutex);
-	while (i < program->total_philo)
-	{
-		if (!philos[i].is_full)
-		{
-			pthread_mutex_unlock(program->meals_mutex);
-			return (0);
-		}
-		i++;
-	}
-	pthread_mutex_unlock(program->meals_mutex);
-	return (1);
-}
-
 int	end_simulation(t_program *program)
-{	
+{
 	int	ret;
+
 	pthread_mutex_lock(program->sim_mutex);
 	ret = program->end_simulation;
 	pthread_mutex_unlock(program->sim_mutex);
 	return (ret);
 }
 
-int	philo_is_full(t_philo *philo)
+int	is_full(t_philo *philo)
 {
 	if (philo->program->max_meals == -1)
 		return (0);
@@ -85,15 +65,15 @@ void	*routine(void *arg)
 		ft_usleep(50);
 	while (!end_simulation(philo->program))
 	{
-		if (!philo_is_full(philo))
+		if (!is_full(philo))
 		{
 			pthread_mutex_lock(philo->fork_mutex);
 			if (philo->left_fork && right_fork(philo) && philo->status == 1)
 			{
-				take_two_forks(philo);
-				start_eating(philo);
-				start_sleeping(philo);
-				start_thinking(philo);
+				take_two_forks(philo, philo->program);
+				start_eating(philo, philo->program);
+				start_sleeping(philo, philo->program);
+				start_thinking(philo, philo->program);
 			}
 			else
 				pthread_mutex_unlock(philo->fork_mutex);
@@ -101,4 +81,3 @@ void	*routine(void *arg)
 	}
 	return (arg);
 }
-
