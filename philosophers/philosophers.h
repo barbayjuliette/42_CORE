@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:45:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 17:00:48 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:30:56 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,22 @@ int		valid_input(char *argv[], int argc);
 
 // Threads
 void	*routine(void *arg);
-int		all_enough_meals(t_philo *philos, t_program *program);
+int		right_fork(t_philo *philo);
+int		is_full(t_philo *philo);
+void	print_message(pthread_mutex_t *mutex, int timestamp, int id, char *msg);
 
 // Monitoring thread
 void	*monitor(void *arg);
+int		all_enough_meals(t_philo *philos, t_program *program);
 int		philo_dies(t_program *p, t_philo *philos);
 void	set_end_simulation(t_program *program);
 
 // Init Threads
 void	create_threads(t_program *program);
-int	initialize_philos(t_program *program, t_philo *philos);
+int		initialize_philos(t_program *program, t_philo *philos);
 int		start_threads(t_program *program, t_philo *philos);
 int		join_threads(t_program *program, t_philo *philos);
 void	destroy_program(t_program *program, t_philo *philos);
-
-// Thread helpers
-int		right_fork(t_philo *philo);
-int		is_full(t_philo *philo);
-void	print_message(pthread_mutex_t *mutex, int timestamp, int id, char *msg);
 
 // Actions
 void	take_two_forks(t_philo *philo, t_program *prog);
