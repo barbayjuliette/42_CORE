@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:42:37 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 19:10:17 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:42:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	valid_input(char *argv[], int argc)
 
 	if (!(argc == 6 || argc == 5))
 	{
-		printf("Error\nRun as follow: ./philo num_of_philo time_to_die time_to_eat"
-		"time_to_sleep [num_of_times_each_philo_must_eat]\n");
+		printf("Error\nRun as follow: ./philo num_of_philo "
+			"time_to_die time_to_eat "
+			"time_to_sleep [num_of_times_each_philo_must_eat]\n");
 		return (0);
 	}
 	i = 1;
@@ -37,7 +38,7 @@ int	valid_input(char *argv[], int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_program program;
+	t_program	program;
 
 	if (!valid_input(argv, argc))
 		return (1);
@@ -47,7 +48,10 @@ int	main(int argc, char *argv[])
 	program.time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		program.max_meals = ft_atoi(argv[5]);
+	else
+		program.max_meals = -1;
 	program.timestamp_start = get_timestamp();
+	program.end_simulation = 0;
 	create_threads(&program);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:06:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/15 19:15:29 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:35:52 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	ft_atoi(char *str)
 	return (sign * num);
 }
 
-unsigned long	get_timestamp()
+size_t	get_timestamp(void)
 {
-	unsigned long	timestamp;
-	struct	timeval time;
+	size_t			timestamp;
+	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	timestamp = time.tv_sec * 1000 + time.tv_usec / 1000;
@@ -63,4 +63,11 @@ int	ft_usleep(size_t milliseconds)
 	while ((get_timestamp() - start) < milliseconds)
 		usleep(500);
 	return (0);
+}
+
+void	print_message(pthread_mutex_t *mutex, int timestamp, int id, char *msg)
+{
+	pthread_mutex_lock(mutex);
+	printf("%d %d %s\n", timestamp, id + 1, msg);
+	pthread_mutex_unlock(mutex);
 }
