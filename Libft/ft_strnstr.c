@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 12:11:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/06 12:11:20 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/16 21:55:39 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "stdio.h"
+
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
@@ -31,9 +32,9 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		return (NULL);
 }
 
-int main(int argc, char const *argv[])
-{
-	char *ptr = ft_strnstr("helloyoux", "you",  10);
-	printf("Pointer: %s", ptr);
-	return 0;
-}
+// int main(int argc, char const *argv[])
+// {
+// 	char *ptr = ft_strnstr("helloyoux", "you",  10);
+// 	printf("Pointer: %s", ptr);
+// 	return 0;
+// }
