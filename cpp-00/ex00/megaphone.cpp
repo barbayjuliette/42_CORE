@@ -21,9 +21,7 @@ int main(int argc, char *argv[])
 			cout << (char)toupper(argv[i][j]);
 			j++;
 		}
-		// if (i != argc - 1)
-		// 	cout << " ";
-		++i;
+		i++;;
 	}
 	cout << endl;
 	return (0);
