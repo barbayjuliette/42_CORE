@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 12:11:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/06 12:11:20 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/16 21:55:39 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "stdio.h"
+
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	*ptr;
-	size_t	i;
-	size_t	j;
+		int	i;
+		int	needle_length;
 
-	i = 0;
-	j = 0;
-	ptr = NULL;
-	while (haystack[i] && needle[j] && i < len)
-	{
-		if (haystack[i] == needle[j])
+		if (*needle == '\0')
+			return ((char *)haystack);
+		i = 0;
+		needle_length = ft_strlen(needle);
+		while (haystack[i] && i + needle_length <= len)
 		{
-			j++;
+			if (ft_strncmp(haystack + i, needle, needle_length) == 0)
+				return ((char *)haystack + i);
 			i++;
 		}
-		else
-		{
-			if (j == 0)
-				i++;
-			else
-				j = 0;
-		}
-	}
-	if (!needle[j])
-		ptr = (char *)&haystack[i - j];
-	return (ptr);
+		return (NULL);
 }
+
+// int main(int argc, char const *argv[])
+// {
+// 	char *ptr = ft_strnstr("helloyoux", "you",  10);
+// 	printf("Pointer: %s", ptr);
+// 	return 0;
+// }

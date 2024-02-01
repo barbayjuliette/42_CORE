@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:40:31 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/06 17:40:36 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/16 21:54:56 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,21 @@ static int	get_length_word(char const *str, char c)
 	return (length);
 }
 
-static char	*get_word(char const *str, char c)
+char	*free_strings(char **strings)
+{
+	int i;
+
+	i = 0;
+	while (strings[i])
+	{
+		free(strings[i]);
+		i++;
+	}
+	free(strings);
+	return (NULL);
+}
+
+static char	*get_word(char const *str, char c, char **strings)
 {
 	int		i;
 	char	*word;
@@ -51,9 +65,9 @@ static char	*get_word(char const *str, char c)
 
 	length = get_length_word(str, c);
 	word = (char *)malloc((length + 1) * sizeof(char));
-	i = 0;
 	if (!word)
 		return (NULL);
+	i = 0;
 	while (i < length)
 	{
 		word[i] = str[i];
@@ -80,7 +94,8 @@ char	**ft_split(char const *s, char c)
 			s++;
 		else
 		{
-			strings[j] = get_word(s, c);
+			if (!(strings[j] = get_word(s, c, strings)))
+				return (free_strings(strings));
 			s = s + get_length_word(s, c);
 			j++;
 		}
@@ -95,8 +110,8 @@ char	**ft_split(char const *s, char c)
 // 	char **strings;
 
 // 	i = 0;
-// strings = ft_split("hello how are you", ' ');
-	// while (strings[i])
+// 	strings = ft_split("hello how are you", ' ');
+// 	while (strings[i])
 // 	{
 // 		ft_putstr_fd(strings[i], 1);
 // 		free(strings[i]);
