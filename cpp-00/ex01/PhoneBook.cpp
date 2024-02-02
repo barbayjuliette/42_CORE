@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:32:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 17:51:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:37:02 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,25 @@ PhoneBook::~PhoneBook(void)
 	// cout << "Deconstructor Phonebook called" << endl;
 }
 
+void	push_contacts(Contact contacts[])
+{
+	int i = 0;
+	
+	while (i < 7)
+	{
+		contacts[i] = contacts[i + 1];
+		i++;
+	}
+
+}
+
 void	PhoneBook::add_contact(Contact new_contact)
 {
 	if (total_contacts == 8)
-		this->contacts[0] = new_contact;
+	{
+		push_contacts(this->contacts);
+		this->contacts[7] = new_contact;
+	}
 	else
 	{
 		this->contacts[this->total_contacts] = new_contact;
@@ -56,24 +71,24 @@ void	display_column(string data)
 	}
 }
 
-void	display_contact(void)
+void	display_contact(int total_contacts, Contact contacts[])
 {
 	int	i;
 
 	cout << "Enter the index of the contact you want to display\n";
 	cin >> i;
-	while (i < 0 || i >= this->total_contacts || cin.fail())
+	while (i < 0 || i >= total_contacts || cin.fail())
 	{
 		cout << "Please enter a valid index number\n";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cin >> i;
 	}
-	cout << endl << "First name: " << this->contacts[i].first_name << endl;
-	cout << "Last name: " << this->contacts[i].last_name << endl;
-	cout << "Nickname: " << this->contacts[i].nickname << endl;
-	cout << "Phone number: " << this->contacts[i].phone_number << endl;
-	cout << "Darkest secret: " << this->contacts[i].darkest_secret << endl;
+	cout << endl << "First name: " << contacts[i].first_name << endl;
+	cout << "Last name: " << contacts[i].last_name << endl;
+	cout << "Nickname: " << contacts[i].nickname << endl;
+	cout << "Phone number: " << contacts[i].phone_number << endl;
+	cout << "Darkest secret: " << contacts[i].darkest_secret << endl;
 }
 
 void	PhoneBook::search(void)
@@ -98,5 +113,5 @@ void	PhoneBook::search(void)
 		cout << endl;
 		i++;
 	}
-	display_contact();
+	display_contact(this->total_contacts, this->contacts);
 }
