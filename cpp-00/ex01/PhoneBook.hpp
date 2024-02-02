@@ -10,10 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
+
 #include <iostream>
+#include "Contact.hpp"
 using namespace std;
 
 class PhoneBook
 {
+	public:
+		Contact contacts[8];
+		int	total_contacts;
 
+		PhoneBook(void);
+		~PhoneBook(void);
+		void add_contact(Contact new_contact);
+		void search(void);
 };
+
+#endif
