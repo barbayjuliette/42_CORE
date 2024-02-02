@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:28:58 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 17:42:25 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:53:11 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int main(void)
 	string input;
 
 	PhoneBook my_phone_book;
-	Contact contact1("Juliette", "Barbay", "Juju", "80443702", "Secret");
-	Contact contact2("Alejandro", "Zamudio Guajardo", "Alex", "80445737", "Secret");
-	my_phone_book.add_contact(contact1);
-	my_phone_book.add_contact(contact2);
+	// Contact contact1("Juliette", "Barbay", "Juju", "80443702", "Secret");
+	// Contact contact2("Alejandro", "Zamudio Guajardo", "Alex", "80445737", "Secret");
+	// my_phone_book.add_contact(contact1);
+	// my_phone_book.add_contact(contact2);
 	cout << "Welcome to your Phonebook\n";
 	while (1)
 	{

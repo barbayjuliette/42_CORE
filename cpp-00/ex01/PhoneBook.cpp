@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:32:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 17:45:33 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:51:43 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ void	display_column(string data)
 	}
 }
 
+void	display_contact(void)
+{
+	int	i;
+
+	cout << "Enter the index of the contact you want to display\n";
+	cin >> i;
+	while (i < 0 || i >= this->total_contacts || cin.fail())
+	{
+		cout << "Please enter a valid index number\n";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cin >> i;
+	}
+	cout << endl << "First name: " << this->contacts[i].first_name << endl;
+	cout << "Last name: " << this->contacts[i].last_name << endl;
+	cout << "Nickname: " << this->contacts[i].nickname << endl;
+	cout << "Phone number: " << this->contacts[i].phone_number << endl;
+	cout << "Darkest secret: " << this->contacts[i].darkest_secret << endl;
+}
+
 void	PhoneBook::search(void)
 {
 	int	i = 0;
@@ -78,18 +98,5 @@ void	PhoneBook::search(void)
 		cout << endl;
 		i++;
 	}
-	cout << "Enter the index of the contact you want to display\n";
-	cin >> i;
-	while (i < 0 || i >= this->total_contacts || cin.fail())
-	{
-		cout << "Please enter a valid index number\n";
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cin >> i;
-	}
-	cout << endl << "First name: " << this->contacts[i].first_name << endl;
-	cout << "Last name: " << this->contacts[i].last_name << endl;
-	cout << "Nickname: " << this->contacts[i].nickname << endl;
-	cout << "Phone number: " << this->contacts[i].phone_number << endl;
-	cout << "Darkest secret: " << this->contacts[i].darkest_secret << endl;
+	display_contact();
 }
