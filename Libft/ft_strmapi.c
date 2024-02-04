@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 13:48:06 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/07 13:48:12 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/04 18:28:58 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Applies the function ’f’ to each character of the
+// string ’s’, and passing its index as first argument
+// to create a new string (with malloc(3)) resulting
+// from successive applications of ’f’.
 
 #include "libft.h"
 
@@ -39,7 +44,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 }
 
 // int	main(void)
-// {	
+// {
 // 	char	*string;
 
 // 	string = ft_strmapi("hello", f);

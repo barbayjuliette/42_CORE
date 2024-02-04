@@ -6,9 +6,14 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:40:31 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/16 21:54:56 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/04 18:28:20 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Allocates (with malloc(3)) and returns an array
+// of strings obtained by splitting ’s’ using the
+// character ’c’ as a delimiter. The array must end
+// with a NULL pointer
 
 #include "libft.h"
 
@@ -43,9 +48,9 @@ static int	get_length_word(char const *str, char c)
 	return (length);
 }
 
-char	*free_strings(char **strings)
+static char	**free_strings(char **strings)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (strings[i])
@@ -57,7 +62,7 @@ char	*free_strings(char **strings)
 	return (NULL);
 }
 
-static char	*get_word(char const *str, char c, char **strings)
+static char	*get_word(char const *str, char c)
 {
 	int		i;
 	char	*word;
@@ -94,7 +99,8 @@ char	**ft_split(char const *s, char c)
 			s++;
 		else
 		{
-			if (!(strings[j] = get_word(s, c, strings)))
+			strings[j] = get_word(s, c);
+			if (!strings[j])
 				return (free_strings(strings));
 			s = s + get_length_word(s, c);
 			j++;
