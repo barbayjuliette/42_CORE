@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 13:46:46 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/10/18 18:20:08 by jbarbay          ###   ########.fr       */
+/*   Created: 2023/12/14 10:21:20 by jbarbay           #+#    #+#             */
+/*   Updated: 2023/12/14 13:52:34 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 100
 # endif
 
 # include <fcntl.h>
@@ -23,16 +23,12 @@
 # include <stddef.h>
 # include <stdio.h>
 
-int		ft_slen(char *string);
-void	ft_strjoin(char **s1, char *s2);
-void	ft_substr(char **s, unsigned int start, size_t len, size_t i);
-int		has_new_line(char *buffer);
-char	*get_one_line(char *rem, int size);
+int	ft_strlcpy(char *dest, char *src, int destsize);
+char	*ft_strchr(char *str, int c);
+int		ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
-char	*ft_strdup(char *s1);
-void	*ft_calloc(size_t size);
-char	*ft_free(char **buffer);
-int		read_file(char **rem, char **buffer, int fd);
-char	*free_static(char **rem, char **buff);
+char	*update_rem(char *rem);
+char	*get_one_line(char *rem);
 
 #endif
