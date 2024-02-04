@@ -16,5 +16,3 @@ malloc, free, write, va_start, va_arg, va_copy, va_end
 
 This was a fun project that taught me about variadic functions. 
 It also allowed me to have a deeper understanding of the original printf.
-
-For our second exam, I had to recode this function without any help.
