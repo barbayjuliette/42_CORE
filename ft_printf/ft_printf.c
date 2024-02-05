@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:18:14 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/12 15:18:22 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:01:18 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	check_letter_conversion(char format, va_list ptr)
+void	check_letter_conversion(char format, va_list *ptr, int *count)
 {
 	if (format == 'i' || format == 'd')
-		return (ft_process_int(va_arg(ptr, int)));
+		put_nbr_base(va_arg(*ptr, int), 10, "0123456789", count);
 	else if (format == 'u')
-		return (ft_process_unsigned_int(va_arg(ptr, unsigned)));
+		put_nbr_base(va_arg(*ptr, unsigned), 10, "0123456789", count);
 	else if (format == 'c')
-		return (ft_putchar_fd(va_arg(ptr, int), 1));
+		ft_putchar(va_arg(*ptr, int), count);
 	else if (format == 's')
-		return (ft_process_str(va_arg(ptr, char *)));
+		ft_process_str(va_arg(*ptr, char *), count);
 	else if (format == 'x')
-		return (ft_puthexa(va_arg(ptr, unsigned int)));
+		put_nbr_base(va_arg(*ptr, unsigned int), 16, "0123456789abcdef", count);
 	else if (format == 'X')
-		return (ft_puthexa_upcase(va_arg(ptr, unsigned int)));
+		put_nbr_base(va_arg(*ptr, unsigned int), 16, "0123456789ABCDEF", count);
 	else if (format == '%')
-		return (ft_putchar_fd('%', 1));
+		ft_putchar('%', count);
 	else if (format == 'p')
-		return (ft_putptr(va_arg(ptr, unsigned long)));
+		ft_putptr(va_arg(*ptr, unsigned long), count);
 	else
-		return (ft_putchar_fd(format, 1));
+		ft_putchar(format, count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -47,12 +47,12 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			count += check_letter_conversion(format[i + 1], ptr);
+			check_letter_conversion(format[i + 1], &ptr, &count);
 			i += 2;
 		}
 		else
 		{
-			count += ft_putchar_fd(format[i], 1);
+			ft_putchar(format[i], &count);
 			i++;
 		}
 	}
@@ -81,5 +81,15 @@ int	ft_printf(const char *format, ...)
 // 	ft_printf("Return value: %d\n", count);
 // 	ft_printf("Expected return value: %d\n", printf("Character: %c\n", 'x'));
 // 	ft_printf("Return value: %d\n", ft_printf("hello %w world\n", 5));
+
+// 	printf(" %c %c %c ", '0', 0, '1');
+// 	printf("\n");
+// 	ft_printf(" %c %c %c ", '0', 0, '1');
+// 	printf("Expected return value: %d\n", printf(" %c %c %c ", '0', 0, '1'));
+// 	printf("Return value: %d\n", ft_printf(" %c %c %c ", '0', 0, '1'));
+
+// 	printf(" %c %c %c ", '1', '2', '3');
+// 		printf("\n");
+// 	ft_printf(" %c %c %c ", '1', '2', '3');
 // 	return (0);
 // }

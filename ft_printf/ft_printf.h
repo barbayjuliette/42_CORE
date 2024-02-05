@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:07:02 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/10/10 11:07:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:03:40 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,14 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+// # include <stdio.h>
 
-int			ft_process_int(int num);
 int			ft_printf(const char *format, ...);
-void		ft_put_unsigned_fd(unsigned int n, int fd);
-int			ft_putchar_fd(char c, int fd);
-void		ft_putnbr_fd(int n, int fd);
-int			ft_putstr_fd(char *s, int fd);
-int			get_length_num(long num);
-int			ft_puthexa(unsigned long int n);
-int			ft_puthexa_upcase(unsigned long int n);
-int			ft_putptr(unsigned long num);
-int			get_length_unsigned(unsigned int num);
-int			ft_count_n_hexa(unsigned long int n);
-int			ft_process_unsigned_int(int num);
-int			ft_process_str(char *str);
-int			check_letter_conversion(char format, va_list ptr);
+void		ft_putchar(char c, int *count);
+void		ft_putstr(char *s, int *count);
+void		ft_putptr(unsigned int num, int *count);
+void		ft_process_str(char *str, int *count);
+void		check_letter_conversion(char format, va_list *ptr, int *count);
+void		put_nbr_base(long long int num, int len, char *base, int *count);
 
 #endif
