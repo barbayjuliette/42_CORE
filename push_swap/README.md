@@ -47,7 +47,7 @@ The last element becomes the first one.
 
 # My approach
 
-After looking into radix sort and otehr sorting algorithms, I finally decided to use the Turk algorithm, as described in this Medium [article](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)
+After looking into radix sort and other sorting algorithms, I finally decided to use the Turk algorithm, as described in this Medium [article](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)
 
 I first started by parsing and validating the data, the sorting algorithms for small stacks, then implemented my own version of the Turk algorithm, adding some improvements.
 
@@ -64,11 +64,14 @@ sa
 pa
 pa
 pa
+
 ./push_swap 0 one 2 3
 Error
 
 A binary is also provided for testing.
+
 ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
 6
+
 $>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_OS $ARG
 OK
