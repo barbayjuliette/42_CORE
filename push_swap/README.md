@@ -3,7 +3,7 @@
 This project is about sorting algorithms.
 My program calculates and displays on the standard output the smallest program that sorts the integers received as arguments, based on the push swap language instructions.
 
-# The rules
+## The rules
 
 You have 2 stacks named a and b.
 
@@ -45,7 +45,7 @@ The last element becomes the first one.
 
 **rrr** : rra and rrb at the same time.
 
-# My approach
+## My approach
 
 After looking into radix sort and other sorting algorithms, I finally decided to use the Turk algorithm, as described in this Medium [article](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)
 
@@ -53,7 +53,7 @@ I first started by parsing and validating the data, the sorting algorithms for s
 
 My algorithms was highly effective as it used a very small amount of instructions, and got the maximum score, based on the number of instructions.
 
-# Testing
+## Testing
 
 ./push_swap 2 1 3 6 5 8
 
