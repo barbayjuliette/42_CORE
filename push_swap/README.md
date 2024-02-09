@@ -56,6 +56,7 @@ My algorithms was highly effective as it used a very small amount of instruction
 # Testing
 
 ./push_swap 2 1 3 6 5 8
+
 sa
 pb
 pb
@@ -66,6 +67,7 @@ pa
 pa
 
 ./push_swap 0 one 2 3
+
 Error
 
 A binary is also provided for testing.
