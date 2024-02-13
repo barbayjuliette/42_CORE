@@ -42,6 +42,8 @@ You will find maps in the maps folder.
 
 ## How to play
 
+Currently, the game is only compatible with Linux.
+
 • make
 
 • ./so_long maps/map.ber
