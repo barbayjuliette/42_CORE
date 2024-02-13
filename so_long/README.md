@@ -34,6 +34,8 @@ P for the player’s starting position.
 • The map must contain 1 exit, at least 1 collectible, and 1 starting position to
 be valid.
 
+• The map must be rectangular
+
 • There must be a valid pass that allows the user to get all collectibles and then exit.
 
 If one of the conditions is not met, an error message will be displayed.
