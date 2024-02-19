@@ -6,12 +6,13 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:32:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/15 15:43:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:44:09 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <limits>
+#include <stdlib.h>
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
@@ -68,27 +69,29 @@ void	display_column(std::string data)
 	}
 }
 
-void	display_contact(int total_contacts, Contact contacts[])
+void	display_contact(int total_contacts, const Contact contacts[])
 {
-	int	i;
+	int			i;
+	std::string	str;
 
 	std::cout << "Enter the index of the contact you want to display\n";
-	std::cin >> i;
-	while (i < 0 || i >= total_contacts || std::cin.fail())
+	std::getline(std::cin, str);
+	i = std::atoi(str.c_str());
+
+	while (i < 0 || i >= total_contacts || (i == 0 && str != "0"))
 	{
 		std::cout << "Please enter a valid index number\n";
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cin >> i;
+		std::getline(std::cin, str);
+		i = std::atoi(str.c_str());
 	}
-	std::cout << std::endl << "First name: " << contacts[i].first_name << std::endl;
-	std::cout << "Last name: " << contacts[i].last_name << std::endl;
-	std::cout << "Nickname: " << contacts[i].nickname << std::endl;
-	std::cout << "Phone number: " << contacts[i].phone_number << std::endl;
-	std::cout << "Darkest secret: " << contacts[i].darkest_secret << std::endl;
+	std::cout << std::endl << "First name: " << contacts[i].get_first_name() << std::endl;
+	std::cout << "Last name: " << contacts[i].get_last_name() << std::endl;
+	std::cout << "Nickname: " << contacts[i].get_nickname() << std::endl;
+	std::cout << "Phone number: " << contacts[i].get_phone() << std::endl;
+	std::cout << "Darkest secret: " << contacts[i].get_secret() << std::endl;
 }
 
-void	PhoneBook::search(void)
+void	PhoneBook::search(void) const
 {
 	int	i = 0;
 
@@ -102,13 +105,18 @@ void	PhoneBook::search(void)
 	{
 		std::cout << i << "         ";
 		std::cout << "|";
-		display_column(this->contacts[i].first_name);
+		display_column(contacts[i].get_first_name());
 		std::cout << "|";
-		display_column(this->contacts[i].last_name);
+		display_column(contacts[i].get_last_name());
 		std::cout << "|";
-		display_column(this->contacts[i].nickname);
+		display_column(contacts[i].get_nickname());
 		std::cout << std::endl;
 		i++;
 	}
 	display_contact(this->total_contacts, this->contacts);
+}
+
+const Contact* PhoneBook::get_contacts(void) const
+{
+	return (this->contacts);
 }

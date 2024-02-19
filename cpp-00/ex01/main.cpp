@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:28:58 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/15 15:57:49 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:43:55 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(void)
 	std::cout << "Welcome to your Phonebook\n";
 	while (1)
 	{
-		std::cout << "\nWhat do you want to do?\nOptions: ADD, SEARCH, EXIT\n";
+		std::cout << "\nWhat do you want to do? Options: ADD, SEARCH, EXIT\n";
 		std::getline(std::cin, input);
 		if (input == "ADD")
 		{
@@ -53,9 +53,13 @@ int main(void)
 			my_phone_book.add_contact(my_contact);
 		}
 		else if (input == "SEARCH")
+		{
 			my_phone_book.search();
+		}
 		else if (input == "EXIT")
 			return 0;
+		else
+			std::cout << "Wrong option: " << input << "." << std::endl;
 	}
 	return 0;
 }

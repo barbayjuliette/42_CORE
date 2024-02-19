@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:26:46 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/15 15:57:28 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/16 17:24:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,28 @@ Contact	Contact::create_contact()
 	Contact my_contact(first, last, nickname, phone, secret);
 
 	return (my_contact);
+}
+
+std::string Contact::get_first_name(void) const
+{
+	return (this->first_name);
+}
+std::string Contact::get_last_name(void) const
+{
+	return (this->last_name);
+}
+
+std::string Contact::get_nickname(void) const
+{
+	return (this->nickname);
+}
+
+std::string Contact::get_phone(void) const
+{
+	return (this->phone_number);
+}
+
+std::string Contact::get_secret(void) const
+{
+	return (this->darkest_secret);
 }
