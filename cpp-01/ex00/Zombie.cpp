@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:13:57 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/19 19:19:00 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/20 17:13:12 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ void	Zombie::announce(void)
 
 Zombie::Zombie(void)
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "Constructor called for: " << this->_name << std::endl;
+
 }
 
 Zombie::Zombie(std::string name): _name(name)
 {
-	std::cout << "Constructor called with name" << std::endl;
+	std::cout << "Constructor called for: " << this->_name << std::endl;
 }
 
 Zombie::~Zombie(void)
 {
-	std::cout << "Deconstructor called" << std::endl;
+	std::cout << "Deconstructor called for: " << this->_name << std::endl;
 }
