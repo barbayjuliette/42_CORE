@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 10:21:16 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/14 14:42:50 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/17 11:53:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*get_one_line(char *rem)
 		return (NULL);
 	while (rem[i] && rem[i] != '\n')
 		i++;
-	if (ft_strchr(rem, '\n'))
+	if (rem[i] == '\n')
 		i++;
-	line = malloc(sizeof(char) * (i + 1));
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
 	ft_strlcpy(line, rem, i + 1);
@@ -46,12 +46,9 @@ char	*update_rem(char *rem)
 	}
 	new_rem++;
 	len = ft_strlen(new_rem);
-	ret = malloc(sizeof(char) * (len + 1));
+	ret = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ret)
-	{
-		// free(rem);
 		return (NULL);
-	}
 	ft_strlcpy(ret, new_rem, len + 1);
 	free(rem);
 	rem = NULL;
@@ -69,7 +66,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!rem)
 	{
-		rem = malloc(1);
+		rem = (char *)malloc(sizeof(char) *1);
 		rem[0] = '\0';
 	}
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -91,7 +88,7 @@ char	*get_next_line(int fd)
 		rem = ft_strjoin(rem, buffer);
 	}
 	free(buffer);
-	if (!rem) // Important
+	if (!rem)
 		return (NULL);
 	line = get_one_line(rem);
 	rem = update_rem(rem);
@@ -104,6 +101,8 @@ char	*get_next_line(int fd)
 // 	char	*line;
 
 // 	fd = open("test.txt", O_RDONLY);
+// 	line = get_next_line(fd);
+// 	printf("Line: %s", line);
 // 	line = get_next_line(fd);
 // 	printf("Line: %s", line);
 // 	line = get_next_line(fd);

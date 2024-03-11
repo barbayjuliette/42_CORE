@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 10:21:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/12/14 13:52:34 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/17 11:47:25 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stddef.h>
 # include <stdio.h>
 
-int	ft_strlcpy(char *dest, char *src, int destsize);
+int		ft_strlcpy(char *dest, char *src, int destsize);
 char	*ft_strchr(char *str, int c);
 int		ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
