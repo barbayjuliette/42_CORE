@@ -6,10 +6,12 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:49:46 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/20 08:58:58 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/20 17:45:52 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
 #include <iostream>
 
 class Zombie
@@ -24,3 +26,5 @@ class Zombie
 		Zombie(std::string name);
 		~Zombie(void);
 };
+
+#endif
