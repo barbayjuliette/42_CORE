@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:28:58 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 18:43:40 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:45:10 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(void)
 	string input;
 
 	PhoneBook my_phone_book;
-	create_test_cases(&my_phone_book);
+	// create_test_cases(&my_phone_book);
 	cout << "Welcome to your Phonebook\n";
 	while (1)
 	{

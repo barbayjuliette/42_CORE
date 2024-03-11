@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:32:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 18:37:02 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:52:48 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	push_contacts(Contact contacts[])
 		contacts[i] = contacts[i + 1];
 		i++;
 	}
-
 }
 
 void	PhoneBook::add_contact(Contact new_contact)
