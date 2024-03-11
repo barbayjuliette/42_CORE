@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:53:45 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 17:53:48 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:42:38 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cstring>
 
-using namespace std;
-
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 	int i = 1;
 	int	j;
 
 	if (argc == 1)
 	{
-		cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << endl;
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 		return (0);
 	}
 	while (i < argc)
@@ -30,11 +27,11 @@ int main(int argc, char *argv[])
 		j = 0;
 		while (argv[i][j] != '\0')
 		{
-			cout << (char)toupper(argv[i][j]);
+			std::cout << (char)toupper(argv[i][j]);
 			j++;
 		}
 		i++;;
 	}
-	cout << endl;
+	std::cout << std::endl;
 	return (0);
-} 
+}

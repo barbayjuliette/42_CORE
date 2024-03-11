@@ -3,12 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:17:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/06 16:17:26 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/04 18:28:02 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Allocates (with malloc(3)) and returns a copy of
+// ’s1’ with the characters specified in ’set’ removed
+// from the beginning and the end of the string.
 
 #include "libft.h"
 

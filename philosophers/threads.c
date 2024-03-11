@@ -6,7 +6,7 @@
 /*   By: jbarbay < jbarbay@student.42singapore.s    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:23:19 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/01/03 16:46:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:35:23 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if ((philo->index + 1) % 2 == 0)
-		ft_usleep(50);
+		ft_usleep(5);
 	while (!end_simulation(philo->program))
 	{
 		if (!is_full(philo))

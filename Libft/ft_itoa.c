@@ -3,12 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 12:13:09 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/09/06 12:13:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/04 18:28:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Allocates (with malloc(3)) and returns a string
+// representing the integer received as an argument.
+// Negative numbers must be handled.
 
 #include "libft.h"
 

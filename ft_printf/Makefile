@@ -3,17 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 11:06:32 by jbarbay           #+#    #+#              #
-#    Updated: 2023/10/10 11:06:35 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/02/05 16:48:22 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 SRCS = ft_printf.c \
-		helpers.c \
-		library.c \
 		conversions.c
 
 CC = cc
@@ -29,7 +27,7 @@ $(NAME): $(OBJS)
 			ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	${CC} $(CFLAGS) -c $< 
+	${CC} $(CFLAGS) -c $<
 
 clean:
 		${RM} ${OBJS}

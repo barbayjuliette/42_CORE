@@ -6,31 +6,30 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:32:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 18:52:48 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/11 11:09:38 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 #include <limits>
+#include <stdlib.h>
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
-using namespace std;
 
 PhoneBook::PhoneBook(void) : total_contacts(0)
 {
-	// cout << "Constructor PhoneBook called" << endl;
+	// std::cout << "Constructor PhoneBook called" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-	// cout << "Deconstructor Phonebook called" << endl;
+	// std::cout << "Deconstructor Phonebook called" << std::endl;
 }
 
 void	push_contacts(Contact contacts[])
 {
 	int i = 0;
-	
+
 	while (i < 7)
 	{
 		contacts[i] = contacts[i + 1];
@@ -52,7 +51,7 @@ void	PhoneBook::add_contact(Contact new_contact)
 	}
 }
 
-void	display_column(string data)
+void	display_column(std::string data)
 {
 	int	len;
 	int	i = 0;
@@ -61,56 +60,63 @@ void	display_column(string data)
 	while (i < 10)
 	{
 		if (i == 9 && len > 10)
-			cout << ".";
+			std::cout << ".";
 		else if (i < len)
-			cout << data[i];
+			std::cout << data[i];
 		else
-			cout << " ";
+			std::cout << " ";
 		i++;
 	}
 }
 
-void	display_contact(int total_contacts, Contact contacts[])
+void	display_contact(int total_contacts, const Contact contacts[])
 {
-	int	i;
+	int			i;
+	std::string	str;
 
-	cout << "Enter the index of the contact you want to display\n";
-	cin >> i;
-	while (i < 0 || i >= total_contacts || cin.fail())
+	std::cout << "Enter the index of the contact you want to display\n";
+	std::getline(std::cin, str);
+	i = std::atoi(str.c_str());
+
+	while (i < 0 || i >= total_contacts || (i == 0 && str != "0"))
 	{
-		cout << "Please enter a valid index number\n";
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cin >> i;
+		std::cout << "Please enter a valid index number\n";
+		std::getline(std::cin, str);
+		i = std::atoi(str.c_str());
 	}
-	cout << endl << "First name: " << contacts[i].first_name << endl;
-	cout << "Last name: " << contacts[i].last_name << endl;
-	cout << "Nickname: " << contacts[i].nickname << endl;
-	cout << "Phone number: " << contacts[i].phone_number << endl;
-	cout << "Darkest secret: " << contacts[i].darkest_secret << endl;
+	std::cout << std::endl << "First name: " << contacts[i].get_first_name() << std::endl;
+	std::cout << "Last name: " << contacts[i].get_last_name() << std::endl;
+	std::cout << "Nickname: " << contacts[i].get_nickname() << std::endl;
+	std::cout << "Phone number: " << contacts[i].get_phone() << std::endl;
+	std::cout << "Darkest secret: " << contacts[i].get_secret() << std::endl;
 }
 
-void	PhoneBook::search(void)
+void	PhoneBook::search(void) const
 {
 	int	i = 0;
 
 	if (this->total_contacts == 0)
 	{
-		cout << "You have no contacts in your phone book!\n";
+		std::cout << "You have no contacts in your phone book!\n";
 		return ;
 	}
-	cout << "Your phone book: \n";
+	std::cout << "Your phone book: \n";
 	while (i < this->total_contacts)
 	{
-		cout << i << "         ";
-		cout << "|";
-		display_column(this->contacts[i].first_name);
-		cout << "|";
-		display_column(this->contacts[i].last_name);
-		cout << "|";
-		display_column(this->contacts[i].nickname);
-		cout << endl;
+		std::cout << i << "         ";
+		std::cout << "|";
+		display_column(contacts[i].get_first_name());
+		std::cout << "|";
+		display_column(contacts[i].get_last_name());
+		std::cout << "|";
+		display_column(contacts[i].get_nickname());
+		std::cout << std::endl;
 		i++;
 	}
 	display_contact(this->total_contacts, this->contacts);
+}
+
+const Contact* PhoneBook::get_contacts(void) const
+{
+	return (this->contacts);
 }

@@ -3,34 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:26:46 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/02 17:44:19 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/16 17:24:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Contact.hpp"
-using namespace std;
 
-Contact::Contact(string p1, string p2, string p3, string p4, string p5)
+Contact::Contact(std::string p1, std::string p2, std::string p3, std::string p4, std::string p5)
  : first_name(p1), last_name(p2), nickname(p3), phone_number(p4), darkest_secret(p5)
 {
-	// cout << "Constructor called" << endl;
-	// cout << "First name: " << this->first_name << endl;
-	// cout << "Last name: " << this->last_name << endl;
-	// cout << "Nickname: " << this->nickname << endl;
-	// cout << "Phone number: " << this->phone_number << endl;
-	// cout << "Darkest secret: " << this->darkest_secret << endl;
+	// std::cout << "Constructor called" << std::endl;
+	// std::cout << "First name: " << this->first_name << std::endl;
+	// std::cout << "Last name: " << this->last_name << std::endl;
+	// std::cout << "Nickname: " << this->nickname << std::endl;
+	// std::cout << "Phone number: " << this->phone_number << std::endl;
+	// std::cout << "Darkest secret: " << this->darkest_secret << std::endl;
 }
 
 Contact::Contact(void)
 {
-	// cout << "Default constructor called" << endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Contact::~Contact(void)
 {
-	// cout << "Deconstructor called" << endl;
+	// std::cout << "Deconstructor called" << std::endl;
+}
+
+std::string	add_data_contact(std::string prompt)
+{
+	std::string	data;
+
+	std::cout << prompt;
+	std::getline(std::cin, data);
+	return data;
+}
+
+Contact	Contact::create_contact()
+{
+	std::cout << "Please enter the information for your new contact\n";
+	std::string first = add_data_contact("First name: ");
+	std::string last = add_data_contact("Last name: ");
+	std::string nickname = add_data_contact("Nickname: ");
+	std::string phone = add_data_contact("Phone number: ");
+	std::string secret = add_data_contact("Darkest secret: ");
+	Contact my_contact(first, last, nickname, phone, secret);
+
+	return (my_contact);
+}
+
+std::string Contact::get_first_name(void) const
+{
+	return (this->first_name);
+}
+std::string Contact::get_last_name(void) const
+{
+	return (this->last_name);
+}
+
+std::string Contact::get_nickname(void) const
+{
+	return (this->nickname);
+}
+
+std::string Contact::get_phone(void) const
+{
+	return (this->phone_number);
+}
+
+std::string Contact::get_secret(void) const
+{
+	return (this->darkest_secret);
 }

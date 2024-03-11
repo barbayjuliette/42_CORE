@@ -3,48 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:21:51 by jbarbay           #+#    #+#             */
-/*   Updated: 2023/10/13 19:21:56 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/02/05 17:03:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_process_int(int num)
+void	ft_process_str(char *str, int *count)
 {
-	ft_putnbr_fd(num, 1);
-	return (get_length_num(num));
-}
+	int	i;
 
-int	ft_process_unsigned_int(int num)
-{
-	ft_put_unsigned_fd(num, 1);
-	return (get_length_unsigned(num));
-}
-
-int	ft_process_str(char *str)
-{
 	if (str == NULL)
-	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
-	}
+		ft_putstr("(null)", count);
 	else
 	{
-		return (ft_putstr_fd(str, 1));
+		i = 0;
+		while (str[i])
+		{
+			*count += write(1, &str[i], 1);
+			i++;
+		}
 	}
 }
 
-int	ft_putptr(unsigned long num)
+void	ft_putstr(char *s, int *count)
 {
-	if (num == 0)
+	int	i;
+
+	i = 0;
+	while (s[i])
 	{
-		write(1, "(nil)", 5);
-		return (5);
+		ft_putchar(s[i], count);
+		i++;
 	}
-	ft_putchar_fd('0', 1);
-	ft_putchar_fd('x', 1);
-	return (ft_puthexa(num)+ 2);
+}
+
+void	ft_putptr(unsigned int num, int *count)
+{
+	ft_putchar('0', count);
+	ft_putchar('x', count);
+	if (num == 0)
+		ft_putchar('0', count);
+	else
+		put_nbr_base(num, 16, "0123456789abcdef", count);
+}
+
+void	put_nbr_base(long long int num, int len, char *base, int *count)
+{
+	if (num < 0)
+	{
+		ft_putchar('-', count);
+		num = -num;
+	}
+	if (num >= len)
+		put_nbr_base(num / len, len, base, count);
+	ft_putchar(base[num % len], count);
+}
+
+void	ft_putchar(char c, int *count)
+{
+	*count += write(1, &c, 1);
 }

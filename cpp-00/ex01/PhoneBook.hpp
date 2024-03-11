@@ -15,18 +15,20 @@
 
 #include <iostream>
 #include "Contact.hpp"
-using namespace std;
 
 class PhoneBook
 {
-	public:
+	private:
 		Contact contacts[8];
 		int	total_contacts;
 
+	public:
+		const Contact* get_contacts(void) const;
+		void	set_total_contacts(int num);
 		PhoneBook(void);
 		~PhoneBook(void);
 		void add_contact(Contact new_contact);
-		void search(void);
+		void search(void) const;
 };
 
 #endif
