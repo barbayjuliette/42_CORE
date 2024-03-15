@@ -5,16 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/20 16:56:14 by jbarbay           #+#    #+#              #
-#    Updated: 2024/03/15 14:28:52 by jbarbay          ###   ########.fr        #
+#    Created: 2024/03/15 14:25:54 by jbarbay           #+#    #+#              #
+#    Updated: 2024/03/15 15:14:05 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.cpp
+SRCS = main.cpp \
+		Harl.cpp \
+
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-NAME = brain
+NAME = harl
 OBJS = ${SRCS:.cpp=.o}
 
 all: ${NAME}

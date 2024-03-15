@@ -6,7 +6,7 @@
 #    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/19 18:55:38 by jbarbay           #+#    #+#              #
-#    Updated: 2024/02/23 10:55:54 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/03/15 14:28:53 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS = Weapon.cpp \
 		HumanA.cpp \
 		HumanB.cpp \
 
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = fight

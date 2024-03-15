@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 17:14:54 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/15 14:25:26 by jbarbay          ###   ########.fr       */
+/*   Created: 2024/03/15 14:26:13 by jbarbay           #+#    #+#             */
+/*   Updated: 2024/03/15 16:58:32 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_HPP
-#define WEAPON_HPP
-
 #include <iostream>
+#include "Harl.hpp"
 
-class Weapon
+int main(void)
 {
-	private:
-		std::string	_type;
-	public:
-		Weapon(std::string type);
-		Weapon(void);
-		~Weapon(void);
-		const std::string&	getType(void) const;
-		void	setType(std::string type);
-};
+	Harl	instance;
 
-#endif
+	instance.complain("DEBUG");
+	instance.complain("INFO");
+	instance.complain("WARNING");
+	instance.complain("ERROR");
+	return 0;
+}

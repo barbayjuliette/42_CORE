@@ -6,14 +6,14 @@
 #    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 09:20:36 by jbarbay           #+#    #+#              #
-#    Updated: 2024/02/20 16:56:45 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/03/15 14:28:52 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = ZombieHord.cpp \
 		Zombie.cpp \
 		main.cpp
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = zombie
