@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:26:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/15 16:37:22 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/15 17:13:44 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	Harl::error( void )
 
 void	Harl::complain(std::string level)
 {
-	// Create a pointer to each function
 	void	(Harl::*ptr_debug)() = &Harl::debug;
 	void	(Harl::*ptr_info)() = &Harl::info;
 	void	(Harl::*ptr_warning)() = &Harl::warning;
