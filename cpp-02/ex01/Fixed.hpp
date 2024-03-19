@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:34:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/17 21:44:57 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:46:16 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class Fixed
 		Fixed(const Fixed& num); // Copy constructor
 		void	operator=(Fixed const& num); // Copy assignement operator overload
 		void	operator<<(Fixed const& num);
-		int	getRawBits( void ) const;
-		int	setRawBits( int const raw );
+		int		getRawBits( void ) const;
+		int		setRawBits( int const raw );
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
 };

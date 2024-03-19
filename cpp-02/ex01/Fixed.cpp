@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:34:18 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/17 22:01:35 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/19 17:03:19 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ Fixed::Fixed(void): _fixed(0)
 Fixed::Fixed(const int num): _fixed(num)
 {
 	std::cout << "Int constructor called" << std::endl;
+	this->_fixed = num << _fract;
+	// Transforms 101010 (8)
+	// To 10101000000000 (Adds 8 fractional bits)
 }
 
 Fixed::Fixed(const float num)
@@ -37,6 +40,15 @@ Fixed::~Fixed(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
+float Fixed::toFloat( void ) const
+{
+	return ((float)this->_fixed);
+}
+
+int Fixed::toInt( void ) const
+{
+	return ((int)this->_fixed);
+}
 
 Fixed::Fixed(const Fixed& num)
 {
