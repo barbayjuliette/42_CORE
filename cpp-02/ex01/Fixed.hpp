@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:34:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/20 17:31:57 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/20 17:43:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ class Fixed
 		~Fixed(void); // Destructor
 		Fixed(const Fixed& num); // Copy constructor
 		void	operator=(Fixed const& num); // Copy assignement operator overload
-		// void	operator<<(Fixed const& num);
 		int		getRawBits( void ) const;
 		int		setRawBits( int const raw );
 		float	toFloat( void ) const;
@@ -34,3 +33,10 @@ class Fixed
 };
 
 #endif
+
+// To get cout to accept a Fixed object after the insertion 
+// operator, overload the insertion operator to recognize 
+// an ostream object on the left and a Fixed on the right. 
+// The overloaded << operator function must then be declared 
+// as a friend of class Fixed so it can access the private 
+// data within a Fixed object.

@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:34:18 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/20 17:39:03 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/20 17:40:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	Fixed::operator=(Fixed const& num)
 std::ostream& operator<<(std::ostream& os, const Fixed& num) 
 {
     os << num.toFloat();
-    return os;
+    return (os);
 }
 
 int	Fixed::getRawBits( void ) const

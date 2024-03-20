@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
+#    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:01:40 by jbarbay           #+#    #+#              #
-#    Updated: 2024/03/15 17:01:50 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/03/20 17:56:19 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.cpp \
 		Harl.cpp \
 
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CC = g++
+CFLAGS = -Wall -Wextra -Werror -std=g++98
 RM = rm -rf
 NAME = harlFilter
 OBJS = ${SRCS:.cpp=.o}

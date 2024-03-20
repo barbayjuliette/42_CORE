@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
+#    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/19 12:36:21 by jbarbay           #+#    #+#              #
-#    Updated: 2024/02/19 12:48:17 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/03/20 17:57:33 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS = Account.cpp \
 		tests.cpp \
 
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=g++98
 RM = rm -rf
 NAME = accounts
 OBJS = ${SRCS:.cpp=.o}
