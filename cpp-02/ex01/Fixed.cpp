@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:34:18 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/19 17:03:19 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/20 17:39:03 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ Fixed::Fixed(const int num): _fixed(num)
 Fixed::Fixed(const float num)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->_fixed = roundf(num);
+	_fixed = roundf(num * (1  << _fract));
+	// Multiply num by 256. So I take 8 bits that I put into the integer part
+	// Then I round up so I get rid of any extra fractional part (over 8 bits)
+	// I convert the fractional part of the number to an integer
 }
 
 Fixed::~Fixed(void)
@@ -42,12 +45,12 @@ Fixed::~Fixed(void)
 
 float Fixed::toFloat( void ) const
 {
-	return ((float)this->_fixed);
+	return (static_cast<float>(_fixed) / (1  << _fract));
 }
 
 int Fixed::toInt( void ) const
 {
-	return ((int)this->_fixed);
+	return (this->_fixed >> _fract);
 }
 
 Fixed::Fixed(const Fixed& num)
@@ -59,7 +62,13 @@ Fixed::Fixed(const Fixed& num)
 void	Fixed::operator=(Fixed const& num)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixed = num.getRawBits();
+	this->_fixed = num._fixed;
+}
+
+std::ostream& operator<<(std::ostream& os, const Fixed& num) 
+{
+    os << num.toFloat();
+    return os;
 }
 
 int	Fixed::getRawBits( void ) const
