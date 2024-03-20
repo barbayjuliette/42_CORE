@@ -84,3 +84,62 @@ bool	Fixed::operator>(Fixed const& num)
 {
 	return (this->_fixed > num._fixed);
 }
+
+bool	Fixed::operator<(Fixed const& num)
+{
+	return (this->_fixed < num._fixed);
+}
+
+bool	Fixed::operator>=(Fixed const& num)
+{
+	return (this->_fixed >= num._fixed);
+}
+
+bool	Fixed::operator<=(Fixed const& num)
+{
+	return (this->_fixed <= num._fixed);
+}
+
+bool	Fixed::operator==(Fixed const& num)
+{
+	return (this->_fixed == num._fixed);
+}
+
+bool	Fixed::operator!=(Fixed const& num)
+{
+	return (this->_fixed != num._fixed);
+}
+
+// Arithmetic operations
+
+Fixed	Fixed::operator+(Fixed const& num)
+{
+	Fixed	nb;
+
+	nb._fixed = (this->_fixed + num._fixed) >> _fract;
+	return (nb);
+}
+
+Fixed	Fixed::operator-(Fixed const& num)
+{
+	Fixed	nb;
+
+	nb._fixed = (this->_fixed - num._fixed) >> _fract;
+	return (nb);
+}
+
+Fixed	Fixed::operator*(Fixed const& num)
+{
+	Fixed	nb;
+
+	nb._fixed = (this->_fixed * num._fixed) >> _fract;
+	return (nb);
+}
+
+Fixed	Fixed::operator/(Fixed const& num)
+{
+	Fixed	nb;
+
+	nb._fixed = (this->_fixed / num._fixed) >> _fract;
+	return (nb);
+}

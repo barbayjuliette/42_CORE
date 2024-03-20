@@ -20,18 +20,28 @@ class Fixed
 		int	_fixed;
 		static const int	_fract;
 	public:
+		friend std::ostream& operator<<(std::ostream& os, const Fixed& num);
 		Fixed(void);
 		Fixed(const int num);
 		Fixed(const float num);
 		~Fixed(void);
 		Fixed(const Fixed& num);
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& num);
 		void	operator=(Fixed const& num);
 		bool	operator>(Fixed const& num);
+		bool	operator<(Fixed const& num);
+		bool	operator>=(Fixed const& num);
+		bool	operator<=(Fixed const& num);
+		bool	operator==(Fixed const& num);
+		bool	operator!=(Fixed const& num);
 		int		getRawBits( void ) const;
 		int		setRawBits( int const raw );
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
+
+		Fixed	operator+(Fixed const& num);
+		Fixed	operator-(Fixed const& num);
+		Fixed	operator*(Fixed const& num);
+		Fixed	operator/(Fixed const& num);
 };
 
 #endif
