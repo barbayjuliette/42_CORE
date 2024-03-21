@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 21:34:18 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/20 17:40:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/21 09:51:34 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	Fixed::operator=(Fixed const& num)
 	this->_fixed = num._fixed;
 }
 
-std::ostream& operator<<(std::ostream& os, const Fixed& num) 
+std::ostream& operator<<(std::ostream& os, const Fixed& num)
 {
-    os << num.toFloat();
-    return (os);
+	os << num.toFloat();
+	return (os);
 }
 
 int	Fixed::getRawBits( void ) const
