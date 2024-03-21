@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:49:16 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/20 18:56:36 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/21 16:42:40 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ class Fixed
 		Fixed(const float num);
 		~Fixed(void);
 		Fixed(const Fixed& num);
+
+		int		getRawBits( void ) const;
+		int		setRawBits( int const raw );
+		float	toFloat( void ) const;
+		int		toInt( void ) const;
+
 		void	operator=(Fixed const& num);
 		bool	operator>(Fixed const& num);
 		bool	operator<(Fixed const& num);
@@ -33,15 +39,21 @@ class Fixed
 		bool	operator<=(Fixed const& num);
 		bool	operator==(Fixed const& num);
 		bool	operator!=(Fixed const& num);
-		int		getRawBits( void ) const;
-		int		setRawBits( int const raw );
-		float	toFloat( void ) const;
-		int		toInt( void ) const;
 
 		Fixed	operator+(Fixed const& num);
 		Fixed	operator-(Fixed const& num);
 		Fixed	operator*(Fixed const& num);
 		Fixed	operator/(Fixed const& num);
+
+		Fixed&	operator++(void);
+		Fixed&	operator--(void);
+		Fixed	operator++(int);
+		Fixed	operator--(int);
+
+		static Fixed&	min(Fixed& one, Fixed& two);
+		static Fixed const&	min(Fixed const& one, Fixed const& two);
+		static Fixed&	max(Fixed& one, Fixed& two);
+		static Fixed const&	max(Fixed const& one, Fixed const& two);
 };
 
 #endif
