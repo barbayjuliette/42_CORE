@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:32:45 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/22 11:14:39 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/22 11:19:55 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 ClapTrap::ClapTrap(void): _name("Default"), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
-	std::cout << _name << "ClapTrap created with default constructor" << std::endl;
+	std::cout << _name << " ClapTrap created with default constructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
-	std::cout << _name << "ClapTrap created!" << std::endl;
+	std::cout << _name << " ClapTrap created!" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << _name << "ClapTrap destroyed!" << std::endl;
+	std::cout << _name << " ClapTrap destroyed!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clap)
