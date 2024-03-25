@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Contact.hpp"
-#include "PhoneBook.hpp"
+#include "Contact/Contact.hpp"
+#include "PhoneBook/PhoneBook.hpp"
 
 void	create_test_cases(PhoneBook *my_phone_book)
 {
@@ -41,13 +41,15 @@ int main(void)
 
 	PhoneBook my_phone_book;
 	// create_test_cases(&my_phone_book);
-	cout << "Welcome to your Phonebook\n";
 	Contact my_contact;
+
 	std::cout << "Welcome to your Phonebook\n";
 	while (1)
 	{
 		std::cout << "\nWhat do you want to do? Options: ADD, SEARCH, EXIT\n";
 		std::getline(std::cin, input);
+		if (std::cin.fail())
+			return 0;
 		if (input == "ADD")
 		{
 			my_contact = my_contact.create_contact();

@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include "Contact.hpp"
+#include "../phone_book.hpp"
 
 Contact::Contact(std::string p1, std::string p2, std::string p3, std::string p4, std::string p5)
  : first_name(p1), last_name(p2), nickname(p3), phone_number(p4), darkest_secret(p5)
@@ -34,15 +35,6 @@ Contact::~Contact(void)
 	// std::cout << "Deconstructor called" << std::endl;
 }
 
-std::string	add_data_contact(std::string prompt)
-{
-	std::string	data;
-
-	std::cout << prompt;
-	std::getline(std::cin, data);
-	return data;
-}
-
 Contact	Contact::create_contact()
 {
 	std::cout << "Please enter the information for your new contact\n";
@@ -54,6 +46,15 @@ Contact	Contact::create_contact()
 	Contact my_contact(first, last, nickname, phone, secret);
 
 	return (my_contact);
+}
+
+void	Contact::display_contact(void) const
+{
+	std::cout << std::endl << "First name: " << this->get_first_name() << std::endl;
+	std::cout << "Last name: " << this->get_last_name() << std::endl;
+	std::cout << "Nickname: " << this->get_nickname() << std::endl;
+	std::cout << "Phone number: " << this->get_phone() << std::endl;
+	std::cout << "Darkest secret: " << this->get_secret() << std::endl;
 }
 
 std::string Contact::get_first_name(void) const

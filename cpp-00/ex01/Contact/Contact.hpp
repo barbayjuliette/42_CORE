@@ -33,6 +33,7 @@ class Contact
 		Contact(void);
 		~Contact(void);
 		Contact	create_contact(void);
+		void	display_contact(void) const;
 };
 
 #endif

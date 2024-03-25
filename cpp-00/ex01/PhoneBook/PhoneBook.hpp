@@ -14,7 +14,7 @@
 # define PHONEBOOK_HPP
 
 #include <iostream>
-#include "Contact.hpp"
+#include "../Contact/Contact.hpp"
 
 class PhoneBook
 {

@@ -10,9 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = Contact.cpp \
-		PhoneBook.cpp \
-		main.cpp
+SRCS = main.cpp \
+		Contact/Contact.cpp \
+		PhoneBook/PhoneBook.cpp \
+		PhoneBook/phone_book_helpers.cpp \
+		Contact/contact_helpers.cpp 
+
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
