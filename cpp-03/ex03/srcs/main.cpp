@@ -6,28 +6,28 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 17:20:59 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/22 21:15:03 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/22 21:15:17 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 void	second_test(void)
 {
-	ScavTrap	bob;
-	ScavTrap john("John");
+	FragTrap	bob;
+	FragTrap john("John");
 	bob.display_all();
-	ScavTrap	copy(bob);
+	FragTrap	copy(bob);
 	bob.display_all();
-	bob.guardGate();
+	bob.highFivesGuys();
 	john = bob;
 	std::cout << "Changed name to: " << john.get_name() << std::endl;
 }
 
 void	john_test(void)
 {
-	ScavTrap john("John");
+	FragTrap john("John");
 	john.display_all();
 	john.attack("One");
 	john.attack("Two");
