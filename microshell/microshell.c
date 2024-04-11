@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:33:11 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/04/11 22:22:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/11 23:27:00 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	execute(char **argv, char **envp, int i)
 	int	status;
 
 	// Create pipe
-	has_pipe = argv[i] && strcmp(argv[i], "|");
+	has_pipe = argv[i] && !strcmp(argv[i], "|");
 	if (has_pipe && pipe(fd) == -1)
 		 write(2, "error: fatal\n", 13);
 
@@ -86,8 +86,8 @@ int main(int argc, char *argv[], char *envp[])
 	while (argv[i] && argv[i + 1])
 	{
 		i++;
-		i = 0;
 		argv += i;
+		i = 0;
 		i = get_n_args(argv);
 
 		if (strcmp(*argv, "cd") == 0)
