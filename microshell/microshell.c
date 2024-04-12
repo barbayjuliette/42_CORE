@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:33:11 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/04/12 16:33:41 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/12 16:43:00 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ int	ft_error(char *str)
 		i++;
 	}
 	return (1);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i = 0;
-
-	while (str[i])
-		i++;
-	return (i);
 }
 
 int	ft_cd(char **argv, int i)
@@ -70,7 +61,7 @@ int	execute(char **argv, char **envp, int i)
 	}
 	waitpid(pid, &status, 0);
 	if (has_pipe && (dup2(fd[0], 0) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
-		write(2, "error: fatal\n", 13);
+		return (ft_error("error: fatal\n"));
 	return WIFEXITED(status) && WEXITSTATUS(status);
 }
 
@@ -85,10 +76,9 @@ int	get_n_args(char **argv)
 
 int main(int argc, char *argv[], char *envp[])
 {
-	int	status;
-	int	i;
+	int	status = 0;
+	int	i = 0;
 
-	i = 0;
 	if (argc == 1)
 		return (1);
 
