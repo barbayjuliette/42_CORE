@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:02:28 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/15 17:33:06 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/25 19:14:41 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Harl.hpp"
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
 
 int	get_num(std::string level)
 {
