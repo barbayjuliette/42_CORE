@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 23:52:25 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/22 23:06:54 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/25 18:21:51 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef HUMANB_HPP
+#define HUMANB_HPP
 
 #include <iostream>
 #include "Weapon.hpp"
@@ -24,3 +27,5 @@ class HumanB
 		void attack(void);
 		void setWeapon(Weapon& weapon);
 };
+
+#endif

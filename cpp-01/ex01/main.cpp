@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 09:14:46 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/20 09:30:08 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:59:16 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(void)
 
 	n = 5;
 	i = 0;
-	Zombie* zombies = Zombie::zombieHorde(n, "Juliette");
+	Zombie* zombies = zombieHorde(n, "Juliette");
 	while (i < n)
 	{
 		zombies[i].announce();

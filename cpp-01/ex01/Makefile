@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
+#    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 09:20:36 by jbarbay           #+#    #+#              #
-#    Updated: 2024/03/22 10:52:27 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/04/25 17:00:04 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ZombieHord.cpp \
+SRCS = zombieHord.cpp \
 		Zombie.cpp \
 		main.cpp
 CC = g++

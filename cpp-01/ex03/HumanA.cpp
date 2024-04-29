@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 23:51:36 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/22 22:43:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:42:57 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ HumanA::HumanA(std::string name, Weapon& weapon) :  _weapon(weapon), _name(name)
 
 HumanA::~HumanA(void)
 {
-	std::cout << "Deconstructed A: " << this->_name << " with weapon" << this->_weapon.getType() << std::endl;
+	std::cout << "Deconstructed A: " << this->_name << " with weapon " << this->_weapon.getType() << std::endl;
 }

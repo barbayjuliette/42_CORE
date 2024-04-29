@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:49:46 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/02/20 17:45:52 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:51:55 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ class Zombie
 {
 	private:
 		std::string	_name;
-		Zombie(void);
 	public:
 		void	announce(void);
-		static Zombie* newZombie( std::string name );
-		static void randomChump( std::string name );
 		Zombie(std::string name);
+		Zombie(void);
 		~Zombie(void);
 };
+
+Zombie* newZombie( std::string name );
+void randomChump( std::string name );
 
 #endif

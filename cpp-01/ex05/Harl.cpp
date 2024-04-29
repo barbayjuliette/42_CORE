@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:26:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/15 17:13:44 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/04/29 12:18:36 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Harl.hpp"
 
 Harl::Harl(void)
 {
-	std::cout << "Constructor called" << std::endl;
+	// std::cout << "Constructor called" << std::endl;
 }
 
 Harl::~Harl(void)
 {
-	std::cout << "Deconstructor called" << std::endl;
+	// std::cout << "Deconstructor called" << std::endl;
 }
 
 void	Harl::debug( void )
@@ -39,6 +38,10 @@ void	Harl::error( void )
 {
 	std::cout << "Oops, there was an error" << std::endl;
 }
+
+// I create pointers to the member functions
+//  I create an array of pointers to the member functions
+//  I call the right function
 
 void	Harl::complain(std::string level)
 {
@@ -60,5 +63,5 @@ void	Harl::complain(std::string level)
 		}
 		i++;
 	}
-
+	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }

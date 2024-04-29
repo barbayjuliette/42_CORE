@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+         #
+#    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 10:55:40 by jbarbay           #+#    #+#              #
-#    Updated: 2024/03/22 10:52:27 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/04/25 18:18:48 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.cpp \
+	replace.cpp
 
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
