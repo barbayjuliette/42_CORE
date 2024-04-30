@@ -19,18 +19,30 @@ class Fixed
 		int	_fixed;
 		static const int	_fract;
 	public:
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& num);
-		Fixed(void); // Constructor
-		Fixed(const int num); // Constructor 2
-		Fixed(const float num); // Constructor 3
-		~Fixed(void); // Destructor
-		Fixed(const Fixed& num); // Copy constructor
-		void	operator=(Fixed const& num); // Copy assignement operator overload
+
+		// std::ostream& to_stream(std::ostream& os) const;
+		
+		// Constructors
+		Fixed(void); 
+		Fixed(const int num);
+		Fixed(const float num);
+
+		// Copy constructor
+		Fixed(const Fixed& num);
+
+		// Copy assignement operator overload
+		Fixed&	operator=(Fixed const& num);
+
+		// Destructor
+		~Fixed(void);
 		int		getRawBits( void ) const;
 		int		setRawBits( int const raw );
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed &num);
+
 
 #endif
 
