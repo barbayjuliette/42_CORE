@@ -15,21 +15,24 @@
 
 int main( void )
 {
-	Fixed a;
-	// Fixed c(23);
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	// Fixed a;
+	Fixed c(23);
+	Fixed d(2);
+	// Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
 	// std::cout << (c > a) << std::endl;
-	// std::cout << (c > a) << std::endl;
+	// std::cout << (c < a) << std::endl;
+	std::cout << c << std::endl;
+	std::cout << (c + d) << std::endl;
 
-	std::cout << a << std::endl; // 0 OK
-	std::cout << ++a << std::endl; // 0.00390625 OK
-	std::cout << a << std::endl; // 0.00390625 OK
-	std::cout << a++ << std::endl; // 0.00390625 NOK
-	std::cout << a << std::endl; // 0.0078125 OK
+	// std::cout << a << std::endl; // 0 OK
+	// std::cout << ++a << std::endl; // 0.00390625 OK
+	// std::cout << a << std::endl; // 0.00390625 OK
+	// std::cout << a++ << std::endl; // 0.00390625 NOK
+	// std::cout << a << std::endl; // 0.0078125 OK
 
-	std::cout << b << std::endl; // 10.1016 OK
+	// std::cout << b << std::endl; // 10.1016 OK
 
-	std::cout << Fixed::max( a, b ) << std::endl; // 10.1016
+	// std::cout << Fixed::max( a, b ) << std::endl; // 10.1016
 	return 0;
 }

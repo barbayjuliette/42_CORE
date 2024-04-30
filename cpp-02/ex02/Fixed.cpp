@@ -54,16 +54,11 @@ Fixed::Fixed(const Fixed& num)
 	*this = num;
 }
 
-void	Fixed::operator=(Fixed const& num)
+Fixed&	Fixed::operator=(Fixed const& num)
 {
 	// std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixed = num._fixed;
-}
-
-std::ostream& operator<<(std::ostream& os, const Fixed& num)
-{
-    os << num.toFloat();
-    return (os);
+	return (*this);
 }
 
 int	Fixed::getRawBits( void ) const
@@ -116,7 +111,7 @@ Fixed	Fixed::operator+(Fixed const& num)
 {
 	Fixed	nb;
 
-	nb._fixed = (this->_fixed + num._fixed) >> _fract;
+	nb._fixed = (this->_fixed + num._fixed);
 	return (nb);
 }
 
@@ -124,7 +119,7 @@ Fixed	Fixed::operator-(Fixed const& num)
 {
 	Fixed	nb;
 
-	nb._fixed = (this->_fixed - num._fixed) >> _fract;
+	nb._fixed = (this->_fixed - num._fixed);
 	return (nb);
 }
 
@@ -132,7 +127,7 @@ Fixed	Fixed::operator*(Fixed const& num)
 {
 	Fixed	nb;
 
-	nb._fixed = (this->_fixed * num._fixed) >> _fract;
+	nb._fixed = (this->_fixed * num._fixed);
 	return (nb);
 }
 
@@ -140,7 +135,7 @@ Fixed	Fixed::operator/(Fixed const& num)
 {
 	Fixed	nb;
 
-	nb._fixed = (this->_fixed / num._fixed) >> _fract;
+	nb._fixed = (this->_fixed / num._fixed);
 	return (nb);
 }
 
@@ -208,6 +203,12 @@ Fixed const&	Fixed::max(Fixed const& one, Fixed const& two)
 		return one;
 	else
 		return two;
+}
+
+std::ostream& operator<<(std::ostream& os, const Fixed &num)
+{
+	os << num.toFloat();
+	return (os);
 }
 
 

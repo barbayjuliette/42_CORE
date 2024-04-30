@@ -20,10 +20,11 @@ class Fixed
 		int	_fixed;
 		static const int	_fract;
 	public:
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& num);
+
 		Fixed(void);
 		Fixed(const int num);
 		Fixed(const float num);
+
 		~Fixed(void);
 		Fixed(const Fixed& num);
 
@@ -32,7 +33,7 @@ class Fixed
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
 
-		void	operator=(Fixed const& num);
+		Fixed&	operator=(Fixed const& num);
 		bool	operator>(Fixed const& num);
 		bool	operator<(Fixed const& num);
 		bool	operator>=(Fixed const& num);
@@ -55,5 +56,7 @@ class Fixed
 		static Fixed&	max(Fixed& one, Fixed& two);
 		static Fixed const&	max(Fixed const& one, Fixed const& two);
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed &num);
 
 #endif
