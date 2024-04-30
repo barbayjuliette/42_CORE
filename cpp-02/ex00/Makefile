@@ -12,7 +12,7 @@
 
 SRCS = Fixed.cpp \
 		main.cpp
-CC = c++
+CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = fixed

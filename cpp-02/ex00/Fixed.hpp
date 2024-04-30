@@ -19,12 +19,21 @@ class Fixed
 		int	_fixed;
 		static const int	_fract;
 	public:
-		Fixed(void); // Constructor
-		~Fixed(void); // Destructor
-		Fixed(const Fixed& num); // Copy constructor
-		void	operator=(Fixed const& num); // Copy assignement operator overload
+		// Default Constructor
+		Fixed(void);
+
+		// Copy constructor
+		Fixed(const Fixed& num); 
+
+		// Copy assignement operator overload
+		Fixed&	operator=(Fixed const& num);
+		
+		// Destructor
+		~Fixed(void);
+		
+		// Member functions
 		int	getRawBits( void ) const;
-		int	setRawBits( int const raw );
+		void	setRawBits( int const raw );
 };
 
 #endif
