@@ -109,33 +109,25 @@ bool	Fixed::operator!=(Fixed const& num)
 
 Fixed	Fixed::operator+(Fixed const& num)
 {
-	Fixed	nb;
-
-	nb._fixed = (this->_fixed + num._fixed);
+	Fixed	nb = (this->toFloat() + num.toFloat());
 	return (nb);
 }
 
 Fixed	Fixed::operator-(Fixed const& num)
 {
-	Fixed	nb;
-
-	nb._fixed = (this->_fixed - num._fixed);
+	Fixed	nb = (this->toFloat() - num.toFloat());
 	return (nb);
 }
 
 Fixed	Fixed::operator*(Fixed const& num)
 {
-	Fixed	nb;
-
-	nb._fixed = (this->_fixed * num._fixed);
+	Fixed	nb = (this->toFloat() * num.toFloat());
 	return (nb);
 }
 
 Fixed	Fixed::operator/(Fixed const& num)
 {
-	Fixed	nb;
-
-	nb._fixed = (this->_fixed / num._fixed);
+	Fixed	nb = (this->toFloat() / num.toFloat());
 	return (nb);
 }
 

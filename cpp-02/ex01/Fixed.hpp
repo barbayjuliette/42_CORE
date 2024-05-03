@@ -35,6 +35,8 @@ class Fixed
 
 		// Destructor
 		~Fixed(void);
+
+		// Member functions
 		int		getRawBits( void ) const;
 		int		setRawBits( int const raw );
 		float	toFloat( void ) const;
