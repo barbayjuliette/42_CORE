@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "../includes/ClapTrap.hpp"
+#include <stdlib.h>
 
 ClapTrap::ClapTrap(void): _name("Default"), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
@@ -45,7 +46,7 @@ ClapTrap&	ClapTrap::operator=(ClapTrap const& clap)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if ( _energy_points > 0 && _hit_points > 0)
+	if (_energy_points > 0 && _hit_points > 0)
 	{
 		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attack_damage << " points of damage" << std::endl;
 		_energy_points -= 1;
@@ -63,7 +64,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		_hit_points -= amount;
 		if (_hit_points < 0)
 			_hit_points = 0;
-		std::cout << "ClapTrap " << _name << " was attacked and lost " << amount << " hit points. It has now " << _hit_points << " hit points" << std::endl;
+		std::cout << "ClapTrap " << _name << " was attacked and lost " << amount << " hit points." << std::endl;
 	}
 	else
 		std::cout << _name << " cannot take damage anymore, it is dead!" << std::endl;
@@ -97,4 +98,32 @@ unsigned int	ClapTrap::get_energy_points(void)
 std::string		ClapTrap::get_name(void)
 {
 	return (this->_name);
+}
+
+// Helpers
+void	ClapTrap::display_hit_points()
+{
+	std::cout << "[HIT POINTS]: "<< this->_hit_points << std::endl;
+}
+
+void	ClapTrap::display_energy_points()
+{
+	std::cout << "[ENERGY POINTS]: "<< this->_energy_points << std::endl;
+}
+
+void	ClapTrap::display_attack_damage()
+{
+	std::cout << "[ATTACK DAMAGE]: "<< this->_attack_damage << std::endl;
+}
+
+void	ClapTrap::display_all()
+{
+	const char *red = "\e[31m";
+	const char *white = "\e[97m";
+
+	system("Color E4");
+	std::cout << red <<  get_name() << ": ";
+	std::cout <<"[HIT POINTS]: "<< this->_hit_points;
+	std::cout << " [ENERGY POINTS]: "<< this->_energy_points;
+	std::cout << " [ATTACK DAMAGE]: " << this->_attack_damage << white << std::endl;
 }

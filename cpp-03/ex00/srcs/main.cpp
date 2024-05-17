@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "../includes/ClapTrap.hpp"
 
 void	bob_test(void)
 {
@@ -40,14 +40,20 @@ void	john_test(void)
 {
 	ClapTrap john("John");
 
+	john.display_all();
 	john.attack("One");
 	john.attack("Two");
 	john.attack("Three");
+	john.display_all();
 	john.takeDamage(4);
+	john.display_all();
 	john.takeDamage(2);
+	john.display_all();
 	john.beRepaired(3);
+	john.display_all();
 	john.takeDamage(4);
 	john.takeDamage(3);
+	john.display_all();
 	john.beRepaired(3);
 }
 

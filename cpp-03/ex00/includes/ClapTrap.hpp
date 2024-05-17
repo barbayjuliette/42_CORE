@@ -37,12 +37,20 @@ class ClapTrap
 		~ClapTrap(void);
 
 		// Member functions
-		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
+		void			attack(const std::string& target);
+		void 			takeDamage(unsigned int amount);
+		void 			beRepaired(unsigned int amount);
+
+		// Getters
 		unsigned int	get_hit_points();
 		unsigned int	get_energy_points();
 		std::string		get_name();
+
+		// Helpers
+		void			display_hit_points();
+		void			display_energy_points();
+		void			display_attack_damage();
+		void			display_all();
 };
 
 #endif
