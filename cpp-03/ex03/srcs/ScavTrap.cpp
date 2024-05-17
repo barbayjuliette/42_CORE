@@ -39,10 +39,11 @@ ScavTrap::ScavTrap(const ScavTrap& clap): ClapTrap(clap)
 	std::cout << "Copy constructor Scav called" << std::endl;
 }
 
-void	ScavTrap::operator=(ScavTrap const& clap)
+ScavTrap&	ScavTrap::operator=(ScavTrap const& clap)
 {
 	ClapTrap::operator=(clap);
 	std::cout << "Assignment operator Scav called" << std::endl;
+	return (*this);
 }
 
 void	ScavTrap::guardGate()

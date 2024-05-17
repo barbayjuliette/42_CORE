@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:32:45 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/03/22 20:47:30 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/03/22 11:19:55 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ ClapTrap::~ClapTrap(void)
 
 ClapTrap::ClapTrap(const ClapTrap& clap)
 {
-	std::cout << "Copy constructor ClapTrap called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 	*this = clap;
 }
 
-void	ClapTrap::operator=(ClapTrap const& clap)
+ClapTrap&	ClapTrap::operator=(ClapTrap const& clap)
 {
-	std::cout << "Assignment operator ClapTrap called" << std::endl;
+	std::cout << "Assignment operator called" << std::endl;
 	this->_attack_damage = clap._attack_damage;
 	this->_energy_points = clap._energy_points;
 	this->_hit_points = clap._hit_points;
 	this->_name = clap._name;
+	return (*this);
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -96,27 +97,4 @@ unsigned int	ClapTrap::get_energy_points(void)
 std::string		ClapTrap::get_name(void)
 {
 	return (this->_name);
-}
-
-void	ClapTrap::display_hit_points()
-{
-	std::cout << "[HIT POINTS]: "<< this->_hit_points << std::endl;
-}
-
-void	ClapTrap::display_energy_points()
-{
-	std::cout << "[ENERGY POINTS]: "<< this->_energy_points << std::endl;
-}
-
-void	ClapTrap::display_attack_damage()
-{
-	std::cout << "[ATTACK DAMAGE]: "<< this->_attack_damage << std::endl;
-}
-
-void	ClapTrap::display_all()
-{
-	std::cout << get_name() << ": ";
-	std::cout << "[HIT POINTS]: "<< this->_hit_points;
-	std::cout << " [ENERGY POINTS]: "<< this->_energy_points;
-	std::cout << " [ATTACK DAMAGE]: "<< this->_attack_damage << std::endl;
 }

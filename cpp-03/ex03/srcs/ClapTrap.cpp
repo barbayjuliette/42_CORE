@@ -33,13 +33,14 @@ ClapTrap::ClapTrap(const ClapTrap& clap)
 	*this = clap;
 }
 
-void	ClapTrap::operator=(ClapTrap const& clap)
+ClapTrap&	ClapTrap::operator=(ClapTrap const& clap)
 {
-	std::cout << "Assignment operator ClapTrap called" << std::endl;
+	std::cout << "Assignment operator called" << std::endl;
 	this->_attack_damage = clap._attack_damage;
 	this->_energy_points = clap._energy_points;
 	this->_hit_points = clap._hit_points;
 	this->_name = clap._name;
+	return (*this);
 }
 
 void ClapTrap::attack(const std::string& target)

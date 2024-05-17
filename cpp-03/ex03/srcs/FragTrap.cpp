@@ -40,10 +40,11 @@ FragTrap::FragTrap(const FragTrap& clap): ClapTrap(clap)
 	std::cout << "Copy constructor Scav called" << std::endl;
 }
 
-void	FragTrap::operator=(FragTrap const& clap)
+FragTrap&	FragTrap::operator=(FragTrap const& clap)
 {
 	ClapTrap::operator=(clap);
 	std::cout << "Assignment operator Scav called" << std::endl;
+	return (*this);
 }
 
 void	FragTrap::highFivesGuys(void)

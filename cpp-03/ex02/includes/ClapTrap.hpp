@@ -23,11 +23,20 @@ class ClapTrap
 		int				_energy_points;
 		unsigned int	_attack_damage;
 	public:
-		ClapTrap(void); // Default constructor
+		// Default constructor + name
+		ClapTrap(void);
 		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap& clap); // copy constructor
-		void	operator=(ClapTrap const& clap); // Assignment operator
+
+		// Copy constructor
+		ClapTrap(const ClapTrap& clap);
+		
+		// Assignment operator
+		ClapTrap&	operator=(ClapTrap const& clap);
+
+		// Destructor
 		~ClapTrap(void);
+
+		// Member functions
 		virtual void 	attack(const std::string& target);
 		void 			takeDamage(unsigned int amount);
 		void 			beRepaired(unsigned int amount);

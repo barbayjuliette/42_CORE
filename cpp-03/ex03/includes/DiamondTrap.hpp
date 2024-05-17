@@ -24,11 +24,20 @@ class DiamondTrap: public ScavTrap, public FragTrap
 	private:
 		std::string	_name;
 	public:
-		DiamondTrap(void); // Default constructor
+		// Default constructor + name
+		DiamondTrap(void);
 		DiamondTrap(std::string name);
-		DiamondTrap(const DiamondTrap& copy); // copy constructor
-		void	operator=(DiamondTrap const& diamond); // Assignment operator
+
+		// Copy constructor
+		DiamondTrap(const DiamondTrap& clap);
+		
+		// Assignment operator
+		DiamondTrap&	operator=(DiamondTrap const& clap);
+
+		// Destructor
 		~DiamondTrap(void);
+
+		// Member functions
 };
 
 #endif

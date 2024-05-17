@@ -19,11 +19,20 @@
 class FragTrap: virtual public ClapTrap
 {
 	public:
-		FragTrap(void); // Default constructor
+		// Default constructor + name
+		FragTrap(void);
 		FragTrap(std::string name);
-		FragTrap(const FragTrap& copy); // copy constructor
+
+		// Copy constructor
+		FragTrap(const FragTrap& clap);
+		
+		// Assignment operator
+		FragTrap&	operator=(FragTrap const& clap);
+
+		// Destructor
 		~FragTrap(void);
-		void	operator=(FragTrap const& copy); // Assignment operator
+
+		// Member functions
 		void	highFivesGuys(void);
 };
 
