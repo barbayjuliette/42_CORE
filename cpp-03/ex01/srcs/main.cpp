@@ -10,40 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "../includes/ClapTrap.hpp"
+#include "../includes/ScavTrap.hpp"
 
-void	second_test(void)
-{
-	ScavTrap	bob;
-	ScavTrap john("John");
-	bob.display_all();
-	ScavTrap	copy(bob);
-	bob.display_all();
-	bob.guardGate();
-	john = bob;
-	std::cout << "Changed name to: " << john.get_name() << std::endl;
-}
-
+// Test no hit points. Cannot do anything.
 void	john_test(void)
 {
 	ScavTrap john("John");
+
 	john.display_all();
 	john.attack("One");
+	john.guardGate();
 	john.attack("Two");
 	john.attack("Three");
-	john.takeDamage(4);
-	john.takeDamage(2);
-	john.beRepaired(3);
-	john.takeDamage(4);
-	john.takeDamage(3);
-	john.beRepaired(3);
 	john.display_all();
+	john.takeDamage(40);
+	john.display_all();
+	john.takeDamage(20);
+	john.display_all();
+	john.beRepaired(30);
+	john.display_all();
+	john.takeDamage(40);
+	john.takeDamage(33);
+	john.display_all();
+	john.attack("Should fail attack");
+	john.takeDamage(30);
+	john.beRepaired(30);
 }
-
 int main(void)
 {
 	john_test();
-	second_test();
 	return 0;
 }
