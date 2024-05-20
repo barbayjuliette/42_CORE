@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "../includes/ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void): _name("Default"), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
@@ -18,6 +18,12 @@ ClapTrap::ClapTrap(void): _name("Default"), _hit_points(10), _energy_points(10),
 }
 
 ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(10), _energy_points(10), _attack_damage(0)
+{
+	std::cout << _name << " ClapTrap created!" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name, int hit, int energy, int attack): 
+		_name(name), _hit_points(hit), _energy_points(energy), _attack_damage(attack)
 {
 	std::cout << _name << " ClapTrap created!" << std::endl;
 }
@@ -98,7 +104,7 @@ std::string		ClapTrap::get_name(void)
 {
 	return (this->_name);
 }
-
+// Helpers
 void	ClapTrap::display_hit_points()
 {
 	std::cout << "[HIT POINTS]: "<< this->_hit_points << std::endl;
@@ -116,8 +122,12 @@ void	ClapTrap::display_attack_damage()
 
 void	ClapTrap::display_all()
 {
-	std::cout << get_name() << ": ";
-	std::cout << "[HIT POINTS]: "<< this->_hit_points;
-	std::cout << " [ENERGY POINTS]: "<< this->_energy_points;
-	std::cout << " [ATTACK DAMAGE]: "<< this->_attack_damage << std::endl;
+	const char *red = "\e[31m";
+	const char *white = "\e[97m";
+
+	std::cout << red <<  get_name() << std::endl;
+	this->display_hit_points();
+	this->display_energy_points();
+	this->display_attack_damage();
+	std::cout << white;
 }

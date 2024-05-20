@@ -10,10 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = includes/main.cpp \
-		includes/ClapTrap.cpp \
-		includes/ScavTrap.cpp \
-		includes/FragTrap.cpp
+SRCS = srcs/main.cpp \
+		srcs/ClapTrap.cpp \
+		srcs/ScavTrap.cpp \
+		srcs/FragTrap.cpp
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf

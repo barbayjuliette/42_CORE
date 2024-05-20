@@ -10,40 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "FragTrap.hpp"
-
-void	second_test(void)
-{
-	FragTrap	bob;
-	FragTrap john("John");
-	bob.display_all();
-	FragTrap	copy(bob);
-	bob.display_all();
-	bob.highFivesGuys();
-	john = bob;
-	std::cout << "Changed name to: " << john.get_name() << std::endl;
-}
+#include "../includes/ClapTrap.hpp"
+#include "../includes/FragTrap.hpp"
 
 void	john_test(void)
 {
 	FragTrap john("John");
+
+	john.highFivesGuys();
+	john.highFivesGuys();
 	john.display_all();
 	john.attack("One");
 	john.attack("Two");
 	john.attack("Three");
-	john.takeDamage(4);
-	john.takeDamage(2);
-	john.beRepaired(3);
-	john.takeDamage(4);
-	john.takeDamage(3);
-	john.beRepaired(3);
 	john.display_all();
+	john.takeDamage(40);
+	john.display_all();
+	john.takeDamage(20);
+	john.display_all();
+	john.beRepaired(30);
+	john.display_all();
+	john.takeDamage(40);
+	john.takeDamage(33);
+	john.display_all();
+	john.attack("Should fail attack");
+	john.takeDamage(30);
+	john.beRepaired(30);
+	john.highFivesGuys();
 }
 
 int main(void)
 {
 	john_test();
-	second_test();
 	return 0;
 }
