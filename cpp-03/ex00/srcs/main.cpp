@@ -12,10 +12,12 @@
 
 #include "../includes/ClapTrap.hpp"
 
+// Test Bob has no energy point. Cannot attack, can only be attacked
 void	bob_test(void)
 {
 	ClapTrap	bob("Bob");
 
+	bob.display_all();
 	bob.attack("One");
 	bob.attack("Two");
 	bob.attack("Three");
@@ -25,17 +27,19 @@ void	bob_test(void)
 	bob.attack("Seven");
 	bob.attack("Eight");
 	bob.attack("Nine");
-	std::cout << "Energy points ClapTrap " << bob.get_name() << ": " << bob.get_energy_points() << std::endl;
+	bob.display_all();
 	bob.attack("Ten");
-	std::cout << "Energy points ClapTrap " << bob.get_name() << ": " << bob.get_energy_points() << std::endl;
+	bob.display_all();
 	bob.attack("Eleven");
 	bob.takeDamage(3);
 	bob.takeDamage(5);
 	bob.takeDamage(3);
-	std::cout << "Hit points ClapTrap " << bob.get_name() << ": " << bob.get_hit_points() << std::endl;
+	bob.display_all();
 	bob.beRepaired(5);
+	bob.takeDamage(3);
 }
 
+// Test no hit points. Cannot do anything.
 void	john_test(void)
 {
 	ClapTrap john("John");
@@ -54,12 +58,14 @@ void	john_test(void)
 	john.takeDamage(4);
 	john.takeDamage(3);
 	john.display_all();
+	john.attack("Should fail attack");
+	john.takeDamage(3);
 	john.beRepaired(3);
 }
 
 int main(void)
 {
-	// bob_test();
-	john_test();
+	bob_test();
+	// john_test();
 	return 0;
 }

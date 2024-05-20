@@ -76,7 +76,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	{
 		_hit_points += amount;
 		_energy_points -= 1;
-		std::cout << "ClapTrap " << _name << " repaired itself and got " << amount << " points back" << std::endl;
+		std::cout << "ClapTrap " << _name << " repaired itself and got " << amount << " hit points back" << std::endl;
 	}
 	else if (_energy_points <= 0)
 		std::cout << "ClapTrap " << _name << " does not have any energy point to repair itself" << std::endl;
@@ -121,9 +121,9 @@ void	ClapTrap::display_all()
 	const char *red = "\e[31m";
 	const char *white = "\e[97m";
 
-	system("Color E4");
-	std::cout << red <<  get_name() << ": ";
-	std::cout <<"[HIT POINTS]: "<< this->_hit_points;
-	std::cout << " [ENERGY POINTS]: "<< this->_energy_points;
-	std::cout << " [ATTACK DAMAGE]: " << this->_attack_damage << white << std::endl;
+	std::cout << red <<  get_name() << std::endl;
+	this->display_hit_points();
+	this->display_energy_points();
+	this->display_attack_damage();
+	std::cout << white;
 }
