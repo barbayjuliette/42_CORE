@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include "ClapTrap.hpp"
-#include "FragTrap.hpp"
+#include "../includes/ClapTrap.hpp"
+#include "../includes/FragTrap.hpp"
 
-FragTrap::FragTrap(void): ClapTrap()
+FragTrap::FragTrap(void): ClapTrap("Default", 100, 100, 30)
 {
-	_hit_points = 100;
-	_energy_points = 100;
-	_attack_damage = 30;
 	std::cout << get_name() << " FragTrap created with default constructor" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name): ClapTrap(name)
+FragTrap::FragTrap(std::string name): ClapTrap(name, 100, 100, 30)
 {
-	_hit_points = 100;
-	_energy_points = 100;
-	_attack_damage = 30;
 	std::cout << get_name() << " FragTrap created!" << std::endl;
+}
+
+FragTrap::FragTrap(std::string name, int hit, int energy, int attack): ClapTrap(name, hit, energy, attack)
+{
+	std::cout << get_name() << " ScavTrap created!" << std::endl;
 }
 
 FragTrap::~FragTrap(void)

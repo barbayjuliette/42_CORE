@@ -44,6 +44,8 @@ class ClapTrap
 		unsigned int	get_hit_points();
 		unsigned int	get_energy_points();
 		std::string		get_name();
+
+		// Helpers
 		void			display_hit_points();
 		void			display_energy_points();
 		void			display_attack_damage();

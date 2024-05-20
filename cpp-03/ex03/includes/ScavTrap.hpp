@@ -22,6 +22,7 @@ class ScavTrap : virtual public ClapTrap
 		// Default constructor + name
 		ScavTrap(void);
 		ScavTrap(std::string name);
+		ScavTrap(std::string name, int hit, int energy, int attack);
 
 		// Copy constructor
 		ScavTrap(const ScavTrap& clap);

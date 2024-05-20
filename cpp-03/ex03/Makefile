@@ -16,7 +16,7 @@ SRCS = srcs/main.cpp \
 		srcs/FragTrap.cpp \
 		srcs/DiamondTrap.cpp
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 RM = rm -rf
 NAME = claptrap
 OBJS = ${SRCS:.cpp=.o}

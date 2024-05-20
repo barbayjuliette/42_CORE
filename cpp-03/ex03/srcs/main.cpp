@@ -10,24 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "FragTrap.hpp"
-
-void	second_test(void)
-{
-	FragTrap	bob;
-	FragTrap john("John");
-	bob.display_all();
-	FragTrap	copy(bob);
-	bob.display_all();
-	bob.highFivesGuys();
-	john = bob;
-	std::cout << "Changed name to: " << john.get_name() << std::endl;
-}
+#include "../includes/ClapTrap.hpp"
+#include "../includes/FragTrap.hpp"
+#include "../includes/DiamondTrap.hpp"
 
 void	john_test(void)
 {
-	FragTrap john("John");
+	DiamondTrap john("John");
 	john.display_all();
 	john.attack("One");
 	john.attack("Two");
@@ -44,6 +33,5 @@ void	john_test(void)
 int main(void)
 {
 	john_test();
-	second_test();
 	return 0;
 }

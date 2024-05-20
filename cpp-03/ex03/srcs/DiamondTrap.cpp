@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "DiamondTrap.hpp"
-#include "FragTrap.hpp"
-#include "ScavTrap.hpp"
+#include "../includes/ClapTrap.hpp"
+#include "../includes/DiamondTrap.hpp"
+#include "../includes/FragTrap.hpp"
+#include "../includes/ScavTrap.hpp"
 
-DiamondTrap::DiamondTrap(void): ClapTrap("default_crap_trap"), ScavTrap(), FragTrap()
+DiamondTrap::DiamondTrap(void): ClapTrap("default_crap_trap"), ScavTrap("default", 100, 50, 20), FragTrap("default", 100, 100, 30)
 {
 	this->_name = "default";
 	this->_hit_points = FragTrap::_hit_points;
@@ -24,13 +24,13 @@ DiamondTrap::DiamondTrap(void): ClapTrap("default_crap_trap"), ScavTrap(), FragT
 	std::cout << get_name() << " DiamondTrap created with default constructor" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name): ScavTrap(name), FragTrap(name), ClapTrap(name + "_clap_name")
+DiamondTrap::DiamondTrap(std::string name):  ClapTrap(name + "_clap_name"), ScavTrap(name, 100, 50, 20), FragTrap(name, 100, 100, 30)
 {
 	this->_name = "name";
 	this->_hit_points = FragTrap::_hit_points;
 	this->_energy_points = ScavTrap::_energy_points;
 	this->_attack_damage = FragTrap::_attack_damage;
-	std::cout << get_name() << " DiamondTrap created!" << std::endl;
+	std::cout << get_name() << " DiamondTrap created here!" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)
@@ -38,7 +38,7 @@ DiamondTrap::~DiamondTrap(void)
 	std::cout << get_name() << " DiamondTrap destroyed!" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& copy):  ScavTrap(copy), FragTrap(copy), ClapTrap(copy)
+DiamondTrap::DiamondTrap(const DiamondTrap& copy): ClapTrap(copy), ScavTrap(copy), FragTrap(copy)
 {
 	std::cout << "Copy constructor Scav called" << std::endl;
 }
@@ -49,3 +49,5 @@ DiamondTrap&	DiamondTrap::operator=(DiamondTrap const& clap)
 	std::cout << "Assignment operator Scav called" << std::endl;
 	return (*this);
 }
+
+

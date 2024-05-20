@@ -22,6 +22,7 @@ class FragTrap: virtual public ClapTrap
 		// Default constructor + name
 		FragTrap(void);
 		FragTrap(std::string name);
+		FragTrap(std::string name, int hit, int energy, int attack);
 
 		// Copy constructor
 		FragTrap(const FragTrap& clap);

@@ -37,6 +37,7 @@ void	john_test(void)
 	john.takeDamage(30);
 	john.beRepaired(30);
 }
+
 int main(void)
 {
 	john_test();

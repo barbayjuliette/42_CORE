@@ -23,9 +23,10 @@ class ClapTrap
 		int				_energy_points;
 		unsigned int	_attack_damage;
 	public:
-		// Default constructor + name
+		// Constructors
 		ClapTrap(void);
 		ClapTrap(std::string name);
+		ClapTrap(std::string name, int hit, int energy, int attack);
 
 		// Copy constructor
 		ClapTrap(const ClapTrap& clap);
