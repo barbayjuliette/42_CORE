@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:23:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/22 16:40:34 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:26:15 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	test_wrong_animals()
 	std::cout << std::endl << GREEN << "Types:" << WHITE << std::endl;
 	std::cout << i->getType() << " " << std::endl << std::endl;
 	
-	std::cout << GREEN << "Should all be Animal sound: " << WHITE << std::endl;
+	std::cout << GREEN << "Should all be WrongAnimal sound: " << WHITE << std::endl;
 	i->makeSound();
 	meta->makeSound();
 
@@ -95,10 +95,10 @@ void	extra_tests()
 
 int main()
 {
-	// test_animals();
-	// std::cout << std::endl;
-	// test_wrong_animals();
-	// std::cout << std::endl;
+	test_animals();
+	std::cout << std::endl;
+	test_wrong_animals();
+	std::cout << std::endl;
 	extra_tests();
 	return 0;
 }
