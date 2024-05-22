@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:11:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 18:51:39 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 11:58:30 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Dog::Dog()
 	std::cout << "Dog constructor called 🐶" << std::endl;
 }
 
-Dog::Dog( const Dog & src ) : Animal(src)
+Dog::Dog(const Dog& src) : Animal(src)
 {
 	std::cout << "Dog Copy constructor called" << std::endl;
 	*this = src;
@@ -43,8 +43,9 @@ Dog::~Dog()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Dog&	Dog::operator=( Dog const & rhs )
+Dog&	Dog::operator=( Dog const& rhs )
 {
+	std::cout << "Dog assignment operator called" << std::endl;
 	this->type = rhs.getType();
 	return (*this);
 }

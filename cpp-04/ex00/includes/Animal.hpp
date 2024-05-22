@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:37:24 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 18:46:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:23:16 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ class Animal
 		std::string	type;
 	public:
 		Animal();
-		Animal(Animal const & src);
-		~Animal();
+		Animal(const Animal& src);
+		virtual ~Animal();
 
-		Animal&		operator=( Animal const & rhs );
+		Animal&			operator=( Animal const & rhs );
 
 		virtual void	makeSound() const;
-		std::string	getType() const;
+		std::string		getType() const;
 };
 
 #endif

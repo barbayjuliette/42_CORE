@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:57:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 19:35:42 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:18:44 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ WrongAnimal::~WrongAnimal()
 
 WrongAnimal&	WrongAnimal::operator=( WrongAnimal const & rhs )
 {
+	std::cout << "Wrong Animal assignment operator called" << std::endl;
 	this->type = rhs.getType();
 	return (*this);
 }

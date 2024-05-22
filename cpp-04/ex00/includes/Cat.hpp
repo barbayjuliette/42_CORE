@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:12:24 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 18:50:38 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:23:42 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Cat : public Animal
 
 	public:
 		Cat();
-		Cat( Cat const & src );
+		Cat(const Cat& src);
 		~Cat();
 
 		Cat &		operator=( Cat const & rhs );

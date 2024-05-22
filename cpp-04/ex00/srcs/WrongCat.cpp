@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:57:33 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 19:35:56 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:18:59 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ WrongCat::~WrongCat()
 
 WrongCat&	WrongCat::operator=( WrongCat const & rhs )
 {
+	std::cout << "Wrong Cat assignment operator called" << std::endl;
 	this->type = rhs.getType();
 	return (*this);
 }

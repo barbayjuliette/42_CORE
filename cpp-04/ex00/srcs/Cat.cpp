@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:11:45 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 18:59:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/21 20:24:47 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Cat::Cat()
 	std::cout << "Cat constructor called 🐱" << std::endl;
 }
 
-Cat::Cat( const Cat & src ): Animal(src)
+Cat::Cat(const Cat& src): Animal(src)
 {
 	std::cout << "Cat Copy constructor called" << std::endl;
 	*this = src;
@@ -45,6 +45,7 @@ Cat::~Cat()
 
 Cat &	Cat::operator=( Cat const & rhs )
 {
+	std::cout << "Cat assignment operator called" << std::endl;
 	this->type = rhs.getType();
 	return (*this);
 }

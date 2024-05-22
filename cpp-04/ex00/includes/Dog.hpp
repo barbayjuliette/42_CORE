@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:12:18 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 18:50:43 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 11:56:37 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ class Dog : public Animal
 
 	public:
 		Dog();
-		Dog( Dog const & src );
+		Dog(const Dog& src);
 		~Dog();
 
-		Dog &		operator=( Dog const & rhs );
+		Dog&		operator=( Dog const & rhs );
 		void		makeSound() const;
 
 	private:

@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:57:15 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 19:08:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/21 19:58:37 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ class WrongAnimal
 		void	makeSound() const;
 	protected:
 		std::string	type;
-
 };
 
 #endif
