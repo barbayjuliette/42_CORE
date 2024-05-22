@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:23:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/22 17:16:14 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:41:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	test_deep_copy_dog()
 	Dog dog;
 
 	std::cout << std::endl << GREEN << "Creating 1 puppy" << WHITE << std::endl;
-	Dog puppy(dog);
+	Dog puppy;
+	puppy = dog;
 	
 	std::cout << std::endl << GREEN << "Adding 3 ideas to dog" << WHITE << std::endl;
 	dog.get_brain()->set_ideas("First idea");
@@ -135,9 +136,9 @@ void	test_deep_copy_type()
 
 int main()
 {
-	test_pet_array();
+	// test_pet_array();
 	// test_deep_copy_cat();
 	// test_deep_copy_dog();
-	// test_deep_copy_type();
+	test_deep_copy_type();
 	return 0;
 }

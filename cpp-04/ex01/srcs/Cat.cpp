@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:11:45 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/22 17:02:14 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:47:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Cat::Cat()
+Cat::Cat(): Animal()
 {
 	std::cout << "Cat constructor called 🐱" << std::endl;
 	type = "Cat";
@@ -27,7 +27,7 @@ Cat::Cat()
 Cat::Cat(const Cat& src): Animal(src), _brain(new Brain())
 {
 	std::cout << "Cat Copy constructor called" << std::endl;
-	*this = src;
+	*(this->_brain) = *(src.get_brain());
 }
 
 /*
@@ -40,7 +40,6 @@ Cat::~Cat()
 	delete _brain;
 }
 
-
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
@@ -48,8 +47,11 @@ Cat::~Cat()
 Cat &	Cat::operator=( Cat const & rhs )
 {
 	std::cout << "Cat assignment operator called" << std::endl;
-	this->type = rhs.getType();
-	*(this->_brain) = *(rhs.get_brain());
+	if (this != &rhs)
+	{
+		Animal::operator=(rhs);
+		*(this->_brain) = *(rhs.get_brain());
+	}
 	return (*this);
 }
 

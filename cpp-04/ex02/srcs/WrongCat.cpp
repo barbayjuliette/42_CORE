@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:57:33 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 20:18:59 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:35:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,16 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-WrongCat::WrongCat()
+WrongCat::WrongCat(): WrongAnimal()
 {
 	type = "Wrong Cat";
 	std::cout << "Wrong Cat constructor called 🐆" << std::endl;
 }
 
-WrongCat::WrongCat( const WrongCat & src ) : WrongAnimal()
+WrongCat::WrongCat( const WrongCat & src ) : WrongAnimal(src)
 {
 	std::cout << "Wrong Cat Copy constructor called" << std::endl;
-	*this = src;
 }
-
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -39,7 +37,6 @@ WrongCat::~WrongCat()
 	std::cout << "Wrong Cat destructor called" << std::endl;
 }
 
-
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
@@ -47,7 +44,8 @@ WrongCat::~WrongCat()
 WrongCat&	WrongCat::operator=( WrongCat const & rhs )
 {
 	std::cout << "Wrong Cat assignment operator called" << std::endl;
-	this->type = rhs.getType();
+	if (this != &rhs)
+		WrongAnimal::operator=(rhs);
 	return (*this);
 }
 
