@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:37:24 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 20:23:16 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 17:02:44 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Animal
 
 		virtual void	makeSound() const;
 		std::string		getType() const;
+		void			setType(std::string type);
 };
 
 #endif

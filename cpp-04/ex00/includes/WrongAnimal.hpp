@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:57:15 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 19:58:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 16:41:25 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ class WrongAnimal
 		WrongAnimal( WrongAnimal const & src );
 		~WrongAnimal();
 
-		WrongAnimal &		operator=( WrongAnimal const & rhs );
-		std::string	getType() const;
-		void	makeSound() const;
+		WrongAnimal&	operator=( WrongAnimal const & rhs );
+		std::string		getType() const;
+		void			makeSound() const;
 	protected:
 		std::string	type;
 };

@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 14:37:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/22 13:33:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 17:03:25 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,11 @@ std::string	Animal::getType() const
 {
 	return (this->type);
 }
+
+void			Animal::setType(std::string type)
+{
+	this->type = type;
+}
+
 
 /* ************************************************************************** */

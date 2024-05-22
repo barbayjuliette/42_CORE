@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 18:57:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/21 19:08:08 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 16:41:36 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class WrongCat : public WrongAnimal
 		WrongCat( WrongCat const & src );
 		~WrongCat();
 
-		WrongCat &		operator=( WrongCat const & rhs );
-		void	makeSound() const;
+		WrongCat&	operator=( WrongCat const & rhs );
+		void		makeSound() const;
 	private:
 
 };

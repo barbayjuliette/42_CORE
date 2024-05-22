@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:23:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/22 16:36:46 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/22 17:16:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,33 @@ void	test_deep_copy_dog()
 	std::cout << std::endl << GREEN << "Destruction:" << WHITE << std::endl;
 }
 
+void	test_deep_copy_type()
+{
+	std::cout << RED << "---Make sure copy is deep, not shallow!- TYPE---" << WHITE << std::endl;
+	
+	std::cout << GREEN << "Creating 1 dog" << WHITE << std::endl;
+	Dog dog;
+
+	std::cout << std::endl << GREEN << "Creating 1 puppy" << WHITE << std::endl;
+	Dog puppy;
+
+	puppy = dog;
+	std::cout << std::endl << GREEN << "Changing type of puppy: DOG -> PUPPY" << WHITE << std::endl;
+	puppy.setType("Puppy");
+
+	std::cout << std::endl << GREEN << "Check types" << WHITE << std::endl;
+	std::cout << "Dog is of type: " << dog.getType() << std::endl;
+	std::cout << "Puppy is of type: " << puppy.getType() << std::endl;
+
+	std::cout << std::endl << GREEN << "Destruction:" << WHITE << std::endl;
+
+}
+
 int main()
 {
 	test_pet_array();
-	test_deep_copy_cat();
-	test_deep_copy_dog();
+	// test_deep_copy_cat();
+	// test_deep_copy_dog();
+	// test_deep_copy_type();
 	return 0;
 }
