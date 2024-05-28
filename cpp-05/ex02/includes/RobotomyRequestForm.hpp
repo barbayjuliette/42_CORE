@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:35:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 21:36:17 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 17:15:02 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <string>
 # include <exception>
 # include <stdbool.h>
+# include <iostream>
+# include <fstream>
+# include <cstdlib>
 
 # include "./Bureaucrat.hpp"
 # include "./AForm.hpp"
@@ -25,15 +28,18 @@ class Bureaucrat;
 
 class RobotomyRequestForm : public AForm
 {
+	private:
+		const std::string	_target;
 	public:
 		RobotomyRequestForm();
-		RobotomyRequestForm(std::string name, int gradeSign, int gradeExec);
+		RobotomyRequestForm(std::string target);
 		RobotomyRequestForm(const RobotomyRequestForm& src);
 		~RobotomyRequestForm();
 
 		RobotomyRequestForm&			operator=( RobotomyRequestForm const & rhs );
 
-		void	execute(Bureaucrat const &executor);
+		void		execute(Bureaucrat const &executor) const;
+		std::string	getTarget(void) const;
 
 		class GradeTooHighException : public std::exception
 		{

@@ -6,71 +6,145 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 20:58:47 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 17:37:02 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/Bureaucrat.hpp"
-# include "../includes/Form.hpp"
+# include "../includes/AForm.hpp"
+# include "../includes/ShrubberyCreationForm.hpp"
+# include "../includes/PresidentialPardonForm.hpp"
+# include "../includes/RobotomyRequestForm.hpp"
 
-void	test_beSigned(void)
+void	test_shrubbery()
 {
-	std::cout << RED << "--- HAPPY TEST: Bureaucrat signs form ---" << WHITE << std::endl;
-
-	Form form("28C", 150, 150);
-	Bureaucrat bureaucrat("Bob", 42);
-
-	std::cout << form;
-	form.beSigned(bureaucrat);
-	std::cout << form;
-}
-
-void	test_signForm(void)
-{
-	std::cout << RED << "--- HAPPY TEST: Bureaucrat signs form ---" << WHITE << std::endl;
-
-	Form form("28C", 150, 150);
-	Bureaucrat bureaucrat("Bob", 42);
-
-	std::cout << form;
-	bureaucrat.signForm(form);
-	std::cout << form;
-}
-
-void	test_cannot_sign(void)
-{
-	std::cout << RED << "--- EXCEPTION: Bureaucrat cannot sign - beSigned---" << WHITE << std::endl;
-
-	try
-	{
-		Form form("28C", 21, 21);
-		Bureaucrat bureaucrat("Bob", 42);
+	std::cout << std::endl << BBLUE << "-------------- SHRUBBERY --------------" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- EXECUTION WORKS ---" << WHITE << std::endl;
+	{	
+		ShrubberyCreationForm	form("home");
 		std::cout << form;
-		form.beSigned(bureaucrat);
-		std::cout << form;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED << "Exception caught: " << e.what() << '\n';
-	}
-	std::cout << RED << "--- EXCEPTION: Bureaucrat cannot sign - signForm ---" << WHITE << std::endl;
-	try
-	{
-		Form form("28C", 21, 21);
-		Bureaucrat bureaucrat("Bob", 42);
-		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 137);
 		bureaucrat.signForm(form);
 		std::cout << form;
+		bureaucrat.executeForm(form);
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED << "Exception caught: " << e.what() << '\n';
+
+	std::cout << std::endl << BLUE << "--- FAIL: GRADE NOK ---" << WHITE << std::endl;
+	{	
+		ShrubberyCreationForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 138);
+		bureaucrat.signForm(form);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+	}
+
+	std::cout << std::endl << BLUE << "--- FAIL: FORM NOT SIGNED  ---" << WHITE << std::endl;
+	{	
+		ShrubberyCreationForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 137);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+	}
+
+	std::cout << std::endl << BLUE << "--- FAIL: FORM NOT SIGNED & GRADE TOO LOW ---" << WHITE << std::endl;
+	{	
+		ShrubberyCreationForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 138);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+	}
+}
+
+void	test_robotomy()
+{
+	std::cout << std::endl << BBLUE << "-------------- ROBOTOMY --------------" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- EXECUTION WORKS ---" << WHITE << std::endl;
+	{	
+		RobotomyRequestForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 1);
+		bureaucrat.signForm(form);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+		bureaucrat.executeForm(form);
+		bureaucrat.executeForm(form);
+		bureaucrat.executeForm(form);
+		bureaucrat.executeForm(form);
+		bureaucrat.executeForm(form);
+	}
+
+	std::cout << std::endl << BLUE << "--- FAIL: GRADE NOK ---" << WHITE << std::endl;
+	{	
+		RobotomyRequestForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 50);
+		bureaucrat.signForm(form);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+
+	}
+
+	std::cout << std::endl << BLUE << "--- FAIL: FORM NOT SIGNED  ---" << WHITE << std::endl;
+	{	
+		RobotomyRequestForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 1);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+	}
+}
+
+void	test_presidential()
+{
+	std::cout << std::endl << BBLUE << "-------------- PRESIDENTIAL --------------" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- EXECUTION WORKS ---" << WHITE << std::endl;
+	{	
+		PresidentialPardonForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 1);
+		bureaucrat.signForm(form);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+	}
+
+	std::cout << std::endl << BLUE << "--- FAIL: GRADE NOK ---" << WHITE << std::endl;
+	{	
+		PresidentialPardonForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 10);
+		bureaucrat.signForm(form);
+		std::cout << form;
+		bureaucrat.executeForm(form);
+	}
+
+	std::cout << std::endl << BLUE << "--- FAIL: FORM NOT SIGNED  ---" << WHITE << std::endl;
+	{	
+		PresidentialPardonForm	form("home");
+		std::cout << form;
+
+		Bureaucrat				bureaucrat("Bob", 1);
+		std::cout << form;
+		bureaucrat.executeForm(form);
 	}
 }
 
 int main(void)
 {
-	// test_beSigned();
-	// test_signForm();
-	test_cannot_sign();
+	// test_shrubbery();
+	std::cout << std::endl;
+	test_robotomy();
+	std::cout << std::endl;
+	// test_presidential();
 }

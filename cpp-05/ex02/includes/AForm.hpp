@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:02:09 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 21:29:14 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:14:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <string>
 # include <exception>
 # include <stdbool.h>
+# include <iostream>
+# include <fstream>
+# include <stdexcept>
 
 # include "./Bureaucrat.hpp"
 
@@ -42,8 +45,9 @@ class AForm
 		int			getGradeExec() const;
 		bool		getSigned() const;
 
-		void	beSigned(Bureaucrat& bureaucrat);
-		virtual void	execute(Bureaucrat const &executor) = 0;
+		void			beSigned(Bureaucrat& bureaucrat);
+		virtual void	execute(Bureaucrat const &executor) const = 0;
+		void			execution_rights(Bureaucrat const &executor) const;
 
 		class GradeTooHighException : public std::exception
 		{
@@ -56,8 +60,15 @@ class AForm
 			public:
 				virtual const char *what() const throw();
 		};
+
+		class ExecutionDeniedException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& buro);
+
 
 #endif

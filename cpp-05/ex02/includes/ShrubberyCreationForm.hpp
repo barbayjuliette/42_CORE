@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:28:36 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 21:33:19 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:47:54 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,25 @@
 # include <exception>
 # include <stdbool.h>
 
-# include "./Bureaucrat.hpp"
 # include "./AForm.hpp"
+# include "./Bureaucrat.hpp"
 
 class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm
 {
+	private:
+		const std::string	_target;
 	public:
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(std::string name, int gradeSign, int gradeExec);
+		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm& src);
 		~ShrubberyCreationForm();
 
 		ShrubberyCreationForm&			operator=( ShrubberyCreationForm const & rhs );
 
-		void	execute(Bureaucrat const &executor);
-
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
+		void		execute(Bureaucrat const &executor) const;
+		std::string	getTarget(void) const;
 };
 
 #endif

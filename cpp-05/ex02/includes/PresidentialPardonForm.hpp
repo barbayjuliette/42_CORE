@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:28:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 21:35:05 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 17:03:12 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ class Bureaucrat;
 
 class PresidentialPardonForm : public AForm
 {
+	private:
+		const std::string	_target;
 	public:
 		PresidentialPardonForm();
-		PresidentialPardonForm(std::string name, int gradeSign, int gradeExec);
+		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm& src);
 		~PresidentialPardonForm();
 
 		PresidentialPardonForm&			operator=( PresidentialPardonForm const & rhs );
 
-		void	execute(Bureaucrat const &executor);
+		void		execute(Bureaucrat const &executor) const;
+		std::string	getTarget(void) const;
 
 		class GradeTooHighException : public std::exception
 		{

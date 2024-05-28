@@ -6,12 +6,11 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:39:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 19:25:17 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:22:21 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
-#include <stdexcept>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
@@ -86,7 +85,7 @@ const char *Bureaucrat::GradeTooLowException::what() const throw ()
 	return "Grade too Low";
 }
 
-void	Bureaucrat::signForm(Form& form)
+void	Bureaucrat::signForm(AForm& form)
 {
 	try {
 		form.beSigned(*this);
@@ -96,6 +95,20 @@ void	Bureaucrat::signForm(Form& form)
 		std::cout << this->getName() << " could not sign form " << form.getName();
 		std::cout << " because their grade is too low." << std::endl;
 	}
+}
+
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << "Bureaucrat " << this->getName() << " executed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << "Exception caught: " << e.what() << WHITE << '\n';
+	}
+	
 }
 
 /*
