@@ -6,12 +6,11 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:39:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:59 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 16:22:21 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
-#include <stdexcept>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
@@ -71,7 +70,7 @@ void	Bureaucrat::increment_grade()
 void	Bureaucrat::decrement_grade()
 {
 	if (_grade >= 150)
-		throw (Bureaucrat::GradeTooLowException());
+		throw (Bureaucrat::GradeTooHighException());
 	this->_grade++;
 	std::cout << this->getName() << " decremented to grade " << this->getGrade() << std::endl;
 }
@@ -84,6 +83,32 @@ const char *Bureaucrat::GradeTooHighException::what() const throw ()
 const char *Bureaucrat::GradeTooLowException::what() const throw ()
 {
 	return "Grade too Low";
+}
+
+void	Bureaucrat::signForm(AForm& form)
+{
+	try {
+		form.beSigned(*this);
+		std::cout << "Bureaucrat " << this->getName() << " signed form " << form.getName() << std::endl;
+	}
+	catch (std::exception& e){
+		std::cout << this->getName() << " could not sign form " << form.getName();
+		std::cout << " because their grade is too low." << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << "Bureaucrat " << this->getName() << " executed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << "Exception caught: " << e.what() << WHITE << '\n';
+	}
+	
 }
 
 /*

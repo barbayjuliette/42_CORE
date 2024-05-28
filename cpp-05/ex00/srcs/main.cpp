@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 16:29:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/27 21:06:15 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	test_happy(void)
 {
-	std::cout << RED << "--- HAPPY TEST: Everything works---" << WHITE << std::endl;
+	std::cout << RED << "--- HAPPY TEST: Everything works ---" << WHITE << std::endl;
 	try {
 		Bureaucrat bureaucrat("Brian", 25);
 		bureaucrat.increment_grade();
@@ -44,6 +44,7 @@ void	catch_exception(void)
 		Bureaucrat test("Bob", 148);
 		test.decrement_grade();
 		test.decrement_grade();
+		test.decrement_grade();
 	} catch (std::exception & e){
 		std::cerr << RED << "Exception caught: " << e.what() << WHITE << std::endl;
 	}
@@ -52,7 +53,7 @@ void	catch_exception(void)
 
 void	exception_creation(void)
 {
-	std::cout << RED << "--- EXCEPTION CREATION: Created with out of bound value---" << WHITE << std::endl;
+	std::cout << RED << "--- EXCEPTION CREATION: Created with out of bound value ---" << WHITE << std::endl;
 	try {
 		Bureaucrat bureaucrat("Brian", 151);
 		bureaucrat.increment_grade();
@@ -81,6 +82,7 @@ void	test_assignment_op(void)
 		Bureaucrat	bureaucrat("Brian", 68);
 		Bureaucrat	copy;
 		copy = bureaucrat;
+		copy.increment_grade();
 	} catch (std::exception & e){
 		std::cerr << RED << "Exception caught: " << e.what() << WHITE << std::endl;
 	}
@@ -88,9 +90,9 @@ void	test_assignment_op(void)
 
 int main(void)
 {
-	// test_happy();
-	// catch_exception();
-	// exception_creation();
-	// test_copy_const();
+	test_happy();
+	catch_exception();
+	exception_creation();
+	test_copy_const();
 	test_assignment_op();
 }

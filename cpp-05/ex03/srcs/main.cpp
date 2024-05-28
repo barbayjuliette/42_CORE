@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:49:36 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/28 17:37:02 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,28 +140,11 @@ void	test_presidential()
 	}
 }
 
-void	test_polymorphism(void)
-{
-	std::cout << std::endl << BBLUE << "-------------- POLYMORPHISM --------------" << WHITE << std::endl;
-	std::cout << std::endl << BLUE << "--- EXECUTES PRESIDENTIAL ---" << WHITE << std::endl;
-	{	
-		AForm*	form = new PresidentialPardonForm("home");
-		std::cout << *form;
-
-		Bureaucrat				bureaucrat("Bob", 1);
-		bureaucrat.signForm(*form);
-		std::cout << *form;
-		bureaucrat.executeForm(*form);
-		delete form;
-	}
-}
-
 int main(void)
 {
-	test_shrubbery();
+	// test_shrubbery();
 	std::cout << std::endl;
 	test_robotomy();
 	std::cout << std::endl;
-	test_presidential();
-	test_polymorphism();
+	// test_presidential();
 }

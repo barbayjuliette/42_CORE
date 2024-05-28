@@ -1,46 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 14:38:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 21:05:26 by jbarbay          ###   ########.fr       */
+/*   Created: 2024/05/27 20:44:56 by jbarbay           #+#    #+#             */
+/*   Updated: 2024/05/27 20:50:12 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __BUREAUCRAT_HPP__
-# define __BUREAUCRAT_HPP__
+#ifndef __INTERN_HPP__
+# define __INTERN_HPP__
 
 # include <iostream>
 # include <string>
 # include <exception>
+# include <stdbool.h>
 
-#include "./Form.hpp"
+# include "./Form.hpp"
 
-class Form;
+// # include "./Bureaucrat.hpp"
 
-class Bureaucrat
+// class Form;
+
+class Intern
 {
-	protected:
-		const std::string	_name;
-		int					_grade;
+	private:
+
 	public:
-		Bureaucrat();
-		// Bureaucrat(std::string name);
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat(const Bureaucrat& src);
-		~Bureaucrat();
+		Intern();
+		Intern(const Intern& src);
+		virtual ~Intern();
 
-		Bureaucrat&			operator=( Bureaucrat const & rhs );
+		Intern&			operator=( Intern const & rhs );
 
-		std::string	getName() const;
-		int			getGrade() const;
-
-		void	increment_grade();
-		void	decrement_grade();
-		void	signForm(Form& form);
+		Form *makeForm(std::string name, std::string target);
 
 		class GradeTooHighException : public std::exception
 		{
@@ -55,6 +50,6 @@ class Bureaucrat
 		};
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& buro);
+std::ostream& operator<<(std::ostream& os, const Intern& buro);
 
 #endif
