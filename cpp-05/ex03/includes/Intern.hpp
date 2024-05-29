@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:44:56 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 20:50:12 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:43:09 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include <string>
 # include <exception>
 # include <stdbool.h>
-
+# include "../includes/ShrubberyCreationForm.hpp"
+# include "../includes/PresidentialPardonForm.hpp"
+# include "../includes/RobotomyRequestForm.hpp"
 # include "./Form.hpp"
 
 // # include "./Bureaucrat.hpp"
@@ -36,20 +38,6 @@ class Intern
 		Intern&			operator=( Intern const & rhs );
 
 		Form *makeForm(std::string name, std::string target);
-
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
 };
-
-std::ostream& operator<<(std::ostream& os, const Intern& buro);
 
 #endif

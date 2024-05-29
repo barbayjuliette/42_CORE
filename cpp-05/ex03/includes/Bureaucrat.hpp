@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:38:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:20:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:51:49 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 #define BBLUE "\e[1;36m"
 #define BLUE "\e[0;36m"
 
-#include "./AForm.hpp"
+#include "./Form.hpp"
 #include <stdexcept>
 
-class AForm;
+class Form;
 
 class Bureaucrat
 {
@@ -47,8 +47,8 @@ class Bureaucrat
 
 		void	increment_grade();
 		void	decrement_grade();
-		void	signForm(AForm& form);
-		void	executeForm(AForm const & form);
+		void	signForm(Form& form);
+		void	executeForm(Form const & form);
 
 		class GradeTooHighException : public std::exception
 		{

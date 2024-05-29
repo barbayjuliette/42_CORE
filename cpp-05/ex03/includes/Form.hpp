@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                          :+:      :+:    :+:   */
+/*   Form.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __AFORM_HPP__
-# define __AFORM_HPP__
+#ifndef __FORM_HPP__
+# define __FORM_HPP__
 
 # include <iostream>
 # include <string>
@@ -25,7 +25,7 @@
 
 class Bureaucrat;
 
-class AForm
+class Form
 {
 	protected:
 		const std::string	_name;
@@ -33,12 +33,12 @@ class AForm
 		const int			_gradeExec;
 		bool				_signed;
 	public:
-		AForm();
-		AForm(std::string name, int gradeSign, int gradeExec);
-		AForm(const AForm& src);
-		virtual ~AForm();
+		Form();
+		Form(std::string name, int gradeSign, int gradeExec);
+		Form(const Form& src);
+		virtual ~Form();
 
-		AForm&			operator=( AForm const & rhs );
+		Form&			operator=( Form const & rhs );
 
 		std::string	getName() const;
 		int			getGradeSign() const;
@@ -66,9 +66,14 @@ class AForm
 			public:
 				virtual const char *what() const throw();
 		};
+		class FormDoesNotExist : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 };
 
-std::ostream& operator<<(std::ostream& os, const AForm& buro);
+std::ostream& operator<<(std::ostream& os, const Form& buro);
 
 
 #endif

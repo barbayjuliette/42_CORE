@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:03:39 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:06:41 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:22:41 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5), _target("none")
+PresidentialPardonForm::PresidentialPardonForm() : Form("PresidentialPardonForm", 25, 5), _target("none")
 {
 	std::cout << "Created PresidentialPardonForm with target " << this->getTarget() << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("PresidentialPardonForm", 25, 5), _target(target)
 {
 	std::cout << "Created PresidentialPardonForm with target " << this->getTarget() << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : AForm(src), _target(src._target)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : Form(src), _target(src._target)
 {
 	std::cout << "Copy constructed PresidentialPardonForm with target " << this->getTarget() << std::endl;
 }
@@ -51,7 +51,7 @@ PresidentialPardonForm &	PresidentialPardonForm::operator=( PresidentialPardonFo
 	std::cout << "PresidentialPardonForm assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
-		AForm::operator=(rhs);
+		Form::operator=(rhs);
 	}
 	return (*this);
 }
@@ -65,6 +65,13 @@ void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 	this->execution_rights(executor);
 	std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
+
+Form	*create_presi(std::string target)
+{
+	Form* form = new PresidentialPardonForm(target);
+	return (form);
+}
+
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

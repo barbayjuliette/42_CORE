@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:39:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 16:22:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 15:51:49 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ const char *Bureaucrat::GradeTooLowException::what() const throw ()
 	return "Grade too Low";
 }
 
-void	Bureaucrat::signForm(AForm& form)
+void	Bureaucrat::signForm(Form& form)
 {
 	try {
 		form.beSigned(*this);
@@ -97,7 +97,7 @@ void	Bureaucrat::signForm(AForm& form)
 	}
 }
 
-void	Bureaucrat::executeForm(AForm const & form)
+void	Bureaucrat::executeForm(Form const & form)
 {
 	try
 	{

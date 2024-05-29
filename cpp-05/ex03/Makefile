@@ -6,13 +6,13 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/24 14:37:06 by jbarbay           #+#    #+#              #
-#    Updated: 2024/05/28 17:41:40 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/05/29 16:24:14 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/main.cpp \
 		srcs/Bureaucrat.cpp \
-		srcs/AForm.cpp \
+		srcs/Form.cpp \
 		srcs/ShrubberyCreationForm.cpp \
 		srcs/RobotomyRequestForm.cpp \
 		srcs/PresidentialPardonForm.cpp \
@@ -21,7 +21,7 @@ SRCS =	srcs/main.cpp \
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-NAME = form
+NAME = intern
 OBJS = ${SRCS:.cpp=.o}
 
 all: ${NAME}

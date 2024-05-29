@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:08:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 16:47:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:22:18 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), _target("none")
+ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", 145, 137), _target("none")
 {
 	std::cout << "Created ShrubberyCreationForm with target " << this->getTarget() << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("ShrubberyCreationForm", 145, 137), _target(target)
 {
 	std::cout << "Created ShrubberyCreationForm with target " << this->getTarget() << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& src) : AForm(src), _target(src._target)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& src) : Form(src), _target(src._target)
 {
 	std::cout << "Copy constructed ShrubberyCreationForm with target " << this->getTarget() << std::endl;
 }
@@ -42,16 +42,13 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	std::cout << "Destructed ShrubberyCreationForm " << this->getTarget() << std::endl;
 }
 
-/*
-** --------------------------------- OVERLOAD ---------------------------------
-*/
 
 ShrubberyCreationForm &	ShrubberyCreationForm::operator=( ShrubberyCreationForm const & rhs )
 {
 	std::cout << "ShrubberyCreationForm assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
-		AForm::operator=(rhs);
+		Form::operator=(rhs);
 	}
 	return (*this);
 }
@@ -97,6 +94,12 @@ MM88MMM 8b,dPPYba,  ,adPPYba,  ,adPPYba,\n\
 			throw (std::runtime_error("Could not create file"));
 		file << tree_1 << tree_2 << tree_3;
 		file.close();
+}
+
+Form	*create_shrub(std::string target)
+{
+	Form* form = new ShrubberyCreationForm(target);
+	return (form);
 }
 
 /*

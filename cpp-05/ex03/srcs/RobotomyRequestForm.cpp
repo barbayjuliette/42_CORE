@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:48:31 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:37:47 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:22:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), _target("none")
+RobotomyRequestForm::RobotomyRequestForm() : Form("RobotomyRequestForm", 72, 45), _target("none")
 {
 	std::cout << "Created RobotomyRequestForm with target " << this->getTarget() << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("RobotomyRequestForm", 72, 45), _target(target)
 {
 	std::cout << "Created RobotomyRequestForm with target " << this->getTarget() << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src) : AForm(src), _target(src._target)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src) : Form(src), _target(src._target)
 {
 	std::cout << "Copy constructed RobotomyRequestForm with target " << this->getTarget() << std::endl;
 }
@@ -49,7 +49,7 @@ RobotomyRequestForm &	RobotomyRequestForm::operator=( RobotomyRequestForm const 
 	std::cout << "RobotomyRequestForm assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
-		AForm::operator=(rhs);
+		Form::operator=(rhs);
 	}
 	return (*this);
 }
@@ -68,6 +68,12 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	else
 		std::cout << "Robotomy failed" << std::endl;
 	success = !success;
+}
+
+Form	*create_robot(std::string target)
+{
+	Form* form = new RobotomyRequestForm(target);
+	return (form);
 }
 
 /*

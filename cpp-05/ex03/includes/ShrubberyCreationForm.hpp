@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:28:36 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 16:47:54 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:17:59 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # include <exception>
 # include <stdbool.h>
 
-# include "./AForm.hpp"
+# include "./Form.hpp"
 # include "./Bureaucrat.hpp"
 
 class Bureaucrat;
 
-class ShrubberyCreationForm : public AForm
+class ShrubberyCreationForm : public Form
 {
 	private:
 		const std::string	_target;
@@ -38,5 +38,7 @@ class ShrubberyCreationForm : public AForm
 		void		execute(Bureaucrat const &executor) const;
 		std::string	getTarget(void) const;
 };
+
+Form	*create_shrub(std::string target);
 
 #endif

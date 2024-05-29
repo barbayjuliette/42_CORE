@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:35:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:15:02 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:34:56 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <cstdlib>
 
 # include "./Bureaucrat.hpp"
-# include "./AForm.hpp"
+# include "./Form.hpp"
 
 class Bureaucrat;
 
-class RobotomyRequestForm : public AForm
+class RobotomyRequestForm : public Form
 {
 	private:
 		const std::string	_target;
@@ -40,18 +40,8 @@ class RobotomyRequestForm : public AForm
 
 		void		execute(Bureaucrat const &executor) const;
 		std::string	getTarget(void) const;
-
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
 };
+
+Form	*create_robot(std::string target);
 
 #endif
