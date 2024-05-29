@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:39:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 16:22:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 17:09:01 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	Bureaucrat::signForm(AForm& form)
 		std::cout << "Bureaucrat " << this->getName() << " signed form " << form.getName() << std::endl;
 	}
 	catch (std::exception& e){
-		std::cout << this->getName() << " could not sign form " << form.getName();
-		std::cout << " because their grade is too low." << std::endl;
+		std::cout << RED << this->getName() << " could not sign form " << form.getName();
+		std::cout << " because their grade is too low." << WHITE << std::endl;
 	}
 }
 

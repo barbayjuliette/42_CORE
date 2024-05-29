@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:38:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/29 16:54:47 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 17:03:50 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define WHITE "\e[97m"
 #define RED "\e[31m"
 #define GREEN "\e[32m"
+#define BLUE "\e[0;36m"
 
 class Bureaucrat
 {

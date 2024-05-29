@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/29 16:55:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 17:00:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	test_happy(void)
 {
-	std::cout << RED << "--- HAPPY TEST: Everything works ---" << WHITE << std::endl;
+	std::cout << BLUE << "--- HAPPY TEST: Everything works ---" << WHITE << std::endl;
 	try {
 		Bureaucrat bureaucrat("Brian", 25);
 		bureaucrat.increment_grade();
@@ -30,7 +30,7 @@ void	test_happy(void)
 
 void	catch_exception(void)
 {
-	std::cout << RED << "--- EXCEPTION TEST: Both exceptions should be caught---" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- EXCEPTION TEST: Both exceptions should be caught---" << WHITE << std::endl;
 	try {
 		Bureaucrat bureaucrat("Brian", 2);
 		bureaucrat.increment_grade();
@@ -52,7 +52,7 @@ void	catch_exception(void)
 
 void	exception_creation(void)
 {
-	std::cout << RED << "--- EXCEPTION CREATION: Created with out of bound value ---" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- EXCEPTION CREATION: Created with out of bound value ---" << WHITE << std::endl;
 	try {
 		Bureaucrat bureaucrat("Brian", 151);
 		bureaucrat.increment_grade();
@@ -64,7 +64,7 @@ void	exception_creation(void)
 
 void	test_copy_const(void)
 {
-	std::cout << RED << "--- COPY CONSTRUCTOR---" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- COPY CONSTRUCTOR---" << WHITE << std::endl;
 	try {
 		Bureaucrat	bureaucrat("Brian", 68);
 		Bureaucrat	copy(bureaucrat);
@@ -76,7 +76,7 @@ void	test_copy_const(void)
 
 void	test_assignment_op(void)
 {
-	std::cout << RED << "--- ASSIGNMENT OPERATOR ---" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- ASSIGNMENT OPERATOR ---" << WHITE << std::endl;
 	try {
 		Bureaucrat	bureaucrat("Brian", 68);
 		Bureaucrat	copy;
