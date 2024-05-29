@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:38:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 21:06:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:54:47 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <string>
 # include <exception>
 
+#define WHITE "\e[97m"
+#define RED "\e[31m"
+#define GREEN "\e[32m"
+
 class Bureaucrat
 {
 	protected:
@@ -24,7 +28,6 @@ class Bureaucrat
 		int					_grade;
 	public:
 		Bureaucrat();
-		// Bureaucrat(std::string name);
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat& src);
 		~Bureaucrat();

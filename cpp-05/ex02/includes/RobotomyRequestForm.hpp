@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:35:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:15:02 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:56:15 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,6 @@ class RobotomyRequestForm : public AForm
 
 		void		execute(Bureaucrat const &executor) const;
 		std::string	getTarget(void) const;
-
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
 };
 
 #endif

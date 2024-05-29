@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:38:17 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:20:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:56:03 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ class Bureaucrat
 		int					_grade;
 	public:
 		Bureaucrat();
-		// Bureaucrat(std::string name);
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat& src);
 		virtual ~Bureaucrat();

@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:28:30 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:03:12 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:56:08 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,6 @@ class PresidentialPardonForm : public AForm
 
 		void		execute(Bureaucrat const &executor) const;
 		std::string	getTarget(void) const;
-
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw();
-		};
 };
 
 #endif

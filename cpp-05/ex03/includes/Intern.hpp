@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:44:56 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/29 16:43:09 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:51:27 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 class Intern
 {
-	private:
-
 	public:
 		Intern();
 		Intern(const Intern& src);

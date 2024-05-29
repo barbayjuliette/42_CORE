@@ -6,13 +6,12 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 20:38:54 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:55:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/Bureaucrat.hpp"
 # include "../includes/Form.hpp"
-# include "../includes/colors.hpp"
 
 void	test_beSigned(void)
 {
