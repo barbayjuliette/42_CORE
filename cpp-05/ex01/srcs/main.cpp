@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/29 17:07:11 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/31 12:30:45 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	test_signForm(void)
 void	test_cannot_sign(void)
 {
 
-	std::cout  << std::endl << BLUE << "--- EXCEPTION: Bureaucrat cannot sign - signForm ---" << WHITE << std::endl;
+	std::cout  << std::endl << BLUE << "--- EXCEPTION: Bureaucrat cannot sign ---" << WHITE << std::endl;
 	Form form("28C", 21, 21);
 	Bureaucrat bureaucrat("Bob", 42);
 	std::cout << form;
@@ -48,9 +48,23 @@ void	test_cannot_sign(void)
 	std::cout << form;
 }
 
+void	test_error_creation(void)
+{
+	std::cout  << std::endl << BLUE << "--- EXCEPTION when creating ---" << WHITE << std::endl;
+	try
+	{
+		Form	form("28C", 151, 0);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << "Exception caught: "<< e.what() << '\n' << WHITE;
+	}
+}
+
 int main(void)
 {
 	test_beSigned();
 	test_signForm();
 	test_cannot_sign();
+	test_error_creation();
 }

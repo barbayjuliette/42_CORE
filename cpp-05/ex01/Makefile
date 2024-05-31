@@ -6,7 +6,7 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/24 14:37:06 by jbarbay           #+#    #+#              #
-#    Updated: 2024/05/27 18:35:45 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/05/31 12:03:36 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS = srcs/main.cpp \
 		srcs/Bureaucrat.cpp \
 		srcs/Form.cpp
 
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = form

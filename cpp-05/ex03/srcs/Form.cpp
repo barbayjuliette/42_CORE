@@ -86,8 +86,6 @@ void	Form::beSigned(Bureaucrat& bureaucrat)
 	if (bureaucrat.getGrade() > this->_gradeSign)
 		throw (Form::GradeTooLowException());
 	this->_signed = true;
-	std::cout << "Form " << this->getName() << " signed!" << std::endl;
-
 }
 
 void	Form::execution_rights(Bureaucrat const &executor) const

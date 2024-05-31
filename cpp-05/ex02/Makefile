@@ -6,7 +6,7 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/24 14:37:06 by jbarbay           #+#    #+#              #
-#    Updated: 2024/05/28 17:14:06 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/05/31 12:03:53 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = srcs/main.cpp \
 		srcs/RobotomyRequestForm.cpp \
 		srcs/PresidentialPardonForm.cpp \
 
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = form

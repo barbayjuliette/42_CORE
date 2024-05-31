@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:44:27 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/28 17:49:36 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/31 12:47:42 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	test_shrubbery()
 	std::cout << std::endl << BBLUE << "-------------- SHRUBBERY --------------" << WHITE << std::endl;
 	std::cout << std::endl << BLUE << "--- EXECUTION WORKS ---" << WHITE << std::endl;
 	{	
-		ShrubberyCreationForm	form("home");
+		ShrubberyCreationForm	form("test");
 		std::cout << form;
 
 		Bureaucrat				bureaucrat("Bob", 137);
@@ -30,7 +30,7 @@ void	test_shrubbery()
 		bureaucrat.executeForm(form);
 	}
 
-	std::cout << std::endl << BLUE << "--- FAIL: GRADE NOK ---" << WHITE << std::endl;
+	std::cout << std::endl << BLUE << "--- FAIL EXECUTION: GRADE NOK ---" << WHITE << std::endl;
 	{	
 		ShrubberyCreationForm	form("home");
 		std::cout << form;
@@ -47,17 +47,6 @@ void	test_shrubbery()
 		std::cout << form;
 
 		Bureaucrat				bureaucrat("Bob", 137);
-		std::cout << form;
-		bureaucrat.executeForm(form);
-	}
-
-	std::cout << std::endl << BLUE << "--- FAIL: FORM NOT SIGNED & GRADE TOO LOW ---" << WHITE << std::endl;
-	{	
-		ShrubberyCreationForm	form("home");
-		std::cout << form;
-
-		Bureaucrat				bureaucrat("Bob", 138);
-		std::cout << form;
 		bureaucrat.executeForm(form);
 	}
 }
@@ -99,7 +88,6 @@ void	test_robotomy()
 		std::cout << form;
 
 		Bureaucrat				bureaucrat("Bob", 1);
-		std::cout << form;
 		bureaucrat.executeForm(form);
 	}
 }
@@ -135,7 +123,6 @@ void	test_presidential()
 		std::cout << form;
 
 		Bureaucrat				bureaucrat("Bob", 1);
-		std::cout << form;
 		bureaucrat.executeForm(form);
 	}
 }

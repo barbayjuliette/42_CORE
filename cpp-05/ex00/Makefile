@@ -6,14 +6,14 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/24 14:37:06 by jbarbay           #+#    #+#              #
-#    Updated: 2024/05/27 14:55:17 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/05/31 12:03:56 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = srcs/main.cpp \
 		srcs/Bureaucrat.cpp \
 
-CC = g++
+CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 NAME = bureaucrats

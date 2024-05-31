@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:39:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/29 17:09:42 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/31 12:55:43 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 	if (_grade < 1)
 		throw (Bureaucrat::GradeTooHighException());
 	else if (_grade > 150)
-		throw (Bureaucrat::GradeTooHighException());
+		throw (Bureaucrat::GradeTooLowException());
 	std::cout << "Created bureaucrat " << this->getName() << " with grade " << this->getGrade() << std::endl;
 }
 
@@ -70,7 +70,7 @@ void	Bureaucrat::increment_grade()
 void	Bureaucrat::decrement_grade()
 {
 	if (_grade >= 150)
-		throw (Bureaucrat::GradeTooHighException());
+		throw (Bureaucrat::GradeTooLowException());
 	this->_grade++;
 	std::cout << this->getName() << " decremented to grade " << this->getGrade() << std::endl;
 }
@@ -93,7 +93,7 @@ void	Bureaucrat::signForm(Form& form)
 	}
 	catch (std::exception& e){
 		std::cout << RED << this->getName() << " could not sign form " << form.getName();
-		std::cout << " because their grade is too low." << WHITE << std::endl;
+		std::cout << ". Reason: " << e.what() << WHITE << std::endl;
 	}
 }
 

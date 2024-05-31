@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:39:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:59 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/31 12:06:16 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 	if (_grade < 1)
 		throw (Bureaucrat::GradeTooHighException());
 	else if (_grade > 150)
-		throw (Bureaucrat::GradeTooHighException());
+		throw (Bureaucrat::GradeTooLowException());
 	std::cout << "Created bureaucrat " << this->getName() << " with grade " << this->getGrade() << std::endl;
 }
 

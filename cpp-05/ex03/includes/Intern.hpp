@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 20:44:56 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/29 16:51:27 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/31 12:52:33 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # include "../includes/PresidentialPardonForm.hpp"
 # include "../includes/RobotomyRequestForm.hpp"
 # include "./Form.hpp"
-
-// # include "./Bureaucrat.hpp"
-
-// class Form;
 
 class Intern
 {
