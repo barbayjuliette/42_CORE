@@ -6,20 +6,18 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 12:00:57 by jbarbay           #+#    #+#              #
-#    Updated: 2024/05/31 17:28:09 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/05/31 17:19:15 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 SRCS = main.cpp \
-		ScalarConverter.cpp \
-		check_type.cpp \
-		print.cpp \
+		Serializer.cpp \
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-NAME = convert
+NAME = serializer
 OBJS = ${SRCS:.cpp=.o}
 
 all: ${NAME}

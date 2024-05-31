@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:03:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/30 18:48:33 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/31 17:33:27 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,17 @@
 #include <cstdlib>
 #include <sstream>
 #include <iomanip>
-#include "print.cpp"
+
+int		get_precision_float(std::string lit);
+int		get_precision_double(std::string lit);
+int		is_int(std::string lit);
+int		is_double(std::string lit);
+void	special_values(std::string	lit);
+void	handle_float(float num, int precision);
+int 	is_displayable(int c);
+void	handle_int(int num);
+void	handle_double(double num, int precision);
+void	handle_char(char c);
 
 class ScalarConverter
 {
