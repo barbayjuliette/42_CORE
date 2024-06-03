@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 18:03:49 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/31 17:36:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:44:34 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	is_int(std::string lit)
 {
 	int	i = 0;
 
+	if (lit[i] == '-')
+		i++;
 	while (lit[i])
 	{
 		if (!isdigit(lit[i]))
@@ -61,11 +63,13 @@ int	is_double(std::string lit)
 {
 	int	i = 0;
 
+	if (lit[i] == '-')
+		i++;
 	while (lit[i])
 	{	
 		if (lit[i] == 46 && i++)
 			continue ;
-		if (lit[0] < 48 || lit[0] > 57 )
+		if (lit[i] < 48 || lit[i] > 57 )
 			return (0);
 		i++;
 	}

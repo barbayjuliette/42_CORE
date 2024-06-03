@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:19:58 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/31 17:19:59 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:47:52 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 Serializer::Serializer()
 {
+
 }
 
 Serializer::Serializer( const Serializer & src )

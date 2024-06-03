@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:13:21 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/31 17:30:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:18:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ void	ScalarConverter::convert(std::string lit)
 		stream >> c;
 		handle_char(lit[0]);
 	}
+	else
+		std::cout << "The argument to convert must be one of those types: char, int, float, double\n";
 };

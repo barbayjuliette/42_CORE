@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 12:03:04 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/31 17:33:27 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:34:35 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_char(char c);
 
 class ScalarConverter
 {
-	protected:
+	private:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& src);
 		~ScalarConverter();

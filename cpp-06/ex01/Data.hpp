@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:48:42 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/31 17:49:18 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/03 17:52:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 typedef struct Data 
 {
 	int	num;
+	std::string str;
 } t_data;
 
 #endif
