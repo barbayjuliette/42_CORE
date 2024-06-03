@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 14:41:37 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/03 16:13:10 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/03 16:29:40 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Base::~Base()
 	std::cout << "Base destructor called" << std::endl;
 }
 
-Base * Base::generate(void)
+Base * generate(void)
 {
 	std::srand(std::time(0));
 	int random_num = rand();
@@ -36,7 +36,7 @@ Base * Base::generate(void)
 	return (instance);
 }
 
-void Base::identify(Base* p)
+void identify(Base* p)
 {
 	// std::cout << "function called with pointer: ";
 	A *a = dynamic_cast<A*>(p);
@@ -60,7 +60,7 @@ void Base::identify(Base* p)
 	std::cout << "Unknown type\n";
 }
 
-void Base::identify(Base& p)
+void identify(Base& p)
 {
 	// std::cout << "function called with reference: ";
 	try
