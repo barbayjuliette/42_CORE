@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 16:05:28 by jbarbay           #+#    #+#             */
+/*   Updated: 2024/06/04 16:47:10 by jbarbay          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "iter.hpp"
+
+void print_int(const int & num)
+{
+	std::cout << num * 100 << std::endl;
+}
+
+void print_char(const char & c)
+{
+	std::cout << c << std::endl;
+}
+
+void print_double(const double & dub)
+{
+	std::cout << dub << std::endl;
+}
+
+
+int main(void)
+{
+	const int nums[] = {5, 9, 8, 3, 6};
+	const double doubles[] = {5.56, 98.32, 87.321, 8.2};
+	const char *str = "hello how are you?";
+
+	std::cout << BLUE << "With array of integers" << WHITE << std::endl;
+	iter(nums, 5, &print_int);
+
+	std::cout << std::endl << BLUE << "With array of characters" << WHITE << std::endl;
+	iter(str, 18, &print_char);
+	
+	std::cout << std::endl << BLUE << "With array of doubles" << WHITE << std::endl;
+	iter(doubles, 4, &print_double);
+	
+	std::cout << std::endl << BLUE << "With template function" << WHITE << std::endl;
+	iter(nums, 5, &print_whatever);
+	std::cout << std::endl;
+	iter(str, 18, &print_whatever);
+	std::cout << std::endl;
+	iter(doubles, 4, &print_whatever);
+	std::cout << std::endl;
+	return (0);
+}
