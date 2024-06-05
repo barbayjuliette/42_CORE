@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 19:26:47 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/04 16:45:34 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:55:44 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #define WHITE "\e[97m"
 #define BLUE "\e[0;36m"
 
-template <typename T> 
-void	print_whatever(const T& t)
+template <typename T>
+void	print_whatever(T& t)
 {
 	std::cout << t << " ";
 }
 
-template <typename T> 
-void iter(const T *array, size_t len, void(*f)(const T&))
+template <typename T>
+void iter(T *array, size_t len, void(*f)(T&))
 {
 	size_t	i = 0;
 

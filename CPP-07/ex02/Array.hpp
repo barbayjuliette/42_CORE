@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:59:59 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/04 20:22:26 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:33:21 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@
 #define BBLUE "\e[1;36m"
 #define BLUE "\e[0;36m"
 
-template <typename T> 
-class Array 
+template <typename T>
+class Array
 {
 	private:
 		T				*array;
 		unsigned int	len;
 	public:
 		Array(): array(NULL), len(0) {}
-		
+
 		Array(const Array& src) : array(new T[src.len]), len(src.len)
 		{
-			int	i = 0;
+			unsigned int	i = 0;
 			while (i < src.len)
 			{
-				this->array[i] = src->array[i];
+				this->array[i] = src.array[i];
 				i++;
 			}
 		}
-		
+
 		~Array()
 		{
 			delete[] array;
@@ -49,20 +49,20 @@ class Array
 		{
 			array = new T[n];
 		}
-		
+
 		Array&	operator=(Array const &rhs)
 		{
 			if (this == &rhs)
 				return *this;
-			
-			int	i = 0;
+
+			unsigned int	i = 0;
 			this->len = rhs.len;
 			delete[] array;
 			this->array = new T[this->len];
-			
+
 			while (i < rhs.len)
 			{
-				this->array[i] = rhs->array[i];
+				this->array[i] = rhs.array[i];
 				i++;
 			}
 			return *this;
