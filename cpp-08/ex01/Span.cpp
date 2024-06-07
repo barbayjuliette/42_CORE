@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:43:31 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/06 19:00:45 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/07 15:54:22 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ Span &				Span::operator=( Span const & rhs )
 
 void	Span::addNumber(int num)
 {
-
-	// std::cout << "Capacity: " << nums.capacity() << std::endl;
-	// std::cout << "Size: " << nums.size() << std::endl;
 	if (nums.size() >= nums.capacity())
 		throw (std::runtime_error("Not enough space in this Span to add a new element."));
 	nums.push_back(num);
@@ -108,9 +105,11 @@ void	Span::print(void) const
 	std::cout << std::endl;
 }
 
-void	addManyNumbers(std::vector<int> toAddNum)
+void	Span::addManyNumbers(std::vector<int>::const_iterator first, std::vector<int>::const_iterator last)
 {
-	
+	if (static_cast<unsigned long>(std::distance(first, last)) > static_cast<unsigned long>(nums.capacity() - nums.size()))
+		throw (std::out_of_range("Not enough space to add all numbers"));
+	nums.insert(nums.end(), first, last);
 }
 
 /*

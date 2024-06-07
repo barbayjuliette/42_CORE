@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:43:25 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/06 19:00:23 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/07 15:41:14 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 
 # include <iostream>
 # include <string>
-# include <map>
+// # include <map>
 # include <vector>
-# include <list>
+// # include <list>
 # include <exception>
 # include <algorithm>
 # include <limits.h>
-# include <bits/stdc++.h>
 # include <time.h>
+
+#define WHITE "\e[0;97m"
+#define RED "\e[31m"
+#define BBLUE "\e[1;36m"
+#define BLUE "\e[0;36m"
 
 class Span
 {
@@ -42,7 +46,7 @@ class Span
 		int		longestSpan(void);
 		void	print(void) const;
 
-		void	addManyNumbers(std::vector<int> toAddNum);
+		void	addManyNumbers(std::vector<int>::const_iterator first, std::vector<int>::const_iterator last);
 
 	private:
 };

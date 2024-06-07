@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 16:13:16 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/06 18:55:41 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/07 15:56:46 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,30 @@ void	test_subject()
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << RED << "Exception caught: " << e.what() << '\n' << WHITE;
+	}
+	std::cout << "Capacity: " << sp.nums.capacity() << std::endl;
+	std::cout << "Size: " << sp.nums.size() << std::endl;
+}
+
+void	test_exception()
+{
+	Span sp(5);
+
+	try
+	{
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
+		sp.addNumber(12);
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << "Exception caught: " << e.what() << '\n' << WHITE;
 	}
 }
 
@@ -62,10 +85,46 @@ void	test_100(void)
 	sp.print();
 }
 
+void	test_add_many_nums()
+{
+	Span sp(200);
+	std::vector<int>	numsToAdd;
+	// std::vector<int>	numsToAdd({1, 2, 3, 4, 5, 6, 7, 8, 9, 11});
+
+	numsToAdd.reserve(201);
+	srand(time(NULL));
+	try
+	{
+		for (int i = 0; i < 200; i++)
+			numsToAdd.push_back(rand());
+		sp.addManyNumbers(numsToAdd.begin(), numsToAdd.end());
+		sp.print();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED << "Exception caught: " << e.what() << '\n' << WHITE;
+	}
+}
+
 int main(void)
 {
+	std::cout << BLUE << "--- Test from subject ---" << WHITE << std::endl;
 	test_subject();
+
+	std::cout << std::endl << BLUE << "--- Test exception ---" << WHITE << std::endl;
+	std::cout << "---> I try to add over the capacity" << std::endl;
+	test_exception();
+
+	std::cout << std::endl << BLUE << "--- Test copy ---" << WHITE << std::endl;
+	std::cout << "---> Using copy constructor and make sure copy is deep" << std::endl;
 	test_copy();
-	test_100();
+
+	// std::cout << std::endl << BLUE << "--- Test with 100 000 numbers ---" << WHITE << std::endl;
+	// test_100();
+
+	std::cout << std::endl << BLUE << "--- Test with addManyNumbers ---" << WHITE << std::endl;
+	std::cout << "---> Add many numbers using a numbers vector" << std::endl;
+	test_add_many_nums();
+
 	return 0;
 }
