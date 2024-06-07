@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:43:48 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/07 19:03:35 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/07 20:04:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ class MutantStack : public std::stack<T>
 		typedef	typename stack::container_type container;
 		typedef typename container::iterator iterator;
     	typedef typename container::const_iterator const_iterator;
-		MutantStack(){};
-		MutantStack( MutantStack const & src )
-		{
-			*this = src;
-		};
+		
+		MutantStack() : stack() {};
+		MutantStack( MutantStack const & src ) : stack(src) {};
 		~MutantStack(){};
 
 		MutantStack &		operator=( MutantStack const & rhs )
 		{
-			*this = rhs;
+			(void)rhs;
 			return (*this);
 		};
 
