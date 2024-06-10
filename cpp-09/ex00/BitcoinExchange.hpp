@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:07 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 18:09:18 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/10 20:07:04 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
@@ -35,10 +34,9 @@ void			check_valid_date(std::string	date);
 class BitcoinExchange
 {
 	private:
-
+		std::map<std::string, float>	data;
 
 	public:
-		std::map<std::string, float>	data;
 		// Constructors
 		BitcoinExchange(void);
 
