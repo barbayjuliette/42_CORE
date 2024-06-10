@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:10 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/09 22:24:16 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/10 17:27:17 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,34 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 
-	// BitcoinExchange bc;
-	// std::ifstream	input(argv[1]);
-	// std::string		line;
+	BitcoinExchange bc;
+	std::ifstream	input(argv[1]);
+	std::string		line;
 
-	// if (!input.is_open())
-	// {
-	// 	std::cerr << "Error opening input file: \n";
-	// 	perror("");
-	// 	return (1);
-	// }
+	if (!input.is_open())
+	{
+		std::cerr << "Error opening input file: \n";
+		perror("");
+		return (1);
+	}
 
-	// while (getline(input, line))
-	// {
-	// 	bc.calculate_exchange(line);
-	// }
-	(void)argv;
-	std::string	date;
-
+	while (getline(input, line))
+	{
+		try
+		{
+			bc.calculate_exchange(line);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << "Error: " << e.what() << '\n';
+		}
+		
+	}
+	// (void)argv;
+	// std::string	date = "2019-09-05";
+	// std::cout << "Value: " << bc.data[date] << std::endl;
 	// std::cout << "Date:" << date << std::endl;
-	date = get_previous_day("2023-04-01");
-	std::cout << "Date:" << date << std::endl;
+	// date = get_previous_day("2000-08-01");
+	// std::cout << "Date:" << date << std::endl;
 	return (0);
 }

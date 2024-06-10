@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:07 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/09 22:21:07 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/10 16:23:32 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <ctime>
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
+#include <exception>
 
 std::string	trim_spaces(std::string str);
 std::string	get_previous_day(std::string date);
@@ -29,8 +29,8 @@ std::string	get_previous_day(std::string date);
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, float>	data;
 	public:
+		std::map<std::string, float>	data;
 		// Constructors
 		BitcoinExchange(void);
 
@@ -46,6 +46,7 @@ class BitcoinExchange
 		// float	search(std::string date);
 		// float	calculate(float rate, float amount);
 		void	calculate_exchange(std::string line);
+		void	check_valid_date(std::string	date) const;
 };
 
 #endif
