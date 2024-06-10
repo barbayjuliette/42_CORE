@@ -6,29 +6,15 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 17:30:50 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/10 18:19:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-std::string	trim_spaces(std::string str)
-{
-	int	start = 0;
-	int	end = str.length() - 1;
-
-	while (start <= end && str[start] == ' ')
-		start++;
-	while (end > start && str[end] == ' ')
-		end--;
-
-	return (str.substr(start, end - start + 1));
-}
-
 // Constructors
 BitcoinExchange::BitcoinExchange(void)
 {
-	// Initialize database
 	std::ifstream		csv("data.csv");
 	std::string			line;
 	std::string			key;
@@ -49,10 +35,7 @@ BitcoinExchange::BitcoinExchange(void)
 		size_t	pos;;
 		pos = line.find(",");
 		if (pos == std::string::npos || pos == 0)
-		{
-			std::cerr << "Error in database";
-			return ;
-		}
+			throw (std::runtime_error("Wrong format csv"));
 		key = trim_spaces(line.substr(0, pos));
 		line.erase(0, pos + 1);
 		stream << line;
@@ -64,7 +47,7 @@ BitcoinExchange::BitcoinExchange(void)
 	}
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy) : data(copy.data)
 {
 	(void)copy;
 }
@@ -72,15 +55,55 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy)
 // Destructor
 BitcoinExchange::~BitcoinExchange(void)
 {
-	// Delete database
+
 }
 
 // Assignment operator
 BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const& rhs)
 {
-	(void)rhs;
+	if (this != &rhs)
+		this->data = rhs.data;
 	return (*this);
 }
+
+// Member functions
+
+void	BitcoinExchange::calculate_exchange(std::string line)
+{
+	size_t				pos;
+	std::string			date;
+	std::string			date_copy;
+	double				value;
+	std::stringstream	stream;
+	double				rate;
+	double				result;
+
+	pos = line.find("|");
+	if (pos == std::string::npos || pos == 0)
+		throw (std::runtime_error("Bad input => " + line));
+	date = trim_spaces(line.substr(0, pos));
+	line.erase(0, pos + 1);
+
+	stream << line;
+	stream >> value;
+
+	if (value < 0)
+		throw (std::runtime_error("not a positive number"));
+	else if (value > 1000)
+		throw (std::runtime_error("too large a number"));
+	stream.clear();
+	check_valid_date(date);
+	date_copy = date;
+	while (data.find(date) == data.end())
+	{
+		date = get_previous_day(date);
+	}
+	rate = data[date];
+	result = value * rate;
+	std::cout << date_copy << " => " << value << " = " << formatNumber(result) << std::endl;
+}
+
+// Helpers
 
 bool	is_thirty_days(int month)
 {
@@ -106,12 +129,25 @@ bool	is_leap_year(int	year)
 	return (false);
 }
 
-void	BitcoinExchange::check_valid_date(std::string	date) const 
+void	check_valid_date(std::string	date)
 {
 	int	day = atoi(date.substr(8, 2).c_str());
 	int	month = atoi(date.substr(5, 2).c_str());
 	int	year = atoi(date.substr(0, 4).c_str());
 
+	size_t	i = 0;
+
+	while (i < date.length())
+	{
+		if (i == 4 || i == 7)
+		{
+			if (date[i] != '-')
+				throw (std::runtime_error("Date not valid: " + date));
+		}
+		else if (!isdigit(date[i]))
+			throw (std::runtime_error("Date not valid: " + date));
+		i++;
+	}
 	if (month > 12 || month <= 0)
 		throw (std::runtime_error("Date not valid: " + date));
 	else if (day <= 0)
@@ -165,37 +201,31 @@ std::string	get_previous_day(std::string date)
 	return (date);
 }
 
-void	BitcoinExchange::calculate_exchange(std::string line)
+std::string formatNumber(double value)
 {
-	size_t				pos;
-	std::string			date;
-	std::string			date_copy;
-	double				value;
-	std::stringstream	stream;
-	double				rate;
-	double				result;
+	std::ostringstream oss;
+	oss << std::fixed << std::setprecision(5) << value;
+	std::string str = oss.str();
 
-	pos = line.find("|");
-	if (pos == std::string::npos || pos == 0)
-		throw (std::runtime_error("Bad input => " + line));
-	date = trim_spaces(line.substr(0, pos));
-	line.erase(0, pos + 1);
-
-	stream << line;
-	stream >> value;
-
-	if (value < 0)
-		throw (std::runtime_error("not a positive number"));
-	else if (value > 1000)
-		throw (std::runtime_error("too large a number"));
-	stream.clear();
-	check_valid_date(date);
-	date_copy = date;
-	while (data.find(date) == data.end())
-	{
-		date = get_previous_day(date);
+	size_t pos = str.find_last_not_of('0');
+	if (pos != std::string::npos) {
+		if (str[pos] == '.')
+			pos--;
+		str.erase(pos + 1);
 	}
-	rate = data[date];
-	result = value * rate;
-	std::cout << date_copy << " => " << std::fixed << std::setprecision(2) << value << " = " << result << std::endl;
+
+	return (str);
+}
+
+std::string	trim_spaces(std::string str)
+{
+	int	start = 0;
+	int	end = str.length() - 1;
+
+	while (start <= end && str[start] == ' ')
+		start++;
+	while (end > start && str[end] == ' ')
+		end--;
+
+	return (str.substr(start, end - start + 1));
 }

@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:07 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 16:23:32 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/10 18:09:18 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,20 @@
 #include <cstdlib>
 #include <exception>
 
-std::string	trim_spaces(std::string str);
-std::string	get_previous_day(std::string date);
+std::string		trim_spaces(std::string str);
+std::string		get_previous_day(std::string date);
+bool			is_thirty_days(int month);
+bool			is_leap_year(int	year);
+std::string		get_previous_day(std::string date);
+std::string 	formatNumber(double value);
+void			check_valid_date(std::string	date);
+
 
 class BitcoinExchange
 {
 	private:
+
+
 	public:
 		std::map<std::string, float>	data;
 		// Constructors
@@ -42,11 +50,8 @@ class BitcoinExchange
 
 		// Destructor
 		~BitcoinExchange(void);
-
-		// float	search(std::string date);
-		// float	calculate(float rate, float amount);
+		
 		void	calculate_exchange(std::string line);
-		void	check_valid_date(std::string	date) const;
 };
 
 #endif
