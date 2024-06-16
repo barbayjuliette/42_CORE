@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:21:01 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 18:56:48 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 19:17:24 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	main(int argc, char *argv[])
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << RED << "Error: " << e.what() << '\n' << WHITE;
+		std::cout << RED << "Error: " << e.what() << '\n' << WHITE;
 	}
 }
