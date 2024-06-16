@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/14 21:22:20 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 17:12:42 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #include <time.h>
 #include <list>
 #include "PmergeMe.tpp"
-// #include <iomanip>
-// #include <cstdlib>
+#include <iomanip>
+#include <cstdlib>
 
 void				print_vector(std::vector<int> vector);
 void				print_list(std::list<int> list);
@@ -36,6 +36,7 @@ int					binary_search( std::list<int> main, int x );
 int					jacobsthal(int n);
 bool				is_sorted(std::list<int> list);
 void				print_vector(std::vector<int> vector);
+void				print_pairs_list(std::list<std::list<int> > &list);
 
 template <typename T> T	create_container(char *argv[], int argc);
 class PmergeMe
@@ -82,7 +83,7 @@ class PmergeMe
 		void							sort_pairs(std::list<std::list<int> > &pairs);
 		void							insertion_sort_pairs(std::list<std::list<int> > &pairs, int n);
 		void							insert_elem(std::list<std::list<int> > &pairs, std::list<int> elem, int n);
-		void							create_pend_main(std::list<std::list<int> >	pairs, std::list<int> &main, std::list<int> &pend);
+		void							create_pend_main(std::list<std::list<int> >	&pairs, std::list<int> &main, std::list<int> &pend);
 		std::list<int>					create_insertion_order(std::list<int> pend);
 		std::list<int>					create_index_sequence(std::list<int> &pend);
 		void							insert_to_main(std::list<int> &main, std::list<int> sequence, std::list<int> &pend);

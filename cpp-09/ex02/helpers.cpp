@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:44:24 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/14 21:22:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 17:00:54 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,31 @@ void	print_vector(std::vector<int> vector)
 	}
 }
 
+void	print_pairs_list(std::list<std::list<int> > list)
+{
+	std::list<std::list<int> >::const_iterator	it;
+
+	for (it = list.begin(); it != list.end(); it++)
+	{
+		std::cout << "Pair: ";
+		std::cout << (*it).front();
+		std::cout << " - ";
+		std::cout << (*it).back();
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 void	print_list(std::list<int> list)
 {
 	std::list<int>::const_iterator	it;
 
+	// std::cout << "Here\n printing\n";
 	for (it = list.begin(); it != list.end(); it++)
 	{
 		std::cout << *it;
 		std::cout << " ";
+		// std::cout << "In loop\n";
 	}
+	// std::cout << "Loop over\n";
 }

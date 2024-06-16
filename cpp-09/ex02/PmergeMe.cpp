@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:29 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/14 21:23:49 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 17:14:01 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	PmergeMe::print_result()
 	std::cout << "Time to process a range of " << length << " elements with std::[list]: ";
 	std::cout << time_list << " us" << std::endl;
 }
+
 /*---------------------------------------- VECTOR ----------------------------------------*/
 
 std::vector<std::vector<int> >	PmergeMe::pair_up(std::vector<int> nums, bool even)
@@ -201,7 +202,6 @@ std::vector<int>	PmergeMe::create_index_sequence(std::vector<int> &pend)
 	bool				last = false;
 	int					i = 1;
 
-
 	sequence.push_back(1);
 	std::vector<int>::const_iterator	it;
 	for (it = pend.begin(); it != pend.end(); it++)
@@ -248,7 +248,7 @@ void	PmergeMe::insert_to_main(std::vector<int> &main, std::vector<int> sequence,
 		index = *it - 1;
 		if (index >= 0 && index < static_cast<int>(pend.size()))
 		{
-			num_to_insert = pend[*it - 1];
+			num_to_insert = pend[index];
 			pos = binary_search(main, num_to_insert);
 			main.insert(main.begin() + pos, num_to_insert);
 		}
@@ -302,10 +302,8 @@ void	PmergeMe::sort_list(void)
 	pairs = pair_up(unsorted_list, even);
 	sort_pairs(pairs);
 	create_pend_main(pairs, main, pend);
-	print_list(main);
 	sequence = create_index_sequence(pend);
 	insert_to_main(main, sequence, pend);
-	print_list(main);
 	if (single != -1)
 		insert_at_index(main, single);
 	sorted_list = main;
@@ -393,21 +391,18 @@ void	PmergeMe::insert_elem(std::list<std::list<int> > &pairs, std::list<int> ele
 	}
 }
 
-void	PmergeMe::create_pend_main(std::list<std::list<int> >	pairs, std::list<int> &main, std::list<int> &pend)
+void	PmergeMe::create_pend_main(std::list<std::list<int> > &pairs, std::list<int> &main, std::list<int> &pend)
 {
 	std::list<std::list<int> >::const_iterator	it;
 	it = pairs.begin();
-	std::list<std::list<int> >::const_iterator	next = it;
-	std::advance(next, 1);
 
-
-	main.push_back((*next).front());
+	main.push_back((*it).back());
 	main.push_back((*it).front());
 	it++;
 	for (; it != pairs.end(); it++)
 	{
 		main.push_back((*it).front());
-		pend.push_back((*next).front());
+		pend.push_back((*it).back());
 	}
 	pairs.clear();
 }
@@ -465,41 +460,40 @@ std::list<int>	PmergeMe::create_insertion_order(std::list<int> pend)
 
 void	PmergeMe::insert_to_main(std::list<int> &main, std::list<int> sequence, std::list<int> &pend)
 {
-	std::list<int>::iterator	it = sequence.begin();
-	std::list<int>::iterator	it_m = main.begin();
-	std::list<int>::iterator	it_p = pend.begin();
+	std::list<int>::iterator	it;
+	std::list<int>::iterator	p_it;
+	std::list<int>::iterator	m_it;
 	int							num_to_insert;
 	int							index;
 	int							pos;
-	std::list<int>::iterator	prev = it;
-	std::advance(prev, -1);
 
-	for (; it != sequence.end(); it++)
+	for (it = sequence.begin(); it != sequence.end(); it++)
 	{
 		index = *it - 1;
 		if (index >= 0 && index < static_cast<int>(pend.size()))
 		{
-			// num_to_insert = pend[index];
-			std::advance(it_p, index);
-			num_to_insert = *it_p;
+			p_it = pend.begin();
+			std::advance(p_it, index);
+			num_to_insert = *p_it;
 
 			pos = binary_search(main, num_to_insert);
-
-			std::advance(it_m, pos);
-			main.insert(it_m, num_to_insert);
+			m_it = main.begin();
+			std::advance(m_it, pos);
+			main.insert(m_it, num_to_insert);
 		}
 	}
 }
 
 int	binary_search( std::list<int> main, int x )
 {
-	int 	low = 0;
-	int 	high = main.size();
-	int		mid;
+	int 						low = 0;
+	int 						high = main.size();
+	int							mid;
 	std::list<int>::iterator	it = main.begin();
 
 	while (low < high)
 	{
+		it = main.begin();
 		mid = ( low + high ) / 2;
 		std::advance(it, mid);
 		if ( x  < *it )
@@ -512,8 +506,9 @@ int	binary_search( std::list<int> main, int x )
 
 void	PmergeMe::insert_at_index(std::list<int> &main, int num)
 {
-	int	index = binary_search(main, num);
+	int							index = binary_search(main, num);
 	std::list<int>::iterator	it = main.begin();
+	
 	std::advance(it, index);
 	main.insert(it, num);
 }
