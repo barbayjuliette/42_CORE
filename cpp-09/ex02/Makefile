@@ -6,13 +6,12 @@
 #    By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/11 14:07:35 by jbarbay           #+#    #+#              #
-#    Updated: 2024/06/14 18:47:27 by jbarbay          ###   ########.fr        #
+#    Updated: 2024/06/16 19:16:03 by jbarbay          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.cpp \
 		PmergeMe.cpp \
-		helpers.cpp
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98

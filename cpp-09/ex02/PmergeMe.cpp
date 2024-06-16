@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:29 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 17:14:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 19:18:51 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ PmergeMe::PmergeMe(char *argv[], int argc, std::string container)
 PmergeMe::PmergeMe(const PmergeMe& copy) : 
 unsorted_vector(copy.unsorted_vector),
 sorted_vector(copy.sorted_vector),
+unsorted_list(copy.unsorted_list),
+sorted_list(copy.sorted_list),
 length(copy.length),
-time_vector(copy.time_vector)
+time_vector(copy.time_vector),
+time_list(copy.time_list)
 {
 	std::cout << "Copy constructor called\n";
 }
@@ -56,8 +59,11 @@ PmergeMe&	PmergeMe::operator=(PmergeMe const& rhs)
 	{
 		unsorted_vector = rhs.unsorted_vector;
 		sorted_vector = rhs.sorted_vector;
+		unsorted_list = rhs.unsorted_list;
+		sorted_list = rhs.sorted_list;
 		length = rhs.length;
 		time_vector = rhs.time_vector;
+		time_list = rhs.time_list;
 	}
 	return (*this);
 }
@@ -79,15 +85,23 @@ void	PmergeMe::print_result()
 	print_vector(sorted_vector);
 	std::cout << std::endl;
 
-	std::cout << "After: ";
-	print_list(sorted_list);
-	std::cout << std::endl;
-
 	std::cout << "Time to process a range of " << length << " elements with std::[vector]: ";
 	std::cout << time_vector << " us" << std::endl;
 
 	std::cout << "Time to process a range of " << length << " elements with std::[list]: ";
 	std::cout << time_list << " us" << std::endl;
+}
+
+// GETTERS
+
+std::vector<int>	PmergeMe::get_sorted_vector()
+{
+	return (this->sorted_vector);
+}
+
+std::list<int>		PmergeMe::get_sorted_list()
+{
+	return (this->sorted_list);
 }
 
 /*---------------------------------------- VECTOR ----------------------------------------*/
@@ -268,6 +282,7 @@ void	PmergeMe::sort_vector(void)
 	if (is_sorted(unsorted_vector))
 	{
 		std::cout << "Numbers are already sorted\n";
+		sorted_vector = unsorted_vector;
 		return ;
 	}
 	pairs = pair_up(unsorted_vector, even);
@@ -278,8 +293,6 @@ void	PmergeMe::sort_vector(void)
 	if (single != -1)
 		insert_at_index(main, single);
 	sorted_vector = main;
-	if (!is_sorted(sorted_vector))
-		std::cout << "Error\n";
 }
 
 /*---------------------------------------- LIST ----------------------------------------*/
@@ -297,6 +310,7 @@ void	PmergeMe::sort_list(void)
 	if (is_sorted(unsorted_list))
 	{
 		std::cout << "Numbers are already sorted\n";
+		sorted_list = unsorted_list;
 		return ;
 	}
 	pairs = pair_up(unsorted_list, even);
@@ -307,8 +321,6 @@ void	PmergeMe::sort_list(void)
 	if (single != -1)
 		insert_at_index(main, single);
 	sorted_list = main;
-	if (!is_sorted(sorted_list))
-		std::cout << "Error\n";
 }
 
 std::list<std::list<int> >	PmergeMe::pair_up(std::list<int> nums, bool even)
@@ -513,3 +525,80 @@ void	PmergeMe::insert_at_index(std::list<int> &main, int num)
 	main.insert(it, num);
 }
 
+/*---------------------------------------- HELPERS ----------------------------------------*/
+
+bool	is_sorted(std::vector<int> vector)
+{
+	size_t	i = 0;
+	int	prev = INT_MIN;
+
+	while ( i < vector.size())
+	{
+		if (vector[i] < prev)
+			return (false);
+		prev = vector[i];
+		i++;
+	}
+	return (true);
+}
+
+bool	is_sorted(std::list<int> list)
+{
+	int							prev = INT_MIN;
+	std::list<int>::iterator	it;
+	for (it = list.begin(); it != list.end(); it++)
+	{
+		if (*it < prev)
+			return (false);
+		prev = *it;
+	}
+	return (true);
+}
+
+int	binary_search( std::vector<int> main, int x )
+{
+	int 	low = 0;
+	int 	high = main.size();
+	int		mid;
+
+	while (low < high)
+	{
+		mid = ( low + high ) / 2;
+		if ( x  < main[mid] )
+			high = mid;
+		else
+			low = mid + 1;
+	}
+	return (low);
+}
+
+int	jacobsthal(int n)
+{
+	if (n == 0)
+		return (0);
+	if (n == 1)
+		return (1);
+	return (jacobsthal(n - 1) + jacobsthal(n - 2) * 2);
+}
+
+void	print_list(std::list<int> list)
+{
+	std::list<int>::const_iterator	it;
+
+	for (it = list.begin(); it != list.end(); it++)
+	{
+		std::cout << *it;
+		std::cout << " ";
+	}
+}
+
+void	print_vector(std::vector<int> vector)
+{
+	std::vector<int>::const_iterator	it;
+
+	for (it = vector.begin(); it != vector.end(); it++)
+	{
+		std::cout << *it;
+		std::cout << " ";
+	}
+}

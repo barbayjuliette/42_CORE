@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 17:12:42 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 19:14:22 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define __PMERGEME_HPP__
 
 #include <iostream>
-// #include <string>
-// #include <cstdlib>
 #include <string> 
 #include <sstream>
 #include <vector>
@@ -23,30 +21,47 @@
 #include <limits.h>
 #include <time.h>
 #include <list>
-#include "PmergeMe.tpp"
 #include <iomanip>
-#include <cstdlib>
+
+#define WHITE "\e[0;97m"
+#define RED "\e[31m"
 
 void				print_vector(std::vector<int> vector);
 void				print_list(std::list<int> list);
-std::vector<int>	create_vector(char *argv[], int argc);
 bool				is_sorted(std::vector<int> vector);
 int					binary_search( std::vector<int> main, int x );
 int					binary_search( std::list<int> main, int x );
 int					jacobsthal(int n);
 bool				is_sorted(std::list<int> list);
 void				print_vector(std::vector<int> vector);
-void				print_pairs_list(std::list<std::list<int> > &list);
+void				print_pairs_list(std::list<std::list<int> > list);
 
-template <typename T> T	create_container(char *argv[], int argc);
+template <typename T>
+T	create_container(char *argv[], int argc)
+{
+	T		unsorted;
+	int		i = 1;
+	int		n;
+
+	while (i < argc)
+	{
+		n = std::atoi(argv[i]);
+		if (n <= 0)
+			throw (std::runtime_error("Please enter only positive numbers"));
+		unsorted.push_back(n);
+		i++;
+	}
+	return (unsorted);
+}
+
 class PmergeMe
 {
 	private:
 		PmergeMe(void);
 		std::vector<int>	unsorted_vector;
 		std::vector<int>	sorted_vector;
-		std::list<int>	unsorted_list;
-		std::list<int>	sorted_list;
+		std::list<int>		unsorted_list;
+		std::list<int>		sorted_list;
 		int					length;
 		double				time_vector;
 		double				time_list;
@@ -63,6 +78,10 @@ class PmergeMe
 
 		// Destructor
 		~PmergeMe(void);
+
+		// Getters
+		std::vector<int>	get_sorted_vector();
+		std::list<int>		get_sorted_list();
 		
 		// Member functions
 		void							print_result(void);

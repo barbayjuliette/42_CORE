@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:38 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 17:10:10 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 19:16:28 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int main(int argc, char *argv[])
 		PmergeMe pm(argv, argc, "vector");
 		PmergeMe pl(argv, argc, "list");
 		pm.print_result();
+		if (!is_sorted(pm.get_sorted_list()) || !is_sorted(pm.get_sorted_vector()))
+			throw(std::runtime_error("Did not sort correctly"));
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cout << RED << "Error: "<< e.what() << '\n' << WHITE;
 	}
 	return 0;
 }
