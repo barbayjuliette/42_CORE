@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:21:54 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 21:48:19 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 18:58:42 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@
 #include <iomanip>
 #include <cstdlib>
 
-void	calculate(char operation, std::stack<std::string> & stack);
-bool	isoperator(char c);
+#define WHITE "\e[0;97m"
+#define RED "\e[31m"
+
 
 class RNP
 {
-	public:
-		std::string	exp;
-
-		// Constructors
+	private:
 		RNP(void);
+		std::string	exp;
+	public:
+		// Constructors
 		RNP(std::string exp);
 
 		// Copy constructor
@@ -46,6 +47,8 @@ class RNP
 		// Member functions
 		void	process_stack();
 		void	check_errors();
+		void	calculate(char operation, std::stack<std::string> & stack);
+		bool	isoperator(char c);
 };
 
 #endif

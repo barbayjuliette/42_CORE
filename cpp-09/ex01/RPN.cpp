@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:21:50 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 21:46:37 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 19:02:49 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ RNP::~RNP(void)
 
 }
 
-void	calculate(char operation, std::stack<std::string> & stack)
+void	RNP::calculate(char operation, std::stack<std::string> & stack)
 {
 	float	result;
 	std::stringstream	stream;
 
 	if (stack.empty())
-		throw (std::runtime_error("Syntax error"));
+		throw (std::runtime_error("syntax"));
 	std::string	num1 = stack.top();
 	stack.pop();
 	if (stack.empty())
-		throw (std::runtime_error("Syntax error"));
+		throw (std::runtime_error("syntax"));
 	std::string	num2 = stack.top();
 	stack.pop();
 
@@ -67,7 +67,7 @@ void	calculate(char operation, std::stack<std::string> & stack)
 	else if (operation == '/')
 	{
 		if (num1[0] == '0')
-			throw (std::runtime_error("Error: division by zero not allowed"));
+			throw (std::runtime_error("division by zero not allowed"));
 		result = std::atof(num2.c_str()) / std::atof(num1.c_str());
 	}
 	else
@@ -91,11 +91,11 @@ void	RNP::process_stack()
 			calculate(num[0], stack);
 	}
 	if (stack.size() != 1)
-		throw (std::runtime_error("Syntax error"));
+		throw (std::runtime_error("syntax"));
 	std::cout << std::fixed << std::setprecision(2) << stack.top() << std::endl;
 }
 
-bool	isoperator(char c)
+bool	RNP::isoperator(char c)
 {
 	if (c == '+' || c == '-' || c == '/' || c == '*')
 		return (true);
@@ -106,11 +106,14 @@ void	RNP::check_errors()
 {
 	std::stringstream 	stream(exp);
 	std::string			num;
+
+	if (exp == "")
+		throw (std::runtime_error("argument cannot be empty"));
 	while (stream >> num)
 	{
 		if (!isdigit(num[0]) && !isoperator(num[0]))
-			throw (std::runtime_error("Error"));
+			throw (std::runtime_error("Only accepts numbers < 10 and operators +-?* "));
 		if (num.length() != 1)
-			throw (std::runtime_error("Error"));
+			throw (std::runtime_error("Only accepts numbers < 10 and operators +-?* "));
 	}
 }
