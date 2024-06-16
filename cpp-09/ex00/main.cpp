@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:10 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 17:27:17 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 18:39:06 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,16 @@ int	main(int argc, char *argv[])
 		perror("");
 		return (1);
 	}
-
+	getline(input, line);
+	if (line != "date | value")
+	{
+		std::cerr << "First line must be format: date | value\n";
+		return (1);
+	}
 	while (getline(input, line))
 	{
+		if (line == "")
+			continue ;
 		try
 		{
 			bc.calculate_exchange(line);
@@ -43,11 +50,5 @@ int	main(int argc, char *argv[])
 		}
 		
 	}
-	// (void)argv;
-	// std::string	date = "2019-09-05";
-	// std::cout << "Value: " << bc.data[date] << std::endl;
-	// std::cout << "Date:" << date << std::endl;
-	// date = get_previous_day("2000-08-01");
-	// std::cout << "Date:" << date << std::endl;
 	return (0);
 }

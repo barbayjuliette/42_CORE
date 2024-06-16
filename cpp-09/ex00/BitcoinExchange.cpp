@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 18:19:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 18:48:18 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ BitcoinExchange::BitcoinExchange(void)
 	}
 	getline(csv, line);
 	if (line != "date,exchange_rate")
-		throw (std::runtime_error("Wrong format csv"));
+		throw (std::runtime_error("Wrong format database"));
 	while (getline(csv, line))
 	{
 		size_t	pos;;
 		pos = line.find(",");
 		if (pos == std::string::npos || pos == 0)
-			throw (std::runtime_error("Wrong format csv"));
+			throw (std::runtime_error("Wrong format database"));
 		key = trim_spaces(line.substr(0, pos));
 		line.erase(0, pos + 1);
 		stream << line;
 		stream >> value;
 		data[key] = value;
 		if (stream.fail())
-			throw (std::runtime_error("Wrong format csv"));
+			throw (std::runtime_error("Wrong format database"));
 		stream.clear();
 	}
 }
@@ -67,7 +67,6 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const& rhs)
 }
 
 // Member functions
-
 void	BitcoinExchange::calculate_exchange(std::string line)
 {
 	size_t				pos;
@@ -83,7 +82,10 @@ void	BitcoinExchange::calculate_exchange(std::string line)
 		throw (std::runtime_error("Bad input => " + line));
 	date = trim_spaces(line.substr(0, pos));
 	line.erase(0, pos + 1);
+	line = trim_spaces(line);
 
+	if (!isdigit(line[0]))
+		throw (std::runtime_error("Value not valid: " + line));
 	stream << line;
 	stream >> value;
 
@@ -91,6 +93,7 @@ void	BitcoinExchange::calculate_exchange(std::string line)
 		throw (std::runtime_error("not a positive number"));
 	else if (value > 1000)
 		throw (std::runtime_error("too large a number"));
+	
 	stream.clear();
 	check_valid_date(date);
 	date_copy = date;
@@ -131,12 +134,7 @@ bool	is_leap_year(int	year)
 
 void	check_valid_date(std::string	date)
 {
-	int	day = atoi(date.substr(8, 2).c_str());
-	int	month = atoi(date.substr(5, 2).c_str());
-	int	year = atoi(date.substr(0, 4).c_str());
-
 	size_t	i = 0;
-
 	while (i < date.length())
 	{
 		if (i == 4 || i == 7)
@@ -148,6 +146,10 @@ void	check_valid_date(std::string	date)
 			throw (std::runtime_error("Date not valid: " + date));
 		i++;
 	}
+	int	day = atoi(date.substr(8, 2).c_str());
+	int	month = atoi(date.substr(5, 2).c_str());
+	int	year = atoi(date.substr(0, 4).c_str());
+
 	if (month > 12 || month <= 0)
 		throw (std::runtime_error("Date not valid: " + date));
 	else if (day <= 0)

@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:07 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/10 20:07:04 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/16 18:08:01 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ bool			is_leap_year(int	year);
 std::string		get_previous_day(std::string date);
 std::string 	formatNumber(double value);
 void			check_valid_date(std::string	date);
-
 
 class BitcoinExchange
 {
