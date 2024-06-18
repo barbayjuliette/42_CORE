@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/18 17:47:29 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:53:23 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ bool	is_leap_year(int	year)
 	return (false);
 }
 
-void	check_valid_date(std::string	date)
+void	check_valid_date(std::string date)
 {
 	size_t	i = 0;
 	while (i < date.length())
