@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:03 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 18:48:18 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:47:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ BitcoinExchange::BitcoinExchange(void)
 	std::ifstream		csv("data.csv");
 	std::string			line;
 	std::string			key;
-	double				value;
 	std::stringstream	stream;
 
 	if (!csv.is_open())
@@ -30,21 +29,35 @@ BitcoinExchange::BitcoinExchange(void)
 	getline(csv, line);
 	if (line != "date,exchange_rate")
 		throw (std::runtime_error("Wrong format database"));
+	getline(csv, line);
+	save_data(line, 1);
 	while (getline(csv, line))
 	{
-		size_t	pos;;
-		pos = line.find(",");
-		if (pos == std::string::npos || pos == 0)
-			throw (std::runtime_error("Wrong format database"));
-		key = trim_spaces(line.substr(0, pos));
-		line.erase(0, pos + 1);
-		stream << line;
-		stream >> value;
-		data[key] = value;
-		if (stream.fail())
-			throw (std::runtime_error("Wrong format database"));
-		stream.clear();
+		save_data(line, 0);
 	}
+}
+
+void	BitcoinExchange::save_data(std::string line, bool min)
+{
+	std::string			key;
+	double				value;
+	std::stringstream	stream;
+
+	size_t	pos;;
+	pos = line.find(",");
+	if (pos == std::string::npos || pos == 0)
+		throw (std::runtime_error("Wrong format database"));
+	key = trim_spaces(line.substr(0, pos));
+	line.erase(0, pos + 1);
+	stream << line;
+	stream >> value;
+	if (stream.fail())
+		throw (std::runtime_error("Wrong format database"));
+	check_valid_date(key);
+	data[key] = value;
+	if (min)
+		min_date = key;
+	stream.clear();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy) : data(copy.data)
@@ -66,6 +79,30 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const& rhs)
 	return (*this);
 }
 
+void	BitcoinExchange::is_before(std::string date)
+{
+	int	day = atoi(date.substr(8, 2).c_str());
+	int	month = atoi(date.substr(5, 2).c_str());
+	int	year = atoi(date.substr(0, 4).c_str());
+
+	int	min_day = atoi(min_date.substr(8, 2).c_str());
+	int	min_month = atoi(min_date.substr(5, 2).c_str());
+	int	min_year = atoi(min_date.substr(0, 4).c_str());
+
+	if (year < min_year)
+		throw (std::runtime_error("No data available for provided date"));
+	if (year == min_year)
+	{
+		if (month < min_month)
+			throw (std::runtime_error("No data available for provided date"));
+		if (month == min_month)
+		{
+			if (day < min_day)
+				throw (std::runtime_error("No data available for provided date"));
+		}
+	}
+}
+
 // Member functions
 void	BitcoinExchange::calculate_exchange(std::string line)
 {
@@ -83,7 +120,6 @@ void	BitcoinExchange::calculate_exchange(std::string line)
 	date = trim_spaces(line.substr(0, pos));
 	line.erase(0, pos + 1);
 	line = trim_spaces(line);
-
 	if (!isdigit(line[0]))
 		throw (std::runtime_error("Value not valid: " + line));
 	stream << line;
@@ -93,12 +129,12 @@ void	BitcoinExchange::calculate_exchange(std::string line)
 		throw (std::runtime_error("not a positive number"));
 	else if (value > 1000)
 		throw (std::runtime_error("too large a number"));
-	
 	stream.clear();
 	check_valid_date(date);
 	date_copy = date;
 	while (data.find(date) == data.end())
 	{
+		is_before(date);
 		date = get_previous_day(date);
 	}
 	rate = data[date];

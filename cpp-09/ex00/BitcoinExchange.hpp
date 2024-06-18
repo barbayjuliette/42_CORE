@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 15:42:07 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 18:08:01 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/18 17:33:04 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class BitcoinExchange
 {
 	private:
 		std::map<std::string, float>	data;
+		std::string						min_date;
 
 	public:
 		// Constructors
@@ -49,6 +50,8 @@ class BitcoinExchange
 		~BitcoinExchange(void);
 		
 		void	calculate_exchange(std::string line);
+		void	save_data(std::string line, bool min);
+		void	is_before(std::string date);
 };
 
 #endif
