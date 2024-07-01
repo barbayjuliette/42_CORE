@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:20 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 19:14:22 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/07/01 16:52:29 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ class PmergeMe
 		std::list<int>		unsorted_list;
 		std::list<int>		sorted_list;
 		int					length;
-		double				time_vector;
-		double				time_list;
+		double				time;
+		std::string			type;
 		
 	public:
 		// Constructors
@@ -85,6 +85,7 @@ class PmergeMe
 		
 		// Member functions
 		void							print_result(void);
+		void							print_time();
 		void							sort_vector(void);
 		std::vector<std::vector<int> >	pair_up(std::vector<int> nums, bool even);
 		void							insert_elem(std::vector<std::vector<int> > &pairs, std::vector<int> elem, int n);

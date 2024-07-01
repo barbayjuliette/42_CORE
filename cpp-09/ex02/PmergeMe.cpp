@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:07:29 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/16 19:18:51 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/07/01 16:53:04 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ PmergeMe::PmergeMe(char *argv[], int argc, std::string container)
 	this->length = argc - 1;
 	if (container == "vector")
 	{
+		type = "vector";
 		clock_t	start = clock();
 		unsorted_vector = create_container<std::vector<int> >(argv, argc);
 		this->sort_vector();
 		clock_t	end = clock();
-		time_vector = (double(end - start) / CLOCKS_PER_SEC) * 1000000;
+		time = (double(end - start) / CLOCKS_PER_SEC) * 1000000;
 	}
 	else if (container == "list")
 	{
+		type = "list";
 		clock_t	start = clock();
 		unsorted_list = create_container<std::list<int> >(argv, argc);
 		this->sort_list();
 		clock_t	end = clock();
-		time_list = (double(end - start) / CLOCKS_PER_SEC) * 1000000;
+		time = (double(end - start) / CLOCKS_PER_SEC) * 1000000;
 	}
 }
 
@@ -46,8 +48,7 @@ sorted_vector(copy.sorted_vector),
 unsorted_list(copy.unsorted_list),
 sorted_list(copy.sorted_list),
 length(copy.length),
-time_vector(copy.time_vector),
-time_list(copy.time_list)
+time(copy.time)
 {
 	std::cout << "Copy constructor called\n";
 }
@@ -62,8 +63,7 @@ PmergeMe&	PmergeMe::operator=(PmergeMe const& rhs)
 		unsorted_list = rhs.unsorted_list;
 		sorted_list = rhs.sorted_list;
 		length = rhs.length;
-		time_vector = rhs.time_vector;
-		time_list = rhs.time_list;
+		time = rhs.time;
 	}
 	return (*this);
 }
@@ -84,12 +84,20 @@ void	PmergeMe::print_result()
 	std::cout << "After: ";
 	print_vector(sorted_vector);
 	std::cout << std::endl;
+}
 
-	std::cout << "Time to process a range of " << length << " elements with std::[vector]: ";
-	std::cout << time_vector << " us" << std::endl;
-
-	std::cout << "Time to process a range of " << length << " elements with std::[list]: ";
-	std::cout << time_list << " us" << std::endl;
+void	PmergeMe::print_time()
+{
+	if (type == "vector")
+	{
+		std::cout << "Time to process a range of " << length << " elements with std::[vector]: ";
+		std::cout << time << " us" << std::endl;
+	}
+	else if (type == "list")
+	{
+		std::cout << "Time to process a range of " << length << " elements with std::[list]: ";
+		std::cout << time << " us" << std::endl;
+	}
 }
 
 // GETTERS
