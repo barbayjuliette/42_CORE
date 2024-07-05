@@ -9,10 +9,10 @@ RUN apt-get update && apt-get upgrade --yes && apt-get install -y nginx openssl
 # RUN mkdir -p /etc/ssl
 
 # # ! Create private key and certificate
-# RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-#     -keyout /etc/ssl/inception.key \
-#     -out /etc/ssl/certs/inception.crt \
-#     -subj "/C=SG/L=Singapore/O=42Singapore/OU=student/CN=jbarbay.42.fr"
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/ssl/inception.key \
+    -out /etc/ssl/certs/inception.crt \
+    -subj "/C=SG/L=Singapore/O=42Singapore/OU=student/CN=jbarbay.42.fr"
 
 # req -x509L To generate a certificate. The option tells it to create self signed certificate
 # -nodes : to not encrypt the key wioth passphrase. Usually neede in production
@@ -26,17 +26,14 @@ RUN apt-get update && apt-get upgrade --yes && apt-get install -y nginx openssl
 # ! Copy NGINX configuration
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
-# Add this for testing
-# COPY index.html /usr/share/nginx/html/index.html
-
 # # ! Create wordpress directory
 # RUN mkdir -p /var/www/wordpress
 
 # # ! change the owner of the wordpress directory to www-data
 # RUN chown -R www-data:www-data /var/www/wordpress
 
-EXPOSE 80
-# EXPOSE 443
+# EXPOSE 80
+EXPOSE 443
 
 # !Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
