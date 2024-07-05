@@ -1,0 +1,67 @@
+version: "3.8"
+services:
+
+  # mariadb:
+  #   image: mariadb:10.4
+  #   container_name: mariadb
+  #   env_file: .env
+  #   environment:
+  #     - MYSQL_DATABASE=wordpress
+  #   volumes:
+  #     - dbdata:/var/lib/mysql
+  #   command: '--default-authentication-plugin=mysql_native_password'
+  #   networks:
+  #     - inception
+  #   restart: always
+
+  #   # build: ./mariadb
+  #   # image: maria-image
+
+  wordpress:
+    build: requirements/wordpress
+    image: wordpress-image
+    container_name: wp-php
+    volumes: 
+      - ./web:/var/www/html
+    # depends_on:
+    #   - mariadb
+    # image: wordpress:5.1.1-fpm-alpine
+    # env_file: .env
+    # environment:
+    #   - WORDPRESS_DB_HOST=db:3306
+    #   - WORDPRESS_DB_USER=$MYSQL_USER
+    #   - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+    #   - WORDPRESS_DB_NAME=wordpress
+    # volumes:
+    #   - wordpress:/var/www/html
+    # networks:
+    #   - inception
+    # restart: always
+
+  nginx:
+    container_name: nginx
+    build: requirements/nginx
+    image: nginx-image
+    ports:
+      - "8080:80"
+    volumes: 
+      - ./web:/var/www/html
+    # depends_on:
+    #   - wordpress
+    # image: nginx:1.15.12-alpine
+    # container_name: webserver
+#     restart: unless-stopped
+#     volumes:
+#       - wordpress:/var/www/html
+#       - ./nginx-conf:/etc/nginx/conf.d
+#     networks:
+#       - inception
+#     env_file: .env
+  
+# volumes:
+#   wordpress:
+#   dbdata:
+
+# networks:
+#   inception:
+#     driver: bridge
