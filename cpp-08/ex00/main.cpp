@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 11:42:28 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/06 13:11:20 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/09 15:14:40 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	test_vector(void)
 	std::vector<int>	nums;
 
 	for (int i = 1; i <= 5; i++)
-	{
 		nums.push_back(i * 100);
-	}
 	try
 	{
 		std::vector<int>::const_iterator it = easyfind(nums, 200);

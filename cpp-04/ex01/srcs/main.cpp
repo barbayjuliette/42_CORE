@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:23:08 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/05/22 18:41:29 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:15:13 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ void	test_deep_copy_type()
 
 int main()
 {
-	// test_pet_array();
-	// test_deep_copy_cat();
-	// test_deep_copy_dog();
+	test_pet_array();
+	test_deep_copy_cat();
+	test_deep_copy_dog();
 	test_deep_copy_type();
 	return 0;
 }

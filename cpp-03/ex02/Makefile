@@ -17,7 +17,7 @@ SRCS = srcs/main.cpp \
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
-NAME = claptrap
+NAME = fragtrap
 OBJS = ${SRCS:.cpp=.o}
 
 all: ${NAME}

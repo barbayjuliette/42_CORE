@@ -51,7 +51,7 @@ void	test_int(void)
 	}
 
 	// Default constructor
-	std::cout << BLUE << "Default constructor then assignment operator" << WHITE << std::endl;
+	std::cout << BLUE << "Default constructor then assignment operator, changed first element" << WHITE << std::endl;
 	Array <int> unknown;
 	unknown = nums;
 	unknown[0] = 999;
@@ -102,9 +102,6 @@ void	test_double()
 
 	std::cout << "Size of new array: " << dub.size() << std::endl;
 
-	std::cout << BLUE << "Printing array..." << WHITE << std::endl;
-	dub.print_array();
-
 	std::cout << BLUE << "Changing each number with double..." << WHITE << std::endl;
 	while (i < dub.size())
 	{
@@ -132,6 +129,7 @@ int main(void)
 
 
 // #define MAX_VAL 750
+// #include <cstdlib>
 // int main(int, char**)
 // {
 // 	Array<int> numbers(MAX_VAL);

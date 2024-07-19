@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbarbay <jbarbay@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:59:59 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/05 19:33:21 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/06 11:32:41 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <stdexcept>
 #define WHITE "\e[0;97m"
 #define RED "\e[31m"
-#define GREEN "\e[32m"
 #define BBLUE "\e[1;36m"
 #define BLUE "\e[0;36m"
 
@@ -30,6 +29,11 @@ class Array
 	public:
 		Array(): array(NULL), len(0) {}
 
+		Array(unsigned int n) : len(n)
+		{
+			array = new T[n]();
+		}
+		
 		Array(const Array& src) : array(new T[src.len]), len(src.len)
 		{
 			unsigned int	i = 0;
@@ -45,11 +49,6 @@ class Array
 			delete[] array;
 		}
 
-		Array(unsigned int n) : len(n)
-		{
-			array = new T[n];
-		}
-
 		Array&	operator=(Array const &rhs)
 		{
 			if (this == &rhs)
@@ -57,7 +56,7 @@ class Array
 
 			unsigned int	i = 0;
 			this->len = rhs.len;
-			delete[] array;
+			delete[] this->array;
 			this->array = new T[this->len];
 
 			while (i < rhs.len)

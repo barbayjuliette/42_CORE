@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 16:43:48 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/07 20:04:13 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/09 15:34:39 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ class MutantStack : public std::stack<T>
 
 		MutantStack &		operator=( MutantStack const & rhs )
 		{
-			(void)rhs;
-			return (*this);
-		};
+	   		if (this != &rhs)
+				stack::operator=(rhs);
+			reurn (*this);
+		}
 
 		iterator begin()
 		{

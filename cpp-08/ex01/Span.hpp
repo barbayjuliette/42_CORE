@@ -6,7 +6,7 @@
 /*   By: jbarbay <jbarbay@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:43:25 by jbarbay           #+#    #+#             */
-/*   Updated: 2024/06/07 15:41:14 by jbarbay          ###   ########.fr       */
+/*   Updated: 2024/06/09 15:21:30 by jbarbay          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 # include <iostream>
 # include <string>
-// # include <map>
 # include <vector>
-// # include <list>
 # include <exception>
 # include <algorithm>
 # include <limits.h>
@@ -28,16 +26,18 @@
 #define BBLUE "\e[1;36m"
 #define BLUE "\e[0;36m"
 
+void	display_int(int n);
+
 class Span
 {
 
 	public:
 		std::vector<int> nums;
 
-		Span();
 		Span(unsigned int N);
 		Span( Span const & src );
 		~Span();
+		Span();
 
 		Span &		operator=( Span const & rhs );
 
