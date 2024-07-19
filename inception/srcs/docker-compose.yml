@@ -43,7 +43,7 @@ services:
     build: requirements/nginx
     image: nginx-image
     ports:
-      - "8080:443"
+      - "8080:80"
     volumes: 
       - ./web:/var/www/html
     # depends_on:
@@ -62,6 +62,6 @@ services:
 #   wordpress:
 #   dbdata:
 
-# networks:
-#   inception:
-#     driver: bridge
+networks:
+  inception:
+    driver: bridge
