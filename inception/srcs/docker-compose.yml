@@ -1,42 +1,39 @@
 version: "3.8"
 services:
 
-  # mariadb:
-  #   image: mariadb:10.4
-  #   container_name: mariadb
-  #   env_file: .env
-  #   environment:
-  #     - MYSQL_DATABASE=wordpress
-  #   volumes:
-  #     - dbdata:/var/lib/mysql
-  #   command: '--default-authentication-plugin=mysql_native_password'
-  #   networks:
-  #     - inception
-  #   restart: always
-
-  #   # build: ./mariadb
-  #   # image: maria-image
+  mariadb:
+    container_name: mariadb
+    build: requirements/mariadb
+    image: mariadb-image
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
 
   wordpress:
+    container_name: wp-php
     build: requirements/wordpress
     image: wordpress-image
-    container_name: wp-php
     volumes: 
       - ./web:/var/www/html
-    # depends_on:
-    #   - mariadb
-    # image: wordpress:5.1.1-fpm-alpine
-    # env_file: .env
-    # environment:
-    #   - WORDPRESS_DB_HOST=db:3306
-    #   - WORDPRESS_DB_USER=$MYSQL_USER
-    #   - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-    #   - WORDPRESS_DB_NAME=wordpress
-    # volumes:
-    #   - wordpress:/var/www/html
-    # networks:
-    #   - inception
-    # restart: always
+    depends_on:
+      - mariadb
+    env_file: .env
+    environment:
+        WORDPRESS_DB_HOST: mariadb:3306
+        WORDPRESS_DB_USER: ${MYSQL_USER}
+        WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+        WORDPRESS_DB_NAME: wordpress
+    networks:
+      - inception
+    restart: always
 
   nginx:
     container_name: nginx
@@ -46,22 +43,17 @@ services:
       - "8080:443"
     volumes: 
       - ./web:/var/www/html
-    # depends_on:
-    #   - wordpress
-    # image: nginx:1.15.12-alpine
-    # container_name: webserver
-#     restart: unless-stopped
-#     volumes:
-#       - wordpress:/var/www/html
-#       - ./nginx-conf:/etc/nginx/conf.d
-#     networks:
-#       - inception
-#     env_file: .env
-  
-# volumes:
-#   wordpress:
-#   dbdata:
+      # - ./nginx-conf:/etc/nginx/conf.d
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+    env_file: .env 
 
-# networks:
-#   inception:
-#     driver: bridge
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+    mariadb_data:

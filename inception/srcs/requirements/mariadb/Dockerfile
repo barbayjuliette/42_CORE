@@ -5,6 +5,14 @@
 
 FROM debian:bullseye
 
-RUN apt-get update && apt-get upgrade --yes
+RUN apt-get update && apt-get upgrade --yes && \
+	apt-get install -y mariadb-server
 
-RUN apt-get install -y mariadb-server
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
+
+COPY 50-server.cnf /etc/mysql/mariadb.conf.d/.
+COPY init.sql /etc/mysql/init.sql
+
+EXPOSE 3306
+
+CMD ["mysqld"]
