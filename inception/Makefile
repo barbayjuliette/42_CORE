@@ -39,6 +39,19 @@ clean:
 	$(RM) $(DB_DATA) || true
 	@echo "$(RED)-->$(CYAN) All clean $(RESET)"
 
+logs:
+	@for container in $$(docker ps -q); do \
+		name=$$(docker inspect --format '{{.Name}}' $${container} | sed 's/\///'); \
+		echo "$(RED)-->$(CYAN)Logs for container $${name}:$(RESET)"; \
+		logs=$$(docker logs $${container} 2>&1); \
+		if [ -z "$$logs" ]; then \
+			echo "No logs for container $${name}"; \
+		else \
+			echo "$$logs"; \
+		fi; \
+		echo "$(RED)END$(RESET)"; \
+	done
+
 re: clean up
 
-.PHONY: all clean re up stop start down
+.PHONY: all clean re up stop start down logs
