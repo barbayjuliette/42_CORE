@@ -1,14 +1,14 @@
 FROM debian:bullseye
 
-#  ! Update package manager
+# Update package manager
 #  By default, Docker run as root: sudo is not needed
 #  apt update it'll figure out what the latest version of each package and dependency is, but will not actually download or install any of those updates.
 # The sudo apt-get upgrade command downloads and installs the updates for each outdated package and dependency on your system.
 RUN apt-get update && apt-get upgrade --yes && apt-get install -y nginx openssl
 
-# RUN mkdir -p /etc/ssl
+RUN mkdir -p /etc/ssl
 
-# # ! Create private key and certificate
+# Create private key and certificate
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/inception.key \
     -out /etc/ssl/certs/inception.crt \
@@ -23,17 +23,17 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 # I can then use these files to configure an NGINX server to use SSL?TLS encrytion. 
 # We do that in the nginx.conf file
 
-# ! Copy NGINX configuration
+# Copy NGINX configuration
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
-# # ! Create wordpress directory
-# RUN mkdir -p /var/www/wordpress
+# Create wordpress directory
+RUN mkdir -p /var/www/wordpress
 
-# # ! change the owner of the wordpress directory to www-data
-# RUN chown -R www-data:www-data /var/www/wordpress
+# change the owner of the wordpress directory to www-data (default user and group for nginx)
+RUN chown -R www-data:www-data /var/www/wordpress
 
 # EXPOSE 80
 EXPOSE 443
 
-# !Start NGINX
+# Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
