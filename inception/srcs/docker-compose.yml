@@ -1,67 +1,124 @@
-version: "3.8"
+version: '3.8'
+
 services:
-
-  # mariadb:
-  #   image: mariadb:10.4
-  #   container_name: mariadb
-  #   env_file: .env
-  #   environment:
-  #     - MYSQL_DATABASE=wordpress
-  #   volumes:
-  #     - dbdata:/var/lib/mysql
-  #   command: '--default-authentication-plugin=mysql_native_password'
-  #   networks:
-  #     - inception
-  #   restart: always
-
-  #   # build: ./mariadb
-  #   # image: maria-image
-
   wordpress:
-    build: requirements/wordpress
-    image: wordpress-image
-    container_name: wp-php
-    volumes: 
+    container_name: wordpress
+    build: requirements/wp-fpm
+    env_file:
+      - .env
+    volumes:
       - ./web:/var/www/html
-    # depends_on:
-    #   - mariadb
-    # image: wordpress:5.1.1-fpm-alpine
-    # env_file: .env
-    # environment:
-    #   - WORDPRESS_DB_HOST=db:3306
-    #   - WORDPRESS_DB_USER=$MYSQL_USER
-    #   - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-    #   - WORDPRESS_DB_NAME=wordpress
-    # volumes:
-    #   - wordpress:/var/www/html
-    # networks:
-    #   - inception
-    # restart: always
+    networks:
+      - inception
+
+  mariadb:
+    container_name: mariadb
+    build: requirements/mariadb
+    env_file: .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
 
   nginx:
     container_name: nginx
     build: requirements/nginx
-    image: nginx-image
     ports:
       - "8080:443"
-    volumes: 
+    volumes:
       - ./web:/var/www/html
-    # depends_on:
-    #   - wordpress
-    # image: nginx:1.15.12-alpine
-    # container_name: webserver
-#     restart: unless-stopped
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+    env_file: .env 
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+    name: mariadb
+    driver: local
+    driver_opts:
+      device: /home/jbarbay/data/mariadb
+      o : bind
+      type : none
+#   wordpress_data:
+#     name: wordpress
+#     driver: local
+#     driver_opts:
+#       device: /home/jbarbay/data/wordpress
+#       o : bind
+#       type : none
+
+# volumes:
+#   wordpress_data:
+#   mariadb_data:
+
+
+# version: "3.8"
+# services:
+
+#   mariadb:
+#     container_name: mariadb
+#     build: requirements/mariadb
+#     image: mariadb-image
+#     env_file: .env
 #     volumes:
-#       - wordpress:/var/www/html
-#       - ./nginx-conf:/etc/nginx/conf.d
+#       - mariadb:/var/lib/mysql
 #     networks:
 #       - inception
-#     env_file: .env
-  
-# volumes:
+#     restart: always
+
 #   wordpress:
-#   dbdata:
+#     container_name: wp-php
+#     build: requirements/wp-fpm
+#     image: wordpress-image
+#     volumes: 
+#       - ./web:/var/www/wordpress
+#     depends_on:
+#       - mariadb
+#     env_file: .env
+#     networks:
+#       - inception
+#     restart: always
+
+#   nginx:
+#     container_name: nginx
+#     build: requirements/nginx
+#     image: nginx-image
+#     ports:
+#       - "443:443"
+#     volumes: 
+#       - ./web:/var/www/wordpress
+#     networks:
+#       - inception
+#     depends_on:
+#       - wordpress
+#     restart: unless-stopped
+#     env_file: .env 
+
+
+# volumes:
+#   mariadb:
+#     name: mariadb
+#     driver: local
+#     driver_opts:
+#       device: /home/jbarbay/data/mariadb
+#       o : bind
+#       type : none
+#   wordpress:
+#     name: wordpress
+#     driver: local
+#     driver_opts:
+#       device: /home/jbarbay/data/wordpress
+#       o : bind
+#       type : none
 
 # networks:
 #   inception:
-#     driver: bridge
+#     name: inception
