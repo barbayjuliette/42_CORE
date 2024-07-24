@@ -4,8 +4,8 @@ RED = \001\033[1;31m\002
 RESET = \001\033[0m\002
 
 DOCKER_COMPOSE_FILE = ./srcs/docker-compose.yml
-WP_DATA = "/home/jbarbay/data/wordpress"
-DB_DATA = "/home/jbarbay/data/mariadb"
+WP_DATA = ${HOME}/data/wordpress
+DB_DATA = ${HOME}/data/mariadb
 RM = rm -rf
 
 up:
